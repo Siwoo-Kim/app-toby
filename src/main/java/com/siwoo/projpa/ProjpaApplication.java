@@ -22,6 +22,8 @@ public class ProjpaApplication {
 	@Bean
 	CommandLineRunner profiler(@Autowired ApplicationEnvironment env, @Autowired MakeSuore makeSuore) {
 		return args -> {
+			System.out.println(env.toString());
+			System.out.println(makeSuore.toString());
 			log.info(env.toString());
 			log.info(makeSuore.toString());
 		};
