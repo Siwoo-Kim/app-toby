@@ -8,7 +8,8 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -16,6 +17,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Getter @Setter @ToString
 @EqualsAndHashCode(of={"id","email","name"})
+@Access(AccessType.FIELD)
 public class User {
     /*  mapping identifier to property using id annotation  */
     @Id @GeneratedValue(strategy = IDENTITY)
@@ -30,6 +32,12 @@ public class User {
     private Level level;
     private double point;
 
+    @ManyToMany
+    @JoinTable(name = "USER_PROJECT",
+    joinColumns = @JoinColumn(name="manager_id"),
+    inverseJoinColumns = @JoinColumn(name="project_id"))
+    Set<Project> projects = new HashSet();
+
     public boolean upgradeLevel() {
         Level nextLevel = level.getNextLevel();
         if(nextLevel != null) {
@@ -38,6 +46,10 @@ public class User {
         } else {
             return false;
         }
+    }
+
+    public boolean addProject(Project project) {
+        return projects.add(project);
     }
 
     public enum Level {
