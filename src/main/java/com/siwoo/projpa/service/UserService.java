@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceUtils;
+import org.springframework.mail.MailMessage;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +30,8 @@ public class UserService {
     UserRepository userRepository;
     @Autowired
     DataSource dataSource;
-
+    @Autowired
+    MailService mailService;
 
     @Transactional (rollbackFor = Exception.class)
     public void upgradeLevels() {
@@ -44,6 +46,15 @@ public class UserService {
     protected void upgradeLevel(User user) {
         user.upgradeLevel();
         userRepository.save(user);
+        mailService.send(upgradeMail(user));
+    }
+
+    //Need to change the toEmail
+    private MailMessage upgradeMail(User user) {
+        return mailService.createMailMessage(
+                "sm123tt.developer@gmail.com",
+                "Upgrade Notice",
+                "Your Level is upgraded to *" + user.getLevel() + "* ");
     }
 
     private boolean upgradable(User user) {

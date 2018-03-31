@@ -3,6 +3,8 @@ package com.siwoo.projpa.service;
 import com.siwoo.projpa.FixtureFactory;
 import com.siwoo.projpa.domain.User;
 import com.siwoo.projpa.repository.UserRepository;
+import com.siwoo.projpa.test.MockMailSender;
+import com.siwoo.projpa.test.MockUserService;
 import com.siwoo.projpa.test.support.TestSupportException;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
@@ -50,6 +52,7 @@ public class TestUserService {
         MockUserService userService = new MockUserService();
         userService.setUserRepository(userRepository);
         userService.setTargetEmail(users.get(3).getEmail());
+        userService.setMailService(new MockMailSender());
         user = users.get(0);
         user.setLevel(User.Level.BRONZE);
         user.setLogin(UserService.MIN_UPGRADE_LOGIN);

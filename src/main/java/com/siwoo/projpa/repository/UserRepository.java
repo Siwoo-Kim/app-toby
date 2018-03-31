@@ -12,4 +12,7 @@ public interface UserRepository extends JpaRepository<User, Long>, CustomUserRep
 
     @Query("select distinct u from User u left join fetch u.projects where u.id = :id ")
     User findUserFetchAllById(@Param("id") long id);
+
+    @Query("select distinct u from User u left join fetch u.projects where u.email = :email ")
+    User findByEmail(@Param("email") String email);
 }

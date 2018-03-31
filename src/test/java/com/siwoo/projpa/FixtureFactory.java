@@ -2,6 +2,7 @@ package com.siwoo.projpa;
 
 import com.siwoo.projpa.domain.BasicTime;
 import com.siwoo.projpa.domain.Project;
+import com.siwoo.projpa.domain.Section;
 import com.siwoo.projpa.domain.User;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,42 @@ public class FixtureFactory {
 
     public static String getName(Object object) {
         return object.getClass().getSimpleName();
+    }
+
+    public static List<Section> sections() {
+        List<Section> sections = new ArrayList<>();
+
+        Section section = new Section();
+        section.setName("JAVA 설치");
+        section.setDescription("자바로 프로그램을 만들기 위해서는 아래와 같은 과정이 필요하다.\n" + "\n" + "코드 작성\n" + "컴퓨터가 실행할 수 있는 형태로 코드를 컴파일\n" + "컴파일된 프로그램을 실행");
+        section.setBasicTime(new BasicTime(LocalDateTime.now(),null));
+        sections.add(section);
+
+        section = new Section();
+        section.setName("숫자와 문자");
+        section.setDescription("프로그래밍 입문자에게 가장 익숙한 데이터 타입(data type)은 숫자와 문자일 것이다. 이번 시간에는 실제로 가장 많이 사용되는 데이터 형인 문자와 숫자를 프로그래밍에서는 어떻게 표현하고 연산하는지 알아보자.");
+        section.setBasicTime(new BasicTime(LocalDateTime.now(),null));
+        sections.add(section);
+
+        section = new Section();
+        section.setName("변수");
+        section.setDescription("영어로는 Variable로 (문자나 숫자 같은) 데이터를 담는 컨테이너다. 여기에 담겨진 데이터는 다른 데이터로 바꿀 수 있다. 변수는 마치 (사람이 쓰는 언어인) 자연어에서 대명사와 비슷한 역할을 한다.");
+        section.setBasicTime(new BasicTime(LocalDateTime.now(),null));
+        sections.add(section);
+
+        section = new Section();
+        section.setName("주석과 세미콜론");
+        section.setDescription("주석(comment)은 로직에 대한 설명이나 코드를 비활성화 할 때 사용한다. 주석은 프로그래밍적으로 해석되지 않는다.");
+        section.setBasicTime(new BasicTime(LocalDateTime.now(),null));
+        sections.add(section);
+
+        section = new Section();
+        section.setName("데이터 타입");
+        section.setDescription("데이터 타입은 조금 어렵다. 후속 수업에서 필수적인 선행지식은 아니지만, 또 뒤에 배치하는 것도 애매하다. 이번 토픽의 학습이 어렵게 느껴지면 다음 토픽으로 넘어가고 나중에 다시 학습하면 된다.\n" + "데이터 타입에 대해서 자세히 알아보기 전에 데이터의 크기에 대해서 학습하자.");
+        section.setBasicTime(new BasicTime(LocalDateTime.now(),null));
+        sections.add(section);
+
+        return sections;
     }
 
     public static List<Project> projects() {

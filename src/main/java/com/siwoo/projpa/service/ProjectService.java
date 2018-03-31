@@ -13,4 +13,7 @@ public interface ProjectService {
 
     @Transactional(readOnly = false)
     void create(Project project);
+
+    @Transactional(readOnly = false)
+    void updateLastUpdatedSections();
 }

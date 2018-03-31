@@ -35,6 +35,8 @@ public class Project {
     @Embedded
     private BasicTime basicTime;
 
+    private LocalDateTime lastUpdatedSection;
+
     private String icon;
 
     private URL url;

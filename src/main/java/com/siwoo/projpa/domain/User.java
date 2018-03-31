@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -32,7 +33,7 @@ public class User {
     private Level level;
     private double point;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "USER_PROJECT",
     joinColumns = @JoinColumn(name="manager_id"),
     inverseJoinColumns = @JoinColumn(name="project_id"))
