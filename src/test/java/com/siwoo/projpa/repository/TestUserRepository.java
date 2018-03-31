@@ -1,6 +1,7 @@
 package com.siwoo.projpa.repository;
 
 import com.siwoo.projpa.FixtureFactory;
+import com.siwoo.projpa.domain.Project;
 import com.siwoo.projpa.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
@@ -9,26 +10,32 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.*;
 import static com.siwoo.projpa.FixtureFactory.*;
 
+@Transactional
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TestUserRepository {
 
     @Autowired UserRepository userRepository;
+    @Autowired ProjectRepository projectRepository;
     private List<User> users;
+    private List<Project> projects;
 
     @Before
     public void setup() {
         assertNotNull(getName(userRepository)+" must not null" ,userRepository);
         users = FixtureFactory.users();
+        projects = FixtureFactory.projects();
 
         for(User user : users) {
             userRepository.create(user);
@@ -56,7 +63,7 @@ public class TestUserRepository {
         List<User> target = new ArrayList<>();
         double targetPoint = 50;
         users.stream().forEach(user -> {
-            if(user.getName().contains("1") || user.getName().contains("3")  ){
+            if(user.getName().getLast().equals("Kim")){
                 user.setPoint(targetPoint);
                 userRepository.save(user);
                 target.add(user);
@@ -83,6 +90,36 @@ public class TestUserRepository {
         assertFalse( userRepository.raisePoint(user.getId(), -raise) );
         user = userRepository.get(users.get(0).getId()).get();
         assertEquals( getName(userRepository) + " must not substract point", user.getPoint() , prePoint + raise ,0.001 );
+    }
+
+    @Test
+    public void findByLastName() {
+        String lastName = "Kim";
+        List<User> users = userRepository.findByNameLast(lastName);
+        assertTrue(!users.isEmpty());
+        List<User> answer =  this.users
+                .stream()
+                .filter(user -> user.getName().getLast().equals(lastName))
+                .collect(toList());
+        assertTrue(answer.size() == users.size());
+    }
+
+    @Test
+    public void findByProjectName() {
+        String lastName = "Kim";
+        List<User> users = userRepository.findByNameLast(lastName);
+
+        Project project = projects.get(0);
+        projectRepository.save(project);
+        for(User user: users) {
+            user.addProject(project);
+            userRepository.save(user);
+        }
+
+        List<User> found = userRepository.findByProjectName(project.getName());
+        assertTrue(users.size() == found.size());
+        log.info(found + "");
+
 
     }
 }

@@ -14,8 +14,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.interceptor.DefaultTransactionAttribute;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -25,7 +24,6 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     SectionRepository sectionRepository;
     @Autowired AuditService auditService;
-
     @Override
     public void assign(Project project, User user) {
         Optional<User> foundUser = userRepository.findById(user.getId());
@@ -72,4 +70,38 @@ public class ProjectServiceImpl implements ProjectService {
         projectRepository.save(project);
     }
 
+    @Override
+    public void displayProjectUsers(String name) {
+        List<User> users = userRepository.findByProjectName(name);
+        for(int i=0; i<users.size(); i++) {
+            User user = users.get(i);
+            System.out.println("Project: " + name);
+            System.out.println(i + 1 + ": " + user.getName() + ", "+ user.getEmail());
+        }
+    }
+
+
+    @Override
+    public Project maxManagerProject() {
+        Map<Project,Long> data = countManagers();
+        Project max;
+        return data.entrySet().stream()
+                .max((o1, o2) -> o1.getValue().compareTo(o2.getValue()))
+                .map(projectLongEntry -> projectLongEntry.getKey())
+                .get();
+    }
+
+    @Override
+    public Map<Project,Long> countManagers() {
+        Map<Project,Long> map = new HashMap<>();
+        List<Object[]> rows = projectRepository.findIdAndManagerCount();
+        for(Object[] row: rows) {
+            if(row[0] != null) {
+                long id = (long) row[0];
+                Project project = projectRepository.findById(id).get();
+                map.put(project, (Long) row[1]);
+            }
+        }
+        return map;
+    }
 }

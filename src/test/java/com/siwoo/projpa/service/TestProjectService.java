@@ -5,8 +5,10 @@ import com.siwoo.projpa.domain.Project;
 import com.siwoo.projpa.domain.User;
 import com.siwoo.projpa.repository.LogRepository;
 import com.siwoo.projpa.repository.ProjectRepository;
+import com.siwoo.projpa.repository.SectionRepository;
 import com.siwoo.projpa.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.proxy.ProxyFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,11 +20,14 @@ import java.util.Arrays;
 import java.util.List;
 import static junit.framework.TestCase.*;
 
+
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TestProjectService {
 
+    @Autowired
+    SectionRepository sectionRepository;
     @Autowired
     ProjectService projectService;
     @Autowired
@@ -47,12 +52,13 @@ public class TestProjectService {
         User user = users.get(0);
         Project project = projects.get(0);
         projectService.assign(project, user);
-        user = userRepository.findUserFetchAllById(user.getId());
+        user = userRepository.findFetchAllById(user.getId());
         assertTrue(user.getProjects().contains(project));
     }
 
     @Test
     public void create() {
+        userRepository.deleteAll();
         projectRepository.deleteAll();
         for(Project project: projects) {
             project.setId(null);
@@ -71,5 +77,10 @@ public class TestProjectService {
         log.warn( projectRepository.getByNames("JSP","Java") + "" );
     }
 
-
+    @Test
+    public void displayProjectUsers() {
+        Project project = projects.get(0);
+        FixtureFactory.assignProjectToUser(users, project, userRepository);
+        projectService.displayProjectUsers(project.getName());
+    }
 }

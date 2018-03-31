@@ -1,11 +1,10 @@
 package com.siwoo.projpa;
 
-import com.siwoo.projpa.domain.BasicTime;
-import com.siwoo.projpa.domain.Project;
-import com.siwoo.projpa.domain.Section;
-import com.siwoo.projpa.domain.User;
+import com.siwoo.projpa.domain.*;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.Repository;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -112,13 +111,13 @@ public class FixtureFactory {
         user.setLevel(User.Level.BRONZE);
         user.setLogin(1);
         user.setRecommend(0);
-        user.setName("user1");
+        user.setName(new Name("Siwoo","Kim",null));
         user.setPassword("passuser1");
         user.setPoint(10);
         fixtures.add(user);
         user = new User();
         user.setEmail("user2@email.com");
-        user.setName("user2");
+        user.setName(new Name("Jee eun","Kim",null));
         user.setPassword("passuser2");
         user.setLevel(User.Level.BRONZE);
         user.setLogin(3);
@@ -127,7 +126,7 @@ public class FixtureFactory {
         fixtures.add(user);
         user = new User();
         user.setEmail("user3@email.com");
-        user.setName("user3");
+        user.setName(new Name("Polo","Marco","D."));
         user.setPassword("passuser3");
         user.setLevel(User.Level.BRONZE);
         user.setLogin(5);
@@ -136,7 +135,7 @@ public class FixtureFactory {
         fixtures.add(user);
         user = new User();
         user.setEmail("user4@email.com");
-        user.setName("user4");
+        user.setName(new Name("Minhee","Lee",null));
         user.setPassword("passuser4");
         user.setLevel(User.Level.BRONZE);
         user.setLogin(29);
@@ -145,7 +144,7 @@ public class FixtureFactory {
         fixtures.add(user);
         user = new User();
         user.setEmail("user5@email.com");
-        user.setName("user5");
+        user.setName(new Name("Suk","Hong",null));
         user.setPassword("passuser5");
         user.setLevel(User.Level.BRONZE);
         user.setLogin(30);
@@ -154,7 +153,7 @@ public class FixtureFactory {
         fixtures.add(user);
         user = new User();
         user.setEmail("user6@email.com");
-        user.setName("user6");
+        user.setName(new Name("Min Hae","Park",null));
         user.setPassword("passuser6");
         user.setLevel(User.Level.SILVER);
         user.setLogin(50);
@@ -163,12 +162,19 @@ public class FixtureFactory {
         fixtures.add(user);
         user = new User();
         user.setEmail("user7@email.com");
-        user.setName("user7");
+        user.setName(new Name("Hyun","Choi",null));
         user.setPassword("passuser7");
         user.setLevel(User.Level.GOLD);
         user.setLogin(100);
         user.setRecommend(100);
         user.setPoint(10);
         return fixtures;
+    }
+
+    public static void assignProjectToUser(List<User> users, Project project, JpaRepository repository) {
+        for(User user: users) {
+            user.addProject(project);
+            repository.save(user);
+        }
     }
 }

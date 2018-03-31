@@ -23,7 +23,7 @@ public class User {
     /*  mapping identifier to property using id annotation  */
     @Id @GeneratedValue(strategy = IDENTITY)
     private long id;
-    private String name;
+    private Name name;
     private String email;
     private String password;
     private LocalDate joinDate;
