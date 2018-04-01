@@ -5,6 +5,7 @@ import com.siwoo.projpa.domain.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Map;
 
 @Transactional(readOnly = true)
@@ -24,4 +25,6 @@ public interface ProjectService {
     Project maxManagerProject();
 
     Map<Project,Long> countManagers();
+
+    List<Project> getAll();
 }

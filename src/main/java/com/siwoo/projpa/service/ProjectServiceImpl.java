@@ -12,9 +12,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.interceptor.DefaultTransactionAttribute;
+import org.springframework.util.Assert;
 
+import javax.validation.constraints.AssertTrue;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.function.Function;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -93,13 +96,22 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Map<Project,Long> countManagers() {
-        Map<Project,Long> map = new HashMap<>();
         List<Object[]> rows = projectRepository.findIdAndManagerCount();
+        return mappingToMap(rows, id -> projectRepository.findById((Long) id).get());
+    }
+
+    @Override
+    public List<Project> getAll() {
+        return projectRepository.findAll();
+    }
+
+    private Map mappingToMap(List<Object[]> rows, Function<Object, Object> doWork) {
+        HashMap<Object, Object> map = new HashMap<>();
         for(Object[] row: rows) {
             if(row[0] != null) {
                 long id = (long) row[0];
-                Project project = projectRepository.findById(id).get();
-                map.put(project, (Long) row[1]);
+                Object object = doWork.apply(id);
+                map.put(object, row[1]);
             }
         }
         return map;
