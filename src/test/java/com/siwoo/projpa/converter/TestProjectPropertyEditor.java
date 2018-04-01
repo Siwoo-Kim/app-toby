@@ -43,7 +43,8 @@ public class TestProjectPropertyEditor {
     public void setup() {
         projects = FixtureFactory.projects();
         users = FixtureFactory.users();
-
+        projectRepository.deleteAll();
+        userRepository.deleteAll();
         projectRepository.saveAll(projects);
         userRepository.saveAll(users);
     }
@@ -58,6 +59,7 @@ public class TestProjectPropertyEditor {
 
     @Test
     public void convert() {
+
         Project project = projectConverter.convert("java");
         assertNotNull(project);
         log.warn(project.toString());

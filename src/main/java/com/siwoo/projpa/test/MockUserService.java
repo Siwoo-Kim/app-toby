@@ -3,12 +3,13 @@ package com.siwoo.projpa.test;
 import com.siwoo.projpa.domain.User;
 import com.siwoo.projpa.repository.UserRepository;
 import com.siwoo.projpa.service.UserService;
+import com.siwoo.projpa.service.UserServiceImpl;
 import com.siwoo.projpa.test.support.TestSupportException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-public class MockUserService extends UserService {
+public class MockUserService extends UserServiceImpl {
     private String targetEmail;
 
 

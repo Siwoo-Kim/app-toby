@@ -55,15 +55,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void updateLastUpdatedSections() {
-        TransactionStatus status = platformTransactionManager.getTransaction(new DefaultTransactionAttribute());
-        try {
-            List<Object[]> rows = sectionRepository.findMaxUpdateTimeAndProjectGroupByProject();
-            for (Object[] row : rows) {
-                updateLastUpdatedSection((LocalDateTime) row[0], (String) row[1]);
-            }
-            platformTransactionManager.commit(status);
-        }catch (RuntimeException e) {
-            platformTransactionManager.rollback(status);
+        List<Object[]> rows = sectionRepository.findMaxUpdateTimeAndProjectGroupByProject();
+        for (Object[] row : rows) {
+            updateLastUpdatedSection((LocalDateTime) row[0], (String) row[1]);
         }
     }
 

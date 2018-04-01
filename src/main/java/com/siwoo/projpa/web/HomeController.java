@@ -21,4 +21,5 @@ public class HomeController {
       log.info(locale + " access the app");
       return "index";
     }
+
 }

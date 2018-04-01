@@ -23,4 +23,10 @@ public interface UserRepository extends JpaRepository<User, Long>, CustomUserRep
     @Query("select distinct u from User u inner join u.projects p where p.name = :name")
     List<User> findByProjectName(@Param("name") String name);
 
+    @Query("select u from User u where u.projects is empty")
+    List<User> findByProjectsIsEmpty();
+
+    @Query("select u from User u where u.projects is not empty")
+    List<User> findByProjectsIsNotEmpty();
+
 }

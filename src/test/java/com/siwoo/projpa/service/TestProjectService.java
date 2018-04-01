@@ -59,6 +59,7 @@ public class TestProjectService {
     @Test
     public void create() {
         userRepository.deleteAll();
+        sectionRepository.deleteAll();
         projectRepository.deleteAll();
         for(Project project: projects) {
             project.setId(null);
