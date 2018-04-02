@@ -41,7 +41,7 @@ import static com.siwoo.projpa.support.QueryTester.*;
 public class ProjpaApplication {
 
 	public static void main(String[] args) throws InterruptedException {
-		ApplicationContext context = SpringApplication.run(ProjpaApplication.class, args);
+		SpringApplication.run(ProjpaApplication.class, args);
 
 //		EntityManager entityManager = context.getBean(EntityManager.class);
 //		Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(System.in)));
