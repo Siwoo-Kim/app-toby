@@ -1,1 +1,1 @@
-web: java -jar out/projpa.jar -Dspring.profiles.active=prod
+web: java -jar out/*.jar -Dspring.profiles.active=prod
