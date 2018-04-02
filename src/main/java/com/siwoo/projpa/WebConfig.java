@@ -19,6 +19,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Slf4j
 @ComponentScan("com.siwoo.projpa.web")
 @Configuration
+@Profile({"dev","prod"})
 public class WebConfig extends WebMvcConfigurationSupport{
 
     @Bean
