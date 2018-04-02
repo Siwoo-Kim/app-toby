@@ -40,42 +40,6 @@ import static com.siwoo.projpa.support.QueryTester.*;
 public class ProjpaApplication {
 
 	public static void main(String[] args) throws InterruptedException {
-		ApplicationContext c = SpringApplication.run(ProjpaApplication.class, args);
-
-		EntityManager entityManager = c.getBean(EntityManager.class);
-		Assert.notNull(entityManager);
-
-		Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(System.in)));
-
-		while(true) {
-			System.out.print("JPQL> ");
-			String query = scanner.nextLine();
-			if(query.equals("Q")) {
-				break;
-			}
-			if(!StringUtils.hasText(query)){
-				continue;
-			}
-
-			try{
-				List result = entityManager.createQuery(query).getResultList();
-
-				if(noResult(result)){
-					continue;
-				};
-
-				System.out.println("=====================================================");
-				System.out.println(result.size() + " data retrieved");
-				for(Object rows: result){
-					printResult(rows);
-					System.out.println();
-				}
-				System.out.println("=====================================================");
-
-			}catch (Exception e){
-				e.printStackTrace();
-			}
-		}
 
 	}
 
@@ -103,12 +67,6 @@ public class ProjpaApplication {
 			List<Project> projects = FixtureFactory.projects();
 			projectRepository.saveAll(projects);
 			List<User> users = FixtureFactory.users();
-			users.get(0).addProject(projects.get(0));
-			users.get(0).addProject(projects.get(1));
-			users.get(0).addProject(projects.get(2));
-			users.get(1).addProject(projects.get(0));
-			users.get(1).addProject(projects.get(3));
-			users.get(2).addProject(projects.get(1));
 			userRepository.saveAll(users);
 
 			Project project = projectRepository.getByNames("JAVA").get(0);
@@ -116,11 +74,8 @@ public class ProjpaApplication {
 			for(Section section: sections) {
 				section.setProject(project);
 			}
-			sections = FixtureFactory.sections();
-			project = projectRepository.getByNames("HTML").get(0);
-			for(Section section: sections) {
-				section.setProject(project);
-			}
+
+
 			sectionRepository.saveAll(sections);
 			sectionRepository.saveAll(FixtureFactory.sections()); //no matching project
 			documentRepository.saveAll(FixtureFactory.documents());

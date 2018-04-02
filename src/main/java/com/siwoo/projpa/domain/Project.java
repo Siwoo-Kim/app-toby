@@ -14,7 +14,7 @@ import java.util.Set;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Getter @Setter @ToString
-@Entity
+@Entity @Table(name="tbl_project")
 @EqualsAndHashCode(of={"id","name"})
 public class Project {
 
