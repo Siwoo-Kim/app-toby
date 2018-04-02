@@ -27,7 +27,6 @@ import java.util.Set;
 @ComponentScan("com.siwoo.projpa.repository")
 @EnableJpaRepositories("com.siwoo.projpa.repository")
 @EntityScan("com.siwoo.projpa.domain")
-@Profile({"dev","prod"})
 public class RootConfig {
 
     @Bean
