@@ -15,7 +15,7 @@ import java.util.Set;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /*  to turn PoJo to entity annotate the class with @Entity    */
-@Entity
+@Entity @Table(name ="tbl_user")
 @Getter @Setter @ToString
 @EqualsAndHashCode(of={"id","email","name"})
 @Access(AccessType.FIELD)

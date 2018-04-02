@@ -15,7 +15,7 @@ import java.util.Map;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-@Entity
+@Entity @Table(name="tbl_document")
 @Getter @Setter @ToString
 @EqualsAndHashCode(of ={"id","title","subtitle"})
 public class Document {
