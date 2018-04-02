@@ -1,5 +1,7 @@
 package com.siwoo.projpa.service.support;
 
+import lombok.ToString;
+
 public class ServiceException extends RuntimeException{
     private String code;
 

@@ -28,4 +28,18 @@ public class BasicTime implements Serializable {
     }
 
 
+    public BasicTime update(LocalDateTime updated) {
+        BasicTime basicTime = new BasicTime();
+        basicTime.setCreated(this.created);
+        basicTime.setUpdated(updated);
+        return basicTime;
+    }
+
+    protected void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
+
+    protected void setUpdated(LocalDateTime updated) {
+        this.updated = updated;
+    }
 }

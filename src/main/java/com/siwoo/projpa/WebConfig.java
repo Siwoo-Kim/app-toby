@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ConversionServiceFactoryBean;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Slf4j
 @ComponentScan("com.siwoo.projpa.web")
 @Configuration
+@Profile({"prod", "dev"})
 public class WebConfig extends WebMvcConfigurationSupport{
 
     @Bean
