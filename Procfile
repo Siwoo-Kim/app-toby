@@ -1,0 +1,1 @@
+web: java -jar out/projpa.jar -Dspring.profiles.active=prod
