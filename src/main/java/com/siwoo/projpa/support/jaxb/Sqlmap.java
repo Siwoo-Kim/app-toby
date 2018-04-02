@@ -2,11 +2,11 @@
 // 이 파일은 JAXB(JavaTM Architecture for XML Binding) 참조 구현 2.2.8-b130911.1802 버전을 통해 생성되었습니다. 
 // <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a>를 참조하십시오. 
 // 이 파일을 수정하면 소스 스키마를 재컴파일할 때 수정 사항이 손실됩니다. 
-// 생성 날짜: 2018.03.31 시간 09:39:10 PM EDT 
+// 생성 날짜: 2018.04.02 시간 07:43:07 PM EDT 
 //
 
 
-package main.java.com.siwoo.projpa.support.jaxb;
+package com.siwoo.projpa.support.jaxb;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="sql" type="{http://localhost:8080/sqlmap}sqlType" maxOccurs="unbounded"/>
+ *         &lt;element name="key" type="{http://localhost:8080/sqlmap}sqlType" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,27 +38,27 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "sql"
+    "key"
 })
 @XmlRootElement(name = "sqlmap")
 public class Sqlmap {
 
     @XmlElement(required = true)
-    protected List<SqlType> sql;
+    protected List<SqlType> key;
 
     /**
-     * Gets the value of the sql property.
+     * Gets the value of the key property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sql property.
+     * This is why there is not a <CODE>set</CODE> method for the key property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getSql().add(newItem);
+     *    getKey().add(newItem);
      * </pre>
      * 
      * 
@@ -68,11 +68,11 @@ public class Sqlmap {
      * 
      * 
      */
-    public List<SqlType> getSql() {
-        if (sql == null) {
-            sql = new ArrayList<SqlType>();
+    public List<SqlType> getKey() {
+        if (key == null) {
+            key = new ArrayList<SqlType>();
         }
-        return this.sql;
+        return this.key;
     }
 
 }
