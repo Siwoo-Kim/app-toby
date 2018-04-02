@@ -62,7 +62,45 @@ public class FixtureFactory {
             document = new Document();
             document.setTitle("메소드");
             document.setDescription("지금까지 배운 것으로도 얼마든지 프로그램을 만들 수 있다. 반복문, 조건문, 변수, 상수와 같은 것들은 사실상 프로그램을 만드는 가장 중요한 도구들이라고 할 수 있다. 지금부터 배우게 될 메소드나 객체지향과 같은 개념들은 웅장하고, 결함이 없고, 유지보수가 쉬운 애플리케이션을 만들기 위한 기법들이라고 할 수 있다. 이것들 없이도 프로그램을 만들 수는 있지만, 이것들 없이 규모있는 애플리케이션을 만든다는 것은 현실적으로 어려운 일이다. 지금까지 만드는 방법을 배웠다면 이제부터는 잘 만드는 방법을 익히는 것이라고 해도 과언이 아니다.");
+            document.setHit(5);
             document.setContent("이것이 메소드다. 지금까지 수없이 만들었던 저 main이라고 하는 것이 바로 메소드인 것이다. 위의 그림을 자세히 보면 핑크색으로 된 부분과 검은색으로 된 부분이 있다. 이 중에서 검은색으로 된 부분은 이번 토픽에서 다루지 않을 개념이다. 이것들은 객체지향과 함께 언급되어야 본질을 이해할 수 있기 때문에 여기서는 언급하지 않겠다. 메소드를 만들 때 public static이라고 적어야 한다고 일단은 기계적으로 이해하자. 여러분이 주목할 것은 핑크색으로 강조한 부분이다.\n" + "\n" + " 살아있는 것들은 외부의 자극에 따라서 반응한다. 외부의 자극이 입력이라면 반응은 출력이라고 할 수 있다. 우리가 아는 쓸모있는 대부분의 프로그램이 사용자의 입력에 따라서 다른 결과를 출력한다. 메소드는 프로그램 안에서 동작하는 하나의 작은 프로그램이라고 할 수 있다. 위에서 살펴본 numbering이라는 메소드는 항상 똑같은 동작만을 반복한다. 이것도 재활용이라는 측면에서는 장점이 있지만, 입력 값에 따라서 출력 값을 달리 제공한다면 더욱 쓸모 있는 프로그램이 될 수 있을 것이다.\n" + "\n" + "매개변수와 인자\n" + "메소드의 입력 값은 매개변수(parameter)를 통해서 이루어진다. 위의 예제를 조금 개선해보자. 이전 예제는 0부터 9까지의 숫자를 화면에 출력했다. 만약 필요에 따라서 0부터 4까지 출력하고 싶거나 0부터 8까지 출력하고 싶다면 어떻게 해야 할까? 각각에 맞는 메소드를 새로 정의해야 할까? 그렇게 해도 되지만 더 좋은 방법이 있다. 입력 값에 따라서 다른 출력 값을 갖도록 메소드를 정의하면 된다. 즉, 입력을 고민할 때가 된 것이다. 아래의 예제를 보자. (실행)");
+            map = new HashMap();
+            map.put("추가정보1", new URL("http", "www.localhost.com", 8080, "/notExits1"));
+            map.put("추가정보2", new URL("http", "www.localhost.com", 8080, "/notExits2"));
+            map.put("추가정보3", new URL("http", "www.localhost.com", 8080, "/notExits3"));
+            document.setResources(map);
+            documents.add(document);
+
+
+            document = new Document();
+            document.setTitle("언어소개");
+            document.setDescription("JavaScript는 웹페이지를 동적으로, 프로그래밍적으로 제어하기 위해서 고안된 언어다. 그렇기 때문에 오늘날 가장 중요한 플랫폼이라고 할 수 있는 웹브라우저에서 유일하게 사용할 수 있는 프로그래밍 언어이다. 최근에는 HTML5의 적용이 가속화되면서 지금까지 모바일 환경에서 네이티브 앱(안드로이드, IOS)으로 구현해왔던 기능이 웹에서도 대부분 구현할 수 있게 되고 있다. 웹이 크로스플랫폼이라는 점, 검색 가능하다는 점, 네이티브 디바이스를 제어할 수 있는 하드브리드 시스템(phonegap 등)이 존재한다는 점에서 웹의 중요함은 더욱 확대될 전망이다. 자연스럽게 웹에서 구동되는 유일한 언어인 JavaScript의 중요함도 점점 커질 것으로 예상된다.");
+            document.setContent("CMAScript\n" + "ECMAScript는 표준화 기구인 Ecma International에 의해서 관리되는 자바스크립트 표준안이다. 현재의 자바스크립트는 ECMAScript 3 기반으로 만들어졌고, 현재 시점(2013년)에서는 ECMAScript 5가 표준으로 정의 되었고 이 버전의 자바스크립트를 브라우저 벤더들이 자신들의 브라우저에 구현하는 작업이 한창이다. 곧 ECMAScript 5의 새로운 기능들을 웹에서도 문제 없이 사용할 수 있게 될 것이다. ECMAScript 4는 기존의 자바스크립트와 너무 큰 차이점 때문에 표준으로 채택되지 못했다.\n" + "\n" + "JavaScript 학습에 요구되는 선행학습\n" + "웹페이지를 동적으로 제어하기 위한 목적으로 자바스크립트를 학습한다면 아래 내용은 반드시 선행해야한다. 아래 내용을 학습 한 후에 본 수업을 공부하고 DOM을 학습하면 웹페이지를 프로그래밍적으로 제어 할 수 있다. 최근에는 DOM을 직접 제어하는 것 보다는 jQuery와 같은 라이브러리를 사용하는 것이 일반적이다. DOM에 대한 내용은 DOM 수업을 참고하고 jQuery에 대한 내용은 jQuery 수업을 참고한다.\n" + "\n" + "HTML\n" + "웹페이지를 만드는 언어로 자바스크립트가 제어하는 직접적인 대상이다.\n" + "생활코딩 HTML 수업과 HTML 사전을 참고한다.\n" + "CSS\n" + "웹페이지를 꾸며주는 언어로 자바스크립트와 함께 사용되어 HTML을 보다 사용자 친화적인 문서, 응용프로그램으로 만들어준다.\n" + "생활코딩 CSS 수업, CSS 사전을 참고한다.");
+            document.setBasicTime(new BasicTime(LocalDateTime.of(2018,1,5,0,0),null));
+            map = new HashMap();
+            map.put("추가정보1", new URL("http", "www.localhost.com", 8080, "/notExits1"));
+            map.put("추가정보2", new URL("http", "www.localhost.com", 8080, "/notExits2"));
+            map.put("추가정보3", new URL("http", "www.localhost.com", 8080, "/notExits3"));
+            document.setResources(map);
+            documents.add(document);
+
+            document = new Document();
+            document.setTitle("함수지향");
+            document.setContent("함수지향 카테고리의 하위 수업들은 함수형 언어로서 자바스크립트의 면모를 다룬다. 자바스크립트의 핵심적인 도구는 함수다. 자바스크립트의 함수는 매우 강력하다. 함수에 대한 이해 없이는 자바스크립트를 잘 다루기 어렵다. 또한 자바스크립트에서 함수는 객체를 이해하는 데 가장 중요한 기초를 이룬다. \n" + "\n" + "하지만 난이도가 조금 있는 내용이다. 기초수업을 이수했다면 구체적인 자바스크립트의 호스트 환경에 대한 학습으로 넘어가도 된다. 함수에 대한 고급 내용을 다루는 본 카테고리는 나중에 학습해도 좋다. 하지만 언젠가는 꼭 정복해야 할 부분이다. 사실 그렇게 어렵지도 않다. 다만 코드를 처음 다루는 입문자라면 함수와 관련된 기능들의 취지에 공감이 잘 안될지도 모르겠다. ");
+            document.setBasicTime(new BasicTime(LocalDateTime.of(2018,2,15,0,0),null));
+            map = new HashMap();
+            map.put("추가정보1", new URL("http", "www.localhost.com", 8080, "/notExits1"));
+            map.put("추가정보2", new URL("http", "www.localhost.com", 8080, "/notExits2"));
+            map.put("추가정보3", new URL("http", "www.localhost.com", 8080, "/notExits3"));
+            document.setResources(map);
+            documents.add(document);
+
+            document = new Document();
+            document.setTitle("클로저");
+            document.setDescription("클로저(closure)는 내부함수가 외부함수의 맥락(context)에 접근할 수 있는 것을 가르킨다. 클로저는 자바스크립트를 이용한 고난이도의 테크닉을 구사하는데 필수적인 개념으로 활용된다. ");
+            document.setContent("클로저(closure)는 내부함수와 밀접한 관계를 가지고 있는 주제다. 내부함수는 외부함수의 지역변수에 접근 할 수 있는데 외부함수의 실행이 끝나서 외부함수가 소멸된 이후에도 내부함수가 외부함수의 변수에 접근 할 수 있다. 이러한 메커니즘을 클로저라고 한다. 아래 예제는 이전의 예제를 조금 변형한 것이다. 결과는 경고창으로 coding everybody를 출력할 것이다.\n" + "\n" + "1\n" + "2\n" + "3\n" + "4\n" + "5\n" + "6\n" + "7\n" + "8\n" + "function outter(){\n" + "    var title = 'coding everybody';  \n" + "    return function(){        \n" + "        alert(title);\n" + "    }\n" + "}\n" + "inner = outter();\n" + "inner();\n" + "예제의 실행순서를 주의깊게 살펴보자. 7행에서 함수 outter를 호출하고 있다. 그 결과가 변수 inner에 담긴다. 그 결과는 이름이 없는 함수다. 실행이 8행으로 넘어오면 outter 함수는 실행이 끝났기 때문에 이 함수의 지역변수는 소멸되는 것이 자연스럽다. 하지만 8행에서 함수 inner를 실행했을 때 coding everybody가 출력된 것은 외부함수의 지역변수 title이 소멸되지 않았다는 것을 의미한다. 클로저란 내부함수가 외부함수의 지역변수에 접근 할 수 있고, 외부함수는 외부함수의 지역변수를 사용하는 내부함수가 소멸될 때까지 소멸되지 않는 특성을 의미한다.");
+            document.setHit(10);
+            document.setBasicTime(new BasicTime(LocalDateTime.of(2018,3,25,0,0),null));
             map = new HashMap();
             map.put("추가정보1", new URL("http", "www.localhost.com", 8080, "/notExits1"));
             map.put("추가정보2", new URL("http", "www.localhost.com", 8080, "/notExits2"));
@@ -120,7 +158,7 @@ public class FixtureFactory {
             project.setBasicTime(new BasicTime(LocalDateTime.now(),null));
             project.setName("Java");
             project.setDescription("Java SE(Java Platform, Standard Edition)는 자바의 표준안이다. 자바라는 언어가 어떠한 문법적인 구성을 가졌는지와 같은 것들을 정의하고 있다. 이것은 구체적인 소프트웨어가 아니고 그 소프트웨어의 설계도라고 할 수 있다. 소프트웨어에서는 설계도라는 표현 대신에 명세서(spec, specification)이라는 말을 사용한다. 이 명세서에 따라서 Java가 만들어지게 된다. Java SE 7은 버전 7에 대한 명세서이다. 자바는 계속 진화하고 있는 기술이다. 이 명세서는 JCP(Java Community Process, http://jcp.org)라는 조직을 통해서 만들어진다.");
-            project.setIcon("fa-java");
+            project.setIcon("android");
             project.setType(Project.Type.BACKEND);
             project.setUrl(new URL("http","www.localhost.com",8080,"/java"));
             projects.add(project);
@@ -129,7 +167,7 @@ public class FixtureFactory {
             project.setBasicTime(new BasicTime(LocalDateTime.now(),null));
             project.setName("Javascript");
             project.setDescription("JavaScript는 웹페이지를 동적으로, 프로그래밍적으로 제어하기 위해서 고안된 언어다. 그렇기 때문에 오늘날 가장 중요한 플랫폼이라고 할 수 있는 웹브라우저에서 유일하게 사용할 수 있는 프로그래밍 언어이다. 최근에는 HTML5의 적용이 가속화되면서 지금까지 모바일 환경에서 네이티브 앱(안드로이드, IOS)으로 구현해왔던 기능이 웹에서도 대부분 구현할 수 있게 되고 있다. 웹이 크로스플랫폼이라는 점, 검색 가능하다는 점, 네이티브 디바이스를 제어할 수 있는 하드브리드 시스템(phonegap 등)이 존재한다는 점에서 웹의 중요함은 더욱 확대될 전망이다. 자연스럽게 웹에서 구동되는 유일한 언어인 JavaScript의 중요함도 점점 커질 것으로 예상된다.");
-            project.setIcon("fa-js");
+            project.setIcon("javascript");
             project.setType(Project.Type.BACKEND);
             project.setUrl(new URL("http","www.localhost.com",8080,"/javscript"));
             projects.add(project);
@@ -138,7 +176,7 @@ public class FixtureFactory {
             project.setBasicTime(new BasicTime(LocalDateTime.now(),null));
             project.setName("Regular Expression");
             project.setDescription("정규표현식(正規表現式, Regular Expression)은 문자열을 처리하는 방법 중의 하나로 특정한 조건의 문자를 '검색'하거나 '치환'하는 과정을 매우 간편하게 처리 할 수 있도록 하는 수단이다.");
-            project.setIcon("fa-re");
+            project.setIcon("codepen");
             project.setType(Project.Type.BACKEND);
             project.setUrl(new URL("http","www.localhost.com",8080,"/re"));
             projects.add(project);
@@ -147,7 +185,7 @@ public class FixtureFactory {
             project.setBasicTime(new BasicTime(LocalDateTime.now(),null));
             project.setName("HTML");
             project.setDescription("HTML is the standard markup language for creating Web pages. HTML stands for Hyper Text Markup Language. HTML describes the structure of Web pages using markup. HTML elements are the building blocks of HTML pages. HTML elements are represented by tags.");
-            project.setIcon("fa-html");
+            project.setIcon("html5");
             project.setType(Project.Type.FRONTEND);
             project.setUrl(new URL("http","www.localhost.com",8080,"/html"));
             projects.add(project);

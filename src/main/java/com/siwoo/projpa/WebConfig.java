@@ -34,6 +34,7 @@ public class WebConfig extends WebMvcConfigurationSupport{
     }
 
 
+
     @Override
     protected void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();

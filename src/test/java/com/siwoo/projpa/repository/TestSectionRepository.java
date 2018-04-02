@@ -38,6 +38,8 @@ public class TestSectionRepository {
     public void setup() {
         projects = FixtureFactory.projects();
         sections = FixtureFactory.sections();
+        sectionRepository.deleteAll();
+        projectRepository.deleteAll();
         projectRepository.saveAll(projects);
         sectionRepository.saveAll(sections);
     }

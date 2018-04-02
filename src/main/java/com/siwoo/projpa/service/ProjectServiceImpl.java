@@ -24,9 +24,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Autowired UserRepository userRepository;
     @Autowired ProjectRepository projectRepository;
-    @Autowired
-    SectionRepository sectionRepository;
+    @Autowired SectionRepository sectionRepository;
     @Autowired AuditService auditService;
+
     @Override
     public void assign(Project project, User user) {
         Optional<User> foundUser = userRepository.findById(user.getId());

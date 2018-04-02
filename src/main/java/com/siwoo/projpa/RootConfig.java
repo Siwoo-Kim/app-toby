@@ -24,7 +24,7 @@ import java.util.Set;
 
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)
-@ComponentScan("com.siwoo.projpa.repository")
+@ComponentScan({"com.siwoo.projpa.repository","com.siwoo.projpa.converter"})
 @EnableJpaRepositories("com.siwoo.projpa.repository")
 @EntityScan("com.siwoo.projpa.domain")
 @Profile({"dev","prod"})

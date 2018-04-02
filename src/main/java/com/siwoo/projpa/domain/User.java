@@ -16,7 +16,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 /*  to turn PoJo to entity annotate the class with @Entity    */
 @Entity @Table(name ="tbl_user")
-@Getter @Setter @ToString
+@Getter @Setter @ToString(exclude = "projects")
 @EqualsAndHashCode(of={"id","email","name"})
 @Access(AccessType.FIELD)
 public class User {
@@ -33,7 +33,7 @@ public class User {
     private Level level;
     private double point;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "USER_PROJECT",
     joinColumns = @JoinColumn(name="manager_id"),
     inverseJoinColumns = @JoinColumn(name="project_id"))

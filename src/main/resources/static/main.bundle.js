@@ -86,12 +86,14 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_main_main_component__ = __webpack_require__("./src/app/shared/main/main.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__document_document_module__ = __webpack_require__("./src/app/document/document.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__app_tokens__ = __webpack_require__("./src/app/app.tokens.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__project_project_module__ = __webpack_require__("./src/app/project/project.module.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -119,7 +121,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_3__shared_share_module__["a" /* ShareModule */],
                 __WEBPACK_IMPORTED_MODULE_4__services_service_module__["a" /* ServiceModule */],
                 __WEBPACK_IMPORTED_MODULE_8__document_document_module__["a" /* DocumentModule */],
-                __WEBPACK_IMPORTED_MODULE_6__angular_router__["a" /* RouterModule */].forRoot(routes),
+                __WEBPACK_IMPORTED_MODULE_10__project_project_module__["a" /* ProjectModule */],
+                __WEBPACK_IMPORTED_MODULE_6__angular_router__["b" /* RouterModule */].forRoot(routes),
                 /*  Angular module  */
                 __WEBPACK_IMPORTED_MODULE_5__angular_http__["b" /* HttpModule */],
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -305,13 +308,13 @@ var DocumentModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_6__angular_forms__["e" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_6__angular_forms__["j" /* ReactiveFormsModule */],
                 __WEBPACK_IMPORTED_MODULE_2__shared_share_module__["a" /* ShareModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_router__["a" /* RouterModule */].forChild(routes)
+                __WEBPACK_IMPORTED_MODULE_5__angular_router__["b" /* RouterModule */].forChild(routes)
             ],
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_3__components_document_list_document_list_component__["a" /* DocumentListComponent */],
                 __WEBPACK_IMPORTED_MODULE_4__components_document_create_document_create_component__["a" /* DocumentCreateComponent */]
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_5__angular_router__["a" /* RouterModule */]],
+            exports: [__WEBPACK_IMPORTED_MODULE_5__angular_router__["b" /* RouterModule */]],
         })
     ], DocumentModule);
     return DocumentModule;
@@ -349,6 +352,133 @@ var Document = /** @class */ (function () {
         this.resources = resources;
     }
     return Document;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/project/project-main/project-main.component.css":
+/***/ (function(module, exports) {
+
+module.exports = "\r\n.main-wrapper {\r\n  margin-top: 20px;\r\n}\r\n\r\n.left-side {\r\n  position: relative;\r\n  padding: 0 1px 0 0;\r\n  margin: 0;\r\n  border: 0;\r\n  outline: 0;\r\n  font-size: 100%;\r\n  vertical-align: baseline;\r\n}\r\n\r\n.left-side .item {\r\n  padding: 8px 15px;\r\n  line-height: 14px;\r\n  color: #999;\r\n  display: block;\r\n}\r\n\r\n.main-content {\r\n  font-family: NanumGothic,sans-serif;\r\n  line-height: 1.8;\r\n  font-size: 1.1em;\r\n  padding: 10px;\r\n  color: #666;\r\n}\r\n\r\n.main-content > p {\r\n  margin: 1em 0;\r\n}\r\n\r\n.main-header {\r\n  padding-bottom: 1em;\r\n  margin-bottom: 2em;\r\n  position: relative !important;\r\n  text-align: center !important;\r\n  line-height: 1.8;\r\n}\r\n\r\n.main-content-wrapper .props {\r\n  color: #999;\r\n  font-size: .95em;\r\n  margin: .5em .5em 0 .2em;\r\n}\r\n"
+
+/***/ }),
+
+/***/ "./src/app/project/project-main/project-main.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "\n<div class=\"main-wrapper\">\n  <div class=\"row\">\n    <div class=\"col-3 col-sm-3 left-side\">\n      <div class=\"ui vertical menu\">\n        <div class=\"item\" *ngFor=\"let section of sections\">\n          <div class=\"header\">{{ section.name }}</div>\n          <div class=\"menu\">\n            <a class=\"item\">Document1</a>\n            <a class=\"item\">Document2</a>\n          </div>\n        </div>\n        <div class=\"item\">\n          <div class=\"header\">Section</div>\n          <div class=\"menu\">\n            <a class=\"item\">Document1</a>\n            <a class=\"item\">Document2</a>\n          </div>\n        </div>\n        <div class=\"item\">\n          <div class=\"header\">Seciton</div>\n          <div class=\"menu\">\n            <a class=\"item\">Document1</a>\n            <a class=\"item\">Document2</a>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"col-9 col-sm-9 dividing ui main-content-wrapper\">\n      <div class=\"main-header\">\n        <h3 class=\"header dividing ui\">\n          {{ project.name }}\n        </h3>\n        <div class=\"props\">\n          {{ project.basicTime.updated || project.basicTime.created }} | 공개\n        </div>\n      </div>\n\n      <div class=\"ui message\">\n        Last updated of time for section is {{ project.lastUpdatedSection }}.\n      </div>\n\n      <div class=\"main-content\">\n        <p>\n          {{ project.description }}\n        </p>\n      </div>\n\n      <div class=\"ui list\">\n\n      </div>\n      <div class=\"ui relaxed divided list\">\n        <h5 class=\"\"> 예제 코드 </h5>\n        <div class=\"item\">\n          <i class=\"large github middle aligned icon\"></i>\n          <div class=\"content\">\n            <a class=\"header\">Document1</a>\n            <div class=\"description\">Document1 URL</div>\n          </div>\n        </div>\n        <div class=\"item\">\n          <i class=\"large github middle aligned icon\"></i>\n          <div class=\"content\">\n            <a class=\"header\">Document2</a>\n            <div class=\"description\">Document2 URL</div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/project/project-main/project-main.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProjectMainComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_project_repository_service__ = __webpack_require__("./src/app/services/project-repository.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_section_repository_service__ = __webpack_require__("./src/app/services/section-repository.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ProjectMainComponent = /** @class */ (function () {
+    function ProjectMainComponent(productRepository, sectionRepository, route) {
+        this.productRepository = productRepository;
+        this.sectionRepository = sectionRepository;
+        this.route = route;
+    }
+    ProjectMainComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.params.subscribe(function (params) {
+            var projectName = params['name'];
+            _this.project = _this.productRepository.getProjectByName(projectName);
+            console.log(_this.project);
+            _this.sectionRepository.getSectionByProject(_this.project.name)
+                .subscribe(function (sections) { return _this.sections = sections; });
+        });
+    };
+    ProjectMainComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-project-main',
+            template: __webpack_require__("./src/app/project/project-main/project-main.component.html"),
+            styles: [__webpack_require__("./src/app/project/project-main/project-main.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_project_repository_service__["a" /* ProjectRepository */],
+            __WEBPACK_IMPORTED_MODULE_3__services_section_repository_service__["a" /* SectionRepository */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]])
+    ], ProjectMainComponent);
+    return ProjectMainComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/project/project.module.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProjectModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("./node_modules/@angular/common/esm5/common.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__project_main_project_main_component__ = __webpack_require__("./src/app/project/project-main/project-main.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_share_module__ = __webpack_require__("./src/app/shared/share.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_service_module__ = __webpack_require__("./src/app/services/service.module.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+var routes = [
+    { path: 'project', children: [
+            { path: ':name', component: __WEBPACK_IMPORTED_MODULE_2__project_main_project_main_component__["a" /* ProjectMainComponent */] },
+            { path: '', component: __WEBPACK_IMPORTED_MODULE_2__project_main_project_main_component__["a" /* ProjectMainComponent */], pathMatch: 'full' },
+            { path: '**', component: __WEBPACK_IMPORTED_MODULE_2__project_main_project_main_component__["a" /* ProjectMainComponent */] },
+        ]
+    }
+];
+var ProjectModule = /** @class */ (function () {
+    function ProjectModule() {
+    }
+    ProjectModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_5__services_service_module__["a" /* ServiceModule */],
+                __WEBPACK_IMPORTED_MODULE_4__shared_share_module__["a" /* ShareModule */],
+                __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* RouterModule */].forChild(routes),
+            ],
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_2__project_main_project_main_component__["a" /* ProjectMainComponent */]
+            ],
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__project_main_project_main_component__["a" /* ProjectMainComponent */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* RouterModule */]
+            ],
+        })
+    ], ProjectModule);
+    return ProjectModule;
 }());
 
 
@@ -401,6 +531,52 @@ var DocumentRepository = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/services/project-repository.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProjectRepository; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rest_datasource_servics__ = __webpack_require__("./src/app/services/rest-datasource.servics.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ProjectRepository = /** @class */ (function () {
+    function ProjectRepository(dataSource) {
+        var _this = this;
+        this.dataSource = dataSource;
+        this._projects = [];
+        this.dataSource.get('project').subscribe(function (data) {
+            _this._projects = data;
+            console.log(_this._projects);
+        });
+    }
+    ProjectRepository.prototype.getProjects = function () {
+        return this.dataSource.get('project');
+    };
+    ProjectRepository.prototype.getProjectByName = function (name) {
+        return this._projects
+            .filter(function (pro) { return pro.name.toLowerCase() == name.toLowerCase(); })[0];
+    };
+    ProjectRepository = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__rest_datasource_servics__["a" /* RestDatasourceService */]])
+    ], ProjectRepository);
+    return ProjectRepository;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/rest-datasource.servics.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -430,7 +606,7 @@ var RestDatasourceService = /** @class */ (function () {
     function RestDatasourceService(http, protocol) {
         this.http = http;
         this.protocol = protocol;
-        this.backendUrl = protocol + "://localhost:8080/";
+        this.backendUrl = protocol + "://" + location.hostname + ":8080/";
     }
     RestDatasourceService.prototype.get = function (url, params) {
         var queryParam = null;
@@ -463,6 +639,42 @@ var RestDatasourceService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/services/section-repository.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SectionRepository; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rest_datasource_servics__ = __webpack_require__("./src/app/services/rest-datasource.servics.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var SectionRepository = /** @class */ (function () {
+    function SectionRepository(dataSource) {
+        this.dataSource = dataSource;
+    }
+    SectionRepository.prototype.getSectionByProject = function (projectName) {
+        return this.dataSource.get("section/project/" + projectName);
+    };
+    SectionRepository = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__rest_datasource_servics__["a" /* RestDatasourceService */]])
+    ], SectionRepository);
+    return SectionRepository;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/service.module.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -471,12 +683,16 @@ var RestDatasourceService = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rest_datasource_servics__ = __webpack_require__("./src/app/services/rest-datasource.servics.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__document_repository_service__ = __webpack_require__("./src/app/services/document-repository.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__project_repository_service__ = __webpack_require__("./src/app/services/project-repository.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__section_repository_service__ = __webpack_require__("./src/app/services/section-repository.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -487,7 +703,10 @@ var ServiceModule = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             providers: [
                 __WEBPACK_IMPORTED_MODULE_1__rest_datasource_servics__["a" /* RestDatasourceService */],
+                /*  App Repository  */
                 __WEBPACK_IMPORTED_MODULE_2__document_repository_service__["a" /* DocumentRepository */],
+                __WEBPACK_IMPORTED_MODULE_3__project_repository_service__["a" /* ProjectRepository */],
+                __WEBPACK_IMPORTED_MODULE_4__section_repository_service__["a" /* SectionRepository */],
             ],
         })
     ], ServiceModule);
@@ -601,14 +820,14 @@ var FooterComponent = /** @class */ (function () {
 /***/ "./src/app/shared/header/header.component.css":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n.box-shadow {\r\n  -webkit-box-shadow: -2px 2px 24px -5px rgba(0,0,0,0.49);\r\n  box-shadow: -2px 2px 24px -5px rgba(0,0,0,0.49);\r\n}\r\n\r\ndiv i {\r\n  margin-top: 18px !important;\r\n}\r\n"
+module.exports = "\r\n\r\n.box-shadow {\r\n  -webkit-box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);\r\n  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);\r\n}\r\n.menu {\r\n  height: 60px;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -ms-flex-wrap: wrap;\r\n  flex-wrap: wrap;\r\n  -webkit-box-align: center;\r\n  -ms-flex-align: center;\r\n  align-items: center;\r\n  padding: 8px 16px;\r\n  background: #3f51b5;\r\n  font-family: Roboto,Helvetica Neue,sans-serif;\r\n}\r\n.menu > * {\r\n  background-repeat: no-repeat;\r\n}\r\n.mat-button {\r\n  -webkit-user-select: none;\r\n     -moz-user-select: none;\r\n      -ms-user-select: none;\r\n          user-select: none;\r\n  cursor: pointer;\r\n  outline: 0;\r\n  border: none;\r\n  -webkit-tap-highlight-color: transparent;\r\n  display: inline-block;\r\n  white-space: nowrap;\r\n  text-decoration: none;\r\n  vertical-align: baseline;\r\n  text-align: center;\r\n  margin: 0;\r\n  min-width: 45px;\r\n  line-height: 36px;\r\n  padding: 0 10px;\r\n  font-weight: bold;\r\n  border-radius: 2px;\r\n}\r\n"
 
 /***/ }),
 
 /***/ "./src/app/shared/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"d-flex flex-column flex-md-row align-items-center p-1 px-md-4 mb-1 bg-white border-bottom box-shadow\">\n  <h5 class=\"my-0 mr-md-auto font-weight-normal mb-1\">\n    <div class=\"ui icon header\">\n      <i class=\"github square icon\"></i>\n    </div>\n  </h5>\n\n  <nav class=\"my-2 my-md-0 mr-md-3\">\n    <div class=\"ui stackable menu\">\n      <a class=\"item\"\n                *ngFor=\"let project of projects\"\n                (click)=\"getProject(project.name)\"\n                [href]=\"project.url\"><i class=\"fa\" [ngClass]=\"project.icon\"></i>&nbsp;{{ project.name }}</a>\n      <a class=\"item\" routerLink=\"/document/create\" routerLinkActive=\"active\">Create Document (enabled)</a>\n      <a class=\"item\">About Me</a>\n      <a class=\"item\">Contact</a>\n\n    </div>\n\n\n  </nav>\n</div>\n"
+module.exports = "\n<div class=\"mb-5 header\">\n  <nav class=\"ui top fixed menu text-white box-shadow\">\n    <h5 class=\"my-0 m-1 mt-4 mr-3 font-weight-normal mb-1\">\n      <div class=\"ui icon header\">\n        <i class=\"github square icon\" style=\"color: white\"></i>\n      </div>\n    </h5>\n    <div class=\"nav-wrapper celled\">\n      <button mat-button  [matMenuTriggerFor]=\"menu\" >Menu</button>\n      <mat-menu #menu=\"matMenu\">\n        <button mat-menu-item>Item 1</button>\n        <button mat-menu-item>Item 2</button>\n      </mat-menu>\n      <button mat-button\n              [routerLink]=\"['project','test']\"\n              [routerLinkActive]=\"active\"\n      ><i class=\"large github middle aligned icon\"></i>Menu</button>\n      <button mat-button\n              *ngFor=\"let project of projects\"\n              [routerLink]=\"['project',project.name]\"><i class=\"large github middle aligned icon\" [ngClass]=\"project.icon\" ></i> {{ project.name }}</button>\n    </div>\n  </nav>\n</div>\n"
 
 /***/ }),
 
@@ -618,7 +837,7 @@ module.exports = "<div class=\"d-flex flex-column flex-md-row align-items-center
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeaderComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_rest_datasource_servics__ = __webpack_require__("./src/app/services/rest-datasource.servics.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_project_repository_service__ = __webpack_require__("./src/app/services/project-repository.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -631,19 +850,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var HeaderComponent = /** @class */ (function () {
-    function HeaderComponent(datasource) {
+    function HeaderComponent(projectRepository) {
         var _this = this;
-        this.datasource = datasource;
+        this.projectRepository = projectRepository;
         this.projects = [];
-        this.datasource.get('project').subscribe(function (data) {
+        $(document)
+            .ready(function () {
+            $('.ui.menu .ui.dropdown').dropdown({
+                on: 'hover'
+            });
+            $('.ui.menu a.item')
+                .on('click', function () {
+                $(this)
+                    .addClass('active')
+                    .siblings()
+                    .removeClass('active');
+            });
+        });
+        this.projectRepository.getProjects().subscribe(function (data) {
             _this.projects = data;
-            console.log(_this.projects);
         });
     }
     HeaderComponent.prototype.ngOnInit = function () {
     };
     HeaderComponent.prototype.getProject = function (name) {
-        console.log(this.datasource.get('project', [{ param: 'name', value: name }]));
+        return this.projectRepository.getProjectByName(name);
     };
     HeaderComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -651,7 +882,7 @@ var HeaderComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/shared/header/header.component.html"),
             styles: [__webpack_require__("./src/app/shared/header/header.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_rest_datasource_servics__["a" /* RestDatasourceService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_project_repository_service__["a" /* ProjectRepository */]])
     ], HeaderComponent);
     return HeaderComponent;
 }());
@@ -663,14 +894,14 @@ var HeaderComponent = /** @class */ (function () {
 /***/ "./src/app/shared/location/location.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".attached.label {\r\n  height: 60px;\r\n  position: relative;\r\n}\r\n\r\nh6 {\r\n  padding-top: 10px !important;\r\n}\r\n\r\ni {\r\n  margin-left: 1em;\r\n  margin-right: 1em;\r\n}\r\n"
+module.exports = "\r\n\r\nh6 {\r\n  padding-top: 10px !important;\r\n}\r\n\r\ni {\r\n  margin-left: 1em;\r\n  margin-right: 1em;\r\n}\r\n"
 
 /***/ }),
 
 /***/ "./src/app/shared/location/location.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"ui label attached top mt-2\">\n  <h6 class=\"ui header grey ml-5 mt-1\"> 프로젝트<i class=\"fa fa-caret-right\"></i>언어 </h6>\n</div>\n"
+module.exports = "\n<div class=\"wrapper col-12\">\n  <div class=\"ui label attached mt-3\" >\n    <h6 class=\"ui header grey ml-5\"> 프로젝트<i class=\"fa fa-caret-right\"></i>언어 </h6>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -807,10 +1038,11 @@ var ShareModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["a" /* MatButtonModule */],
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["c" /* MatInputModule */],
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["b" /* MatFormFieldModule */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["d" /* MatSelectModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["e" /* MatSelectModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["d" /* MatMenuModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_common__["b" /* CommonModule */],
                 __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
-                __WEBPACK_IMPORTED_MODULE_9__angular_router__["a" /* RouterModule */],
+                __WEBPACK_IMPORTED_MODULE_9__angular_router__["b" /* RouterModule */],
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_1__footer_footer_component__["a" /* FooterComponent */],
@@ -819,8 +1051,9 @@ var ShareModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_6__location_location_component__["a" /* LocationComponent */],
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["c" /* MatInputModule */],
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["b" /* MatFormFieldModule */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["d" /* MatSelectModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["e" /* MatSelectModule */],
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["a" /* MatButtonModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["d" /* MatMenuModule */],
             ]
         })
     ], ShareModule);

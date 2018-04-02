@@ -14,6 +14,9 @@ public interface UserRepository extends JpaRepository<User, Long>, CustomUserRep
     @Query("select distinct u from User u left join fetch u.projects where u.id = :id ")
     User findFetchAllById(@Param("id") long id);
 
+    @Query("select distinct u from User u left join fetch u.projects")
+    List<User> findFetchAll();
+
     @Query("select distinct u from User u left join fetch u.projects where u.email = :email ")
     User findByEmail(@Param("email") String email);
 
@@ -29,4 +32,9 @@ public interface UserRepository extends JpaRepository<User, Long>, CustomUserRep
     @Query("select u from User u where u.projects is not empty")
     List<User> findByProjectsIsNotEmpty();
 
+    @Query("select u.id , size(u.projects) from User u group by u.id")
+    List<Object[]> findProjectsCount();
+
+    @Query("select distinct u from User u inner join u.projects p where p.id = :id")
+    List<User> findByProjectId(@Param("id") long projectId);
 }

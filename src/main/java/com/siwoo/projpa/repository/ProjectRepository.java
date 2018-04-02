@@ -22,4 +22,6 @@ public interface ProjectRepository extends JpaRepository<Project, Long>, CustomP
     @Query("select new com.siwoo.projpa.domain.ProjectSummary(p.name, p.type) from Project p ")
     List<ProjectSummary> findSummaryAll();
 
+    @Query("select p from Project p where p.type in (:types)")
+    List<Project> findByTypes(Project.Type... types);
 }

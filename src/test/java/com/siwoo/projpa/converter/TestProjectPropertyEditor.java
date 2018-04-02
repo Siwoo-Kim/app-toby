@@ -4,6 +4,7 @@ import com.siwoo.projpa.FixtureFactory;
 import com.siwoo.projpa.domain.Project;
 import com.siwoo.projpa.domain.User;
 import com.siwoo.projpa.repository.ProjectRepository;
+import com.siwoo.projpa.repository.SectionRepository;
 import com.siwoo.projpa.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
@@ -35,6 +36,8 @@ public class TestProjectPropertyEditor {
     ProjectRepository projectRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    SectionRepository sectionRepository;
 
     private List<Project> projects;
     private List<User> users;
@@ -43,6 +46,7 @@ public class TestProjectPropertyEditor {
     public void setup() {
         projects = FixtureFactory.projects();
         users = FixtureFactory.users();
+        sectionRepository.deleteAll();
         projectRepository.deleteAll();
         userRepository.deleteAll();
         projectRepository.saveAll(projects);
