@@ -13,10 +13,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -31,7 +34,9 @@ import java.util.List;
 import java.util.Scanner;
 import static com.siwoo.projpa.support.QueryTester.*;
 @Slf4j
-@SpringBootApplication
+
+@PropertySource("classpath:application.properties")
+@SpringBootApplication(scanBasePackages = "com.siwoo.projpa" )
 public class ProjpaApplication {
 
 	public static void main(String[] args) throws InterruptedException {

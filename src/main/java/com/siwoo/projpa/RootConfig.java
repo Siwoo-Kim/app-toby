@@ -27,7 +27,6 @@ import java.util.Set;
 @ComponentScan("com.siwoo.projpa.repository")
 @EnableJpaRepositories("com.siwoo.projpa.repository")
 @EntityScan("com.siwoo.projpa.domain")
-@Profile({"prod", "dev"})
 public class RootConfig {
 
     @Bean
@@ -35,16 +34,7 @@ public class RootConfig {
         return new JpaTransactionManager(entityManagerFactory);
     }
 
-    @Autowired ProjectConverter projectConverter;
-    
-    @Bean
-    ConversionServiceFactoryBean conversionServiceFactoryBean() {
-        ConversionServiceFactoryBean factoryBean = new ConversionServiceFactoryBean();
-        Set<Converter> converters = new HashSet<>();
-        converters.add(projectConverter);
-        factoryBean.setConverters(converters);
-        return factoryBean;
-    }
+
 
 //    @Bean
 //    Properties mailProps() {

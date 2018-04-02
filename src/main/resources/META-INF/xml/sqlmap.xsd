@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
         targetNamespace="http://localhost:8080/sqlmap"
-        xmlns:tns="http://localhost:8080/sqlmap">
+        xmlns:sqlmap="http://localhost:8080/sqlmap" elementFormDefault="qualified">
+
     <element name="sqlmap">
-        <complexType>
-            <attribute ></attribute>
-        </complexType>
+
     </element>
+
 </schema>
