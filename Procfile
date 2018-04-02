@@ -1,1 +1,0 @@
-web: java -jar out/*.jar -Dspring.profiles.active=prod --spring.config.location=application.properties
