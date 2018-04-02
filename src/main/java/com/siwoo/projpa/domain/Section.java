@@ -12,7 +12,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class Section {
 
     @Id @GeneratedValue(strategy = IDENTITY)
-    private String id;
+    private Long id;
 
     private String name;
 
