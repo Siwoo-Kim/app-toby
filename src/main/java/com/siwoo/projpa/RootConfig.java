@@ -44,12 +44,13 @@ public class RootConfig {
         return sqlService;
     }
 
-    @Bean
-    Unmarshaller unmarshaller() {
-        CastorMarshaller castorMarshaller = new CastorMarshaller();
-        castorMarshaller.setMappingLocation(new ClassPathResource("META-INF/xml/castor-sqlmap.xsd"));
-        return castorMarshaller;
-    }
+
+//    @Bean
+//    Unmarshaller unmarshaller() {
+//        CastorMarshaller castorMarshaller = new CastorMarshaller();
+//        castorMarshaller.setMappingLocation(new ClassPathResource("META-INF/xml/castor-sqlmap.xsd"));
+//        return castorMarshaller;
+//    }
 
 
 //    @Bean
