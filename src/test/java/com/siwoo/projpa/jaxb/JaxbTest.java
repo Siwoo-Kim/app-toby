@@ -26,7 +26,11 @@ public class JaxbTest {
         Sqlmap sqlmap = (Sqlmap) unmarshaller.unmarshal(sqlmapPath.toFile());
 
         assertThat(sqlmap.getSql().size(), is(3));
-        assertThat(sqlmap.getSql().);
-
+        assertThat(sqlmap.getSql().get(0).getKey(), is("add"));
+        assertThat(sqlmap.getSql().get(0).getValue(), is("insert"));
+        assertThat(sqlmap.getSql().get(1).getKey(), is("get"));
+        assertThat(sqlmap.getSql().get(1).getValue(), is("select"));
+        assertThat(sqlmap.getSql().get(2).getKey(), is("delete"));
+        assertThat(sqlmap.getSql().get(2).getValue(), is("delete"));
     }
 }

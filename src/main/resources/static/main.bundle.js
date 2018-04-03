@@ -606,7 +606,7 @@ var RestDatasourceService = /** @class */ (function () {
     function RestDatasourceService(http, protocol) {
         this.http = http;
         this.protocol = protocol;
-        this.backendUrl = protocol + "://" + location.hostname + ":8080/";
+        this.backendUrl = protocol + "://" + location.hostname + ":80/";
     }
     RestDatasourceService.prototype.get = function (url, params) {
         var queryParam = null;
