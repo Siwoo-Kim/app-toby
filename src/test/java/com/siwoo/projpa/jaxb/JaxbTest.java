@@ -26,5 +26,7 @@ public class JaxbTest {
         Sqlmap sqlmap = (Sqlmap) unmarshaller.unmarshal(sqlmapPath.toFile());
 
         assertThat(sqlmap.getSql().size(), is(3));
+        assertThat(sqlmap.getSql().);
+
     }
 }
