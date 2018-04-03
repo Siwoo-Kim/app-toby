@@ -1,20 +1,38 @@
 package com.siwoo.projpa.jaxb;
 
+import com.siwoo.projpa.support.SqlService;
+import com.siwoo.projpa.support.jaxb.Sqlmap;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class JaxbTest {
 
+    @Autowired
+    SqlService sqlService;
+
+    @Before
+    public void setup() {
+        assertNotNull(sqlService);
+        assertTrue(sqlService.sql("userAdd") != null);
+    }
     @Test
     public void readSqlmap() throws JAXBException {
         String contextPath = Sqlmap.class.getPackage().getName();
