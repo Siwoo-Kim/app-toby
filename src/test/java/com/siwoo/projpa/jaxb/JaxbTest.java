@@ -4,29 +4,27 @@ import org.junit.Test;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import java.util.List;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 
 public class JaxbTest {
 
     @Test
-    public void readSqlMap() throws JAXBException {
+    public void readSqlmap() throws JAXBException {
         String contextPath = Sqlmap.class.getPackage().getName();
         System.out.println(contextPath);
         JAXBContext context = JAXBContext.newInstance(contextPath);
 
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        Sqlmap sqlmap = (Sqlmap) unmarshaller.unmarshal(getClass().getResourceAsStream("/META-INF/xml/sqlmap.xml"));
+        Path sqlmapPath = FileSystems.getDefault().getPath("src","test","resources","META-INF","xml","sqlmap.xml");
+        Sqlmap sqlmap = (Sqlmap) unmarshaller.unmarshal(sqlmapPath.toFile());
 
-        List<SqlType> sqlTypes = sqlmap.getSql();
-        assertThat(sqlTypes.size() , is(3));
-
+        assertThat(sqlmap.getSql().size(), is(3));
     }
 }
