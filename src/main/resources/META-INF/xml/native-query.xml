@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sqlmap xmlns="http://localhost:8080/sqlmap">
+    <sql key="INSERT">insert into tbl_document (title, subtitle, description) values (?, ?, ?)</sql>
+    <sql key="BY_HIT">select * from tbl_document where hit = ?</sql>
+    <sql key="DELETE_BY_ID">delete from tbl_document where id = ?</sql>
+    <sql key="BY_MAX_HIT">select max(hit) from tbl_document</sql>
+</sqlmap>

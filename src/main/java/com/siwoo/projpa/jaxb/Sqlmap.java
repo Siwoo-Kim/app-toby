@@ -1,12 +1,12 @@
 //
-// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ JAXB(JavaTM Architecture for XML Binding) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 2.2.8-b130911.1802 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. 
-// <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a>ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï½Ê½Ã¿ï¿½. 
-// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ò½ï¿½ ï¿½ï¿½Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Õ½ÇµË´Ï´ï¿½. 
-// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥: 2018.04.02 ï¿½Ã°ï¿½ 07:58:59 PM EDT 
+// ÀÌ ÆÄÀÏÀº JAXB(JavaTM Architecture for XML Binding) ÂüÁ¶ ±¸Çö 2.2.8-b130911.1802 ¹öÀüÀ» ÅëÇØ »ý¼ºµÇ¾ú½À´Ï´Ù. 
+// <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a>¸¦ ÂüÁ¶ÇÏ½Ê½Ã¿À. 
+// ÀÌ ÆÄÀÏÀ» ¼öÁ¤ÇÏ¸é ¼Ò½º ½ºÅ°¸¶¸¦ ÀçÄÄÆÄÀÏÇÒ ¶§ ¼öÁ¤ »çÇ×ÀÌ ¼Õ½ÇµË´Ï´Ù. 
+// »ý¼º ³¯Â¥: 2018.04.03 ½Ã°£ 09:00:52 PM EDT 
 //
 
 
-package com.siwoo.projpa.support.jaxb;
+package com.siwoo.projpa.jaxb;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +18,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>anonymous complex typeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Java Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
+ * <p>anonymous complex type¿¡ ´ëÇÑ Java Å¬·¡½ºÀÔ´Ï´Ù.
  * 
- * <p>ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ÔµÇ´ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+ * <p>´ÙÀ½ ½ºÅ°¸¶ ´ÜÆíÀÌ ÀÌ Å¬·¡½º¿¡ Æ÷ÇÔµÇ´Â ÇÊ¿äÇÑ ÄÜÅÙÃ÷¸¦ ÁöÁ¤ÇÕ´Ï´Ù.
  * 
  * <pre>
  * &lt;complexType>
@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "sqlmapType", propOrder = {
+@XmlType(name = "", propOrder = {
     "sql"
 })
 @XmlRootElement(name = "sqlmap")

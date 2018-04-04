@@ -28,6 +28,8 @@ public class Document {
     @Column(name = "sub_title")
     private String subtitle;
 
+    private int index;
+
     @Column(length = 400)
     private String description;
 

@@ -12,6 +12,7 @@ import java.util.List;
 
 public interface ProjectRepository extends JpaRepository<Project, Long>, CustomProjectRepository {
 
+    public static final String COLUMN_ID = "id";
 
     @Query("select p from Project p where upper(p.name) = upper(:name) ")
     Project findByName(@Param("name") String name);

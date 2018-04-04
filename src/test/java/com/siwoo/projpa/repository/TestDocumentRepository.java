@@ -108,9 +108,9 @@ public class TestDocumentRepository {
         log.warn(Arrays.toString(found.toArray()));
 
         assertEquals(found.get(0), document.getTitle());
-        assertEquals(found.get(DocumentRepositoryImpl.COLUMN_TITLE), document.getTitle());
+        assertEquals(found.get(DocumentRepository.COLUMN_TITLE), document.getTitle());
         assertEquals(found.get(1), document.getSubtitle());
-        assertEquals(found.get(DocumentRepositoryImpl.COLUMN_SUBTITLE), document.getSubtitle());
+        assertEquals(found.get(DocumentRepository.COLUMN_SUBTITLE), document.getSubtitle());
 
     }
 }

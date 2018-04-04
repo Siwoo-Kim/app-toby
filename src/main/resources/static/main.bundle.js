@@ -27,7 +27,7 @@ module.exports = ""
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n\n<app-header></app-header>\n<app-location></app-location>\n\n<div class=\"page-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center\">\n  <p class=\"sub-header\" >\n    SubHeader\n  </p>\n  <h1 class=\"display-4\">Siwoo Kim</h1>\n  <p class=\"lead\">Page Header</p>\n</div>\n\n<div class=\"container\">\n  <router-outlet></router-outlet>\n  <a routerLink=\"/document/create\">C</a>\n</div>\n<app-footer></app-footer>\n\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n\n<app-header></app-header>\n<app-location></app-location>\n\n<div class=\"page-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center\">\n  <p class=\"sub-header\" >\n    SubHeader\n  </p>\n  <h1 class=\"display-4\">Siwoo Kim</h1>\n  <p class=\"lead\">Page Header</p>\n</div>\n\n<div class=\"container-fluid\">\n  <router-outlet></router-outlet>\n  <a routerLink=\"/document/create\">C</a>\n</div>\n<app-footer></app-footer>\n\n"
 
 /***/ }),
 
@@ -376,6 +376,29 @@ var Document = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/models/project.model.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Project; });
+var Project = /** @class */ (function () {
+    function Project(id, name, type, icon, url, lastUpdatedSection, description, basicTime) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.icon = icon;
+        this.url = url;
+        this.lastUpdatedSection = lastUpdatedSection;
+        this.description = description;
+        this.basicTime = basicTime;
+    }
+    return Project;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/project/project-main/project-main.component.css":
 /***/ (function(module, exports) {
 
@@ -386,7 +409,7 @@ module.exports = "\r\n.main-wrapper {\r\n  margin-top: 20px;\r\n}\r\n\r\n.left-s
 /***/ "./src/app/project/project-main/project-main.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"main-wrapper\">\n  <div class=\"row\">\n    <div class=\"col-3 col-sm-3 left-side\">\n      <div class=\"ui vertical menu\">\n        <div class=\"item\" *ngFor=\"let section of projectSummary.sectionNames\">\n          <div class=\"header\">{{ section }}</div>\n          <div class=\"menu\">\n            <a class=\"item\" *ngFor=\"let documentTitle of getDocumentTitleByName(section)\">\n              {{ documentTitle }}\n            </a>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"col-9 col-sm-9 dividing ui main-content-wrapper\">\n      <div class=\"main-header\">\n        <h3 class=\"header dividing ui\">\n          {{ project.name }}\n        </h3>\n        <div class=\"props\">\n          {{ project.basicTime.updated || project.basicTime.created }} | 공개\n        </div>\n      </div>\n\n      <div class=\"ui message\">\n        Project Type : <i class=\"ui icon html5\" [ngClass]=\"{'cloudversify' : projectSummary.type == 'BACKEND'}\"></i>{{ projectSummary.type }}\n        <br>\n        Last updated of time for section is {{ project.lastUpdatedSection || 'Not Recent' }}.\n      </div>\n\n      <div class=\"main-content\">\n        <p>\n          {{ project.description }}\n        </p>\n      </div>\n\n      <app-list-chapter [chapters]=\"chapters\" [title]=\"project.name\"></app-list-chapter>\n\n      <div class=\"ui relaxed divided list\">\n        <h5 class=\"\"> 예제 코드 </h5>\n        <div class=\"item\">\n          <i class=\"large github middle aligned icon\"></i>\n          <div class=\"content\">\n            <a class=\"header\">Document1</a>\n            <div class=\"description\">Document1 URL</div>\n          </div>\n        </div>\n        <div class=\"item\">\n          <i class=\"large github middle aligned icon\"></i>\n          <div class=\"content\">\n            <a class=\"header\">Document2</a>\n            <div class=\"description\">Document2 URL</div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "\n\n<div class=\"ui grid stackable container-fluid\">\n  <div class=\"row\">\n    <app-project-sidebar [project]=\"project\" ></app-project-sidebar>\n    <div class=\"ui thirteen wide column\">\n      <div class=\"main-header\">\n        <h3 class=\"header dividing ui\">\n          {{ project.name }}\n        </h3>\n        <div class=\"props\">\n          {{ ( project.basicTime.updated || project.basicTime.created ) | date }} | 공개\n        </div>\n      </div>\n\n      <app-data-loader *ngIf=\"!projectSummary\"></app-data-loader>\n      <div class=\"ui message\" *ngIf=\"projectSummary\">\n        Project Type : <i class=\"ui icon html5\" [ngClass]=\"{'cloudversify' : project.type == 'BACKEND'}\"></i>{{ projectSummary.type }}\n        <br>\n        Last updated of time for section is {{ project.lastUpdatedSection || 'Not Recent' }}.\n      </div>\n\n      <div class=\"main-content\">\n        <p>\n          {{ project.description }}\n        </p>\n      </div>\n\n      <app-data-loader *ngIf=\"!projectSummary\"></app-data-loader>\n      <app-list-chapter *ngIf=\"projectSummary\" [chapters]=\"chapters\" [title]=\"project.name\"></app-list-chapter>\n\n      <div class=\"ui relaxed divided list\">\n        <h5 class=\"\"> 예제 코드 </h5>\n        <div class=\"item\">\n          <i class=\"large github middle aligned icon\"></i>\n          <div class=\"content\">\n            <a class=\"header\">Document1</a>\n            <div class=\"description\">Document1 URL</div>\n          </div>\n        </div>\n        <div class=\"item\">\n          <i class=\"large github middle aligned icon\"></i>\n          <div class=\"content\">\n            <a class=\"header\">Document2</a>\n            <div class=\"description\">Document2 URL</div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -416,25 +439,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var ProjectMainComponent = /** @class */ (function () {
     function ProjectMainComponent(productRepository, sectionRepository, route) {
+        var _this = this;
         this.productRepository = productRepository;
         this.sectionRepository = sectionRepository;
         this.route = route;
         this.chapters = [];
-    }
-    ProjectMainComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this.route.params.subscribe(function (params) {
             var projectName = params['name'];
             _this.project = _this.productRepository.getProjectByName(projectName);
-            _this.productRepository.getProjectSummary(_this.project.id).subscribe(function (data) {
-                _this.projectSummary = data;
-                var sectionChapter = [];
-                for (var _i = 0, _a = _this.projectSummary.sectionNames; _i < _a.length; _i++) {
-                    var sectionName = _a[_i];
-                    sectionChapter.push(new __WEBPACK_IMPORTED_MODULE_4__models_chapter_model__["a" /* Chapter */](sectionName, ''));
-                }
-                _this.chapters.push(new __WEBPACK_IMPORTED_MODULE_4__models_chapter_model__["a" /* Chapter */](_this.project.name, _this.project.description, sectionChapter));
-            });
+            _this.productRepository.currentProject = _this.project;
+        });
+        this.productRepository.changeCurrentProjectEmitter.subscribe(function (project) { return _this.init(project); });
+    }
+    ProjectMainComponent.prototype.ngOnInit = function () {
+    };
+    ProjectMainComponent.prototype.init = function (project) {
+        var _this = this;
+        this.project = project;
+        this.productRepository.getProjectSummary(this.project.id).subscribe(function (data) {
+            _this.projectSummary = data;
+            _this.chapters = [];
+            var sectionChapter = [];
+            for (var _i = 0, _a = _this.projectSummary.sectionNames; _i < _a.length; _i++) {
+                var sectionName = _a[_i];
+                sectionChapter.push(new __WEBPACK_IMPORTED_MODULE_4__models_chapter_model__["a" /* Chapter */](sectionName, ''));
+            }
+            _this.chapters.push(new __WEBPACK_IMPORTED_MODULE_4__models_chapter_model__["a" /* Chapter */](_this.project.name, _this.project.description, sectionChapter));
         });
     };
     ProjectMainComponent.prototype.getDocumentTitleByName = function (sectionName) {
@@ -465,6 +495,91 @@ var ProjectMainComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/project/project-main/project-sidebar/project-sidebar.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/project/project-main/project-sidebar/project-sidebar.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "\n<app-data-loader class=\"ui three wide column pl-3\" *ngIf=\"!currentProject\"></app-data-loader>\n<div class=\"ui three wide column pl-3\" *ngIf=\"currentProject\">\n  <div class=\"ui vertical menu\">\n    <div class=\"item\" *ngFor=\"let section of projectSummary.sectionNames\">\n      <div class=\"header\">{{ section }}</div>\n      <div class=\"menu\">\n        <a class=\"item\" *ngFor=\"let documentTitle of getDocumentTitleByName(section)\">\n          {{ documentTitle }}\n        </a>\n      </div>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/project/project-main/project-sidebar/project-sidebar.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProjectSidebarComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_project_repository_service__ = __webpack_require__("./src/app/services/project-repository.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_project_model__ = __webpack_require__("./src/app/models/project.model.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ProjectSidebarComponent = /** @class */ (function () {
+    function ProjectSidebarComponent(projectRepository, route) {
+        this.projectRepository = projectRepository;
+        this.route = route;
+    }
+    Object.defineProperty(ProjectSidebarComponent.prototype, "project", {
+        set: function (project) {
+            var _this = this;
+            this.currentProject = project;
+            this.projectRepository.getProjectSummary(this.currentProject.id).subscribe(function (data) {
+                _this.projectSummary = data;
+            });
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ProjectSidebarComponent.prototype.ngOnInit = function () { };
+    ProjectSidebarComponent.prototype.getDocumentTitleByName = function (sectionName) {
+        var titles = [];
+        for (var _i = 0, _a = Object.keys(this.projectSummary.documentTitles); _i < _a.length; _i++) {
+            var _sectionName = _a[_i];
+            if (_sectionName == sectionName) {
+                titles = this.projectSummary.documentTitles[_sectionName];
+                console.log(titles);
+            }
+        }
+        return titles;
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__models_project_model__["a" /* Project */]),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__models_project_model__["a" /* Project */]])
+    ], ProjectSidebarComponent.prototype, "project", null);
+    ProjectSidebarComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-project-sidebar',
+            template: __webpack_require__("./src/app/project/project-main/project-sidebar/project-sidebar.component.html"),
+            styles: [__webpack_require__("./src/app/project/project-main/project-sidebar/project-sidebar.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_project_repository_service__["a" /* ProjectRepository */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]])
+    ], ProjectSidebarComponent);
+    return ProjectSidebarComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/project/project.module.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -476,12 +591,14 @@ var ProjectMainComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_share_module__ = __webpack_require__("./src/app/shared/share.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_service_module__ = __webpack_require__("./src/app/services/service.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__project_main_project_sidebar_project_sidebar_component__ = __webpack_require__("./src/app/project/project-main/project-sidebar/project-sidebar.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -508,7 +625,8 @@ var ProjectModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* RouterModule */].forChild(routes),
             ],
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__project_main_project_main_component__["a" /* ProjectMainComponent */]
+                __WEBPACK_IMPORTED_MODULE_2__project_main_project_main_component__["a" /* ProjectMainComponent */],
+                __WEBPACK_IMPORTED_MODULE_6__project_main_project_sidebar_project_sidebar_component__["a" /* ProjectSidebarComponent */],
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_2__project_main_project_main_component__["a" /* ProjectMainComponent */],
@@ -592,11 +710,26 @@ var ProjectRepository = /** @class */ (function () {
         var _this = this;
         this.dataSource = dataSource;
         this._projects = [];
+        this.changeCurrentProjectEmitter = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
         this.dataSource.get('project').subscribe(function (data) {
             _this._projects = data;
             console.log(_this._projects);
         });
     }
+    Object.defineProperty(ProjectRepository.prototype, "currentProject", {
+        get: function () {
+            return this._currentProject;
+        },
+        set: function (project) {
+            this.changeCurrentProjectEmitter.emit(project);
+            this._currentProject = project;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ProjectRepository.prototype.getProject = function (id) {
+        return this._projects.find(function (_project) { return _project.id == id; });
+    };
     ProjectRepository.prototype.getProjects = function () {
         return this.dataSource.get('project');
     };
@@ -817,6 +950,56 @@ var BottomComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/shared/components/data-loader/data-loader.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/shared/components/data-loader/data-loader.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"ui dividing active centered inline loader\"></div>\n\n"
+
+/***/ }),
+
+/***/ "./src/app/shared/components/data-loader/data-loader.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataLoaderComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var DataLoaderComponent = /** @class */ (function () {
+    function DataLoaderComponent() {
+    }
+    DataLoaderComponent.prototype.ngOnInit = function () {
+    };
+    DataLoaderComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-data-loader',
+            template: __webpack_require__("./src/app/shared/components/data-loader/data-loader.component.html"),
+            styles: [__webpack_require__("./src/app/shared/components/data-loader/data-loader.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], DataLoaderComponent);
+    return DataLoaderComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/shared/components/list-chapter/list-chapter-item/list-chapter-item.component.css":
 /***/ (function(module, exports) {
 
@@ -985,7 +1168,7 @@ module.exports = "\r\n.shadow {\r\n  -webkit-box-shadow: 2px 6px 65px -6px rgba(
 /***/ "./src/app/shared/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"header-wrapper d-flex mb-1 flex-column flex-md-row align-items-center p-3 px-md-4 shadow\">\n  <h3 class=\"my-0 mr-md-auto font-weight-normal ui header\">\n    <a\n\n      [routerLink]=\"['/home']\"\n    ><i class=\"ui icon large github\"></i></a>\n  </h3>\n  <nav class=\"my-2 my-md-0 mr-md-3\">\n    <a\n      *ngFor=\"let project of projects\"\n      class=\"p-2\"\n      [routerLink]=\"['project',project.name]\"\n      routerLinkActive=\"active\"> {{ project.name }}</a>\n  </nav>\n  <a class=\"btn btn-outline-primary mr-2\"\n     mat-raised-button\n     (click)=\"onChangeModel('user')\">Contact</a>\n  <form class=\"form-inline ui icon input\">\n    <input\n      type=\"text\"\n      class=\"form-control-sm\"\n      placeholder=\"Search Document\">\n      <i class=\"inverted circular search link icon\"></i>\n  </form>\n</div>\n"
+module.exports = "<div class=\"header-wrapper d-flex mb-1 flex-column flex-md-row align-items-center p-3 px-md-4 shadow\">\n  <h3 class=\"my-0 mr-md-auto font-weight-normal ui header\">\n    <a\n      [routerLink]=\"['/home']\"\n    ><i class=\"ui icon large github\"></i></a>\n  </h3>\n  <nav class=\"my-2 my-md-0 mr-md-3\">\n    <a\n      *ngFor=\"let project of projects\"\n      class=\"p-2\"\n      [routerLink]=\"['project',project.name]\"\n      routerLinkActive=\"active\"> {{ project.name }}</a>\n  </nav>\n  <a class=\"btn btn-outline-primary mr-2\"\n     mat-raised-button\n     (click)=\"onChangeModel('user')\">Contact</a>\n  <form class=\"form-inline ui icon input\">\n    <input\n      type=\"text\"\n      class=\"form-control-sm\"\n      placeholder=\"Search Document\">\n      <i class=\"inverted circular search link icon\"></i>\n  </form>\n</div>\n"
 
 /***/ }),
 
@@ -996,6 +1179,7 @@ module.exports = "<div class=\"header-wrapper d-flex mb-1 flex-column flex-md-ro
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeaderComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_project_repository_service__ = __webpack_require__("./src/app/services/project-repository.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1007,10 +1191,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var HeaderComponent = /** @class */ (function () {
-    function HeaderComponent(projectRepository) {
+    function HeaderComponent(projectRepository, route) {
         var _this = this;
         this.projectRepository = projectRepository;
+        this.route = route;
         this.projects = [];
         $(document)
             .ready(function () {
@@ -1040,7 +1226,8 @@ var HeaderComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/shared/header/header.component.html"),
             styles: [__webpack_require__("./src/app/shared/header/header.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_project_repository_service__["a" /* ProjectRepository */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_project_repository_service__["a" /* ProjectRepository */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]])
     ], HeaderComponent);
     return HeaderComponent;
 }());
@@ -1166,12 +1353,14 @@ var MainComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_list_chapter_list_chapter_component__ = __webpack_require__("./src/app/shared/components/list-chapter/list-chapter.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_list_chapter_list_chapter_item_list_chapter_item_component__ = __webpack_require__("./src/app/shared/components/list-chapter/list-chapter-item/list-chapter-item.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_data_loader_data_loader_component__ = __webpack_require__("./src/app/shared/components/data-loader/data-loader.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1197,6 +1386,7 @@ var ShareModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_7__main_main_component__["a" /* MainComponent */],
                 __WEBPACK_IMPORTED_MODULE_10__components_list_chapter_list_chapter_component__["a" /* ListChapterComponent */],
                 __WEBPACK_IMPORTED_MODULE_11__components_list_chapter_list_chapter_item_list_chapter_item_component__["a" /* ListChapterItemComponent */],
+                __WEBPACK_IMPORTED_MODULE_12__components_data_loader_data_loader_component__["a" /* DataLoaderComponent */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["a" /* MatButtonModule */],
@@ -1215,6 +1405,7 @@ var ShareModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_6__location_location_component__["a" /* LocationComponent */],
                 __WEBPACK_IMPORTED_MODULE_10__components_list_chapter_list_chapter_component__["a" /* ListChapterComponent */],
                 __WEBPACK_IMPORTED_MODULE_11__components_list_chapter_list_chapter_item_list_chapter_item_component__["a" /* ListChapterItemComponent */],
+                __WEBPACK_IMPORTED_MODULE_12__components_data_loader_data_loader_component__["a" /* DataLoaderComponent */],
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["c" /* MatInputModule */],
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["b" /* MatFormFieldModule */],
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["e" /* MatSelectModule */],

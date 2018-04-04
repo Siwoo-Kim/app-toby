@@ -1,6 +1,0 @@
-<sqlmap xmlns="http://localhost:8080/sqlmap">
-    <sql key="userAdd">insert into tbl_user (name, email, password) values (?, ?, ?)</sql>
-    <sql key="userGet">select * from tbl_user where user id = ? </sql>
-    <sql key="userGetAll">select * from tbl_user</sql>
-
-</sqlmap>

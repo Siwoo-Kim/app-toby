@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sqlmap xmlns="http://localhost:8080/sqlmap">
+    <sql key="add">insert</sql>
+    <sql key="get">select</sql>
+    <sql key="delete">delete</sql>
+    <sql key="update">update</sql>
+</sqlmap>

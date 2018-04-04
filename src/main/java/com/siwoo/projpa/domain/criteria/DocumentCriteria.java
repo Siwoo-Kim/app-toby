@@ -30,7 +30,7 @@ public class DocumentCriteria {
         this.subtitle = subtitle;
         this.description = description;
         this.content = content;
-        this.searches = new HashSet<Search>(Arrays.asList(searches));
+        this.searches = new HashSet<>(Arrays.asList(searches));
         //log.warn(this.searches+"");
     }
 

@@ -12,6 +12,16 @@ import java.util.Map;
 
 public interface DocumentRepository extends JpaRepository<Document, Long>, CustomDocumentRepository {
 
+    public static final String COLUMN_SECTION = "section";
+    public static final String COLUMN_TITLE = "title";
+    public static final String COLUMN_SUBTITLE = "subtitle";
+    public static final String COLUMN_DESCRIPTION = "description";
+    public static final String COLUMN_CONTENT = "content";
+    public static final String COLUMN_RESOURCES = "resources";
+    public static final String COLUMN_OWNER = "owner";
+    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_BASICTIME = "basicTime";
+
     @Query("select key(r), value(r) from Document d inner join d.resources r")
     Map<String,URL> findResources();
 
@@ -23,6 +33,7 @@ public interface DocumentRepository extends JpaRepository<Document, Long>, Custo
             "where key(r) in (:keys)")
     Map<String,URL> findResourcesByResourcesKey(@Param("keys") List<String> keys);
 
+    long countBySectionId(long sectionId);
 
     @Query("select d from Document d where d.hit > :hit")
     List<Document> findByHitGreaterThan(@Param("hit") int hit);

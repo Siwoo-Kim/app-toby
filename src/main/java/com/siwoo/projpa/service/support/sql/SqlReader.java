@@ -1,4 +1,4 @@
-package com.siwoo.projpa.support;
+package com.siwoo.projpa.service.support.sql;
 
 public interface SqlReader {
 

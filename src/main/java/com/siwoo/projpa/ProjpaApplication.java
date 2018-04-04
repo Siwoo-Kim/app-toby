@@ -80,8 +80,6 @@ public class ProjpaApplication {
 				e.printStackTrace();
 
 			}
-
-
 		}
 	}
 

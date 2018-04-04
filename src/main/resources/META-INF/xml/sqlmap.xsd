@@ -6,7 +6,7 @@
     <element name="sqlmap">
         <complexType>
             <sequence>
-                <element type="tns:sqlType" maxOccurs="unbounded" name="sql" />
+                <element name="sql" type="tns:sqlType" maxOccurs="unbounded" />
             </sequence>
         </complexType>
     </element>
@@ -14,9 +14,8 @@
     <complexType name="sqlType">
         <simpleContent>
             <extension base="string">
-                <attribute name="key" use="required" type="string" />
+                <attribute name="key" type="string" use="required" />
             </extension>
         </simpleContent>
     </complexType>
-
 </schema>

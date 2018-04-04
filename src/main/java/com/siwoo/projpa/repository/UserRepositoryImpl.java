@@ -16,17 +16,17 @@ import java.util.Optional;
 @Repository
 public class UserRepositoryImpl implements CustomUserRepository {
 
-
-    @PersistenceContext
-    EntityManager entityManager;
-    private static final Class<User> domainClass = User.class;
-
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_EMAIL = "email";
+    private static final Class<User> domainClass = User.class;
+    private static final String JPQL_BY_POINT_GREATER_THAN =
+            "select u from User u where u.point > :point ";
+    @PersistenceContext
+    EntityManager entityManager;
 
     @Override
     public User create(User user) {
-        Assert.notNull(user , "user should not null");
+        Assert.notNull(user, "user should not null");
         defaultCheck(user);
         entityManager.persist(user);
         return user;
@@ -35,18 +35,16 @@ public class UserRepositoryImpl implements CustomUserRepository {
     @Override
     public Optional<User> get(long id) {
         Assert.state(id > 0, "id must be greater than 0");
-        User user = entityManager.find(domainClass,id);
-        if(user == null) {
+        User user = entityManager.find(domainClass, id);
+        if (user == null) {
             log.info("we cannot find the entity, sorry");
         }
         return Optional.ofNullable(user);
     }
 
-    private static final String JPQL_BY_POINT_GREATER_THAN =
-            "select u from User u where u.point > :point ";
     @Override
     public List<User> getByPointGreaterThan(double point) {
-        TypedQuery<User> query = entityManager.createQuery(JPQL_BY_POINT_GREATER_THAN,domainClass)
+        TypedQuery<User> query = entityManager.createQuery(JPQL_BY_POINT_GREATER_THAN, domainClass)
                 .setParameter("point", point);
         return query.getResultList();
     }
@@ -54,7 +52,7 @@ public class UserRepositoryImpl implements CustomUserRepository {
     @Override
     public boolean remove(User user) {
         Optional<User> found = get(user.getId());
-        if(found.isPresent()) {
+        if (found.isPresent()) {
             entityManager.remove(found.get());
             return true;
         } else {
@@ -65,7 +63,7 @@ public class UserRepositoryImpl implements CustomUserRepository {
     @Override
     public boolean raisePoint(long id, double raise) {
         Optional<User> found = get(id);
-        if(found.isPresent()) {
+        if (found.isPresent()) {
             User user = found.get();
             return user.raisePoint(raise);
         } else {
@@ -75,7 +73,7 @@ public class UserRepositoryImpl implements CustomUserRepository {
 
 
     private void defaultCheck(User user) {
-        if(user.getJoinDate() == null) {
+        if (user.getJoinDate() == null) {
             user.setJoinDate(LocalDate.now());
         }
     }
