@@ -18,6 +18,33 @@ public class FixtureFactory {
         return object.getClass().getSimpleName();
     }
 
+    public static List<WebPage> webPages() {
+        List<WebPage> webPages = null;
+        try{
+            WebPage webPage = new WebPage();
+            webPage.setName("Project");
+            webPage.setDescription("프로젝트란 우리말로 목표정도로 번역 할 수 있을 것 같습니다. 어떤 목표를 달성하기 위해서 많은 사람이 협력합니다. 이 과정에서 소위 막장이라고 부르는 상황들이 발생합니다. 그리고 이런 막장은 어느정도는 숙명과도 같은 것입니다. 하지만 막장은 줄일 수 있습니다. 행복한 프로젝트는 아니더라도 프로젝트를 덜 불행하게 만들수는 있습니다. 이를 위한 많은 도구들이 있고 프로젝트 관리편에서는 이 도구들을 소개해드립니다.");
+            webPage.setUrl(new URL("http", "www.localhost.com", 8080, "/project"));
+            webPages.add(webPage);
+
+            webPage = new WebPage();
+            webPage.setName("Home");
+            webPage.setDescription("온라인용 포트폴리오입니다. 사회에 첫발을 내딛기 위한 정말로, 가장 처음으로 만든 포트폴리오라 할 수 있을 것 같습니다. 영원할 것 같던 대학시절이 끝나고 있습니다. 만감이 교차하는 마음으로 준비했던 포트폴리오입니다.");
+            webPage.setUrl(new URL("http", "www.localhost.com", 8080, "/home"));
+            webPages.add(webPage);
+
+            webPage = new WebPage();
+            webPage.setName("Section");
+            webPage.setDescription("프로그래밍을 처음 시작하는 분들의 눈높이에 맞게 만들어진 강의입니다. 이미 프로그래밍에 익숙한 분의 입장에서는 설명이 조금 장황할 수 있습니다.");
+            webPage.setUrl(new URL("http", "www.localhost.com", 8080, "/section"));
+            webPages.add(webPage);
+        }catch (MalformedURLException e) {
+            e.printStackTrace();
+            System.out.printf("Error URL Format");
+        }
+        return webPages;
+    }
+
     public static List<Document> documents() {
         List<Document> documents = null;
         try {
