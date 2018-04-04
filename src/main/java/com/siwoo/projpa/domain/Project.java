@@ -26,6 +26,7 @@ public class Project {
     public enum Type {
         BACKEND, FRONTEND, ETC;
     }
+
     @Enumerated(EnumType.STRING)
     private Type type;
 

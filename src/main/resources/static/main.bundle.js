@@ -27,7 +27,7 @@ module.exports = ""
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n\n<app-header></app-header>\n<app-location></app-location>\n\n<div class=\"page-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center\">\n  <p class=\"sub-header\" >\n    SubHeader\n  </p>\n  <h1 class=\"display-4\">Siwoo Kim</h1>\n  <p class=\"lead\">Page Header</p>\n</div>\n\n<div class=\"container-fluid\">\n  <router-outlet></router-outlet>\n  <a routerLink=\"/document/create\">C</a>\n</div>\n<app-footer></app-footer>\n\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n\n<app-header></app-header>\n<app-location></app-location>\n\n<div class=\"page-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center\">\n  <p class=\"sub-header\" >\n    About Page by Siwoo Kim\n  </p>\n  <h1 class=\"ui header dividing\" style=\"font-size: 3em\">\n    Project\n    <div class=\"sub header pt-3 pb-3\">\n        프로젝트란 우리말로 목표정도로 번역 할 수 있을 것 같습니다. 어떤 목표를 달성하기 위해서 많은 사람이 협력합니다. 이 과정에서 소위 막장이라고 부르는 상황들이 발생합니다. 그리고 이런 막장은 어느정도는 숙명과도 같은 것입니다. 하지만 막장은 줄일 수 있습니다. 행복한 프로젝트는 아니더라도 프로젝트를 덜 불행하게 만들수는 있습니다. 이를 위한 많은 도구들이 있고 생활코딩 프로젝트 관리편에서는 이 도구들을 소개해드립니다.\n    </div>\n  </h1>\n</div>\n\n<div class=\"container-fluid\">\n  <router-outlet></router-outlet>\n  <a routerLink=\"/document/create\">C</a>\n</div>\n<app-footer></app-footer>\n\n"
 
 /***/ }),
 
