@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
-public interface DocumentRepository extends JpaRepository<Document, Long> {
+public interface DocumentRepository extends JpaRepository<Document, Long>, CustomDocumentRepository {
 
     @Query("select key(r), value(r) from Document d inner join d.resources r")
     Map<String,URL> findResources();
@@ -50,5 +50,12 @@ public interface DocumentRepository extends JpaRepository<Document, Long> {
 
     @Query("select d from Document d where d.section.project.name = :projectName ")
     List<Document> findByProjectName(@Param("projectName") String projectName);
+
+    @Query("select d.title from Document d where d.section.project.name = :projectName ")
+    List<String> findTitleByProjectName(@Param("projectName") String projectName);
+
+
+    @Query("select d.title from Document d where d.section.name = :sectionName")
+    String[] findTitleBySectionName(@Param("sectionName") String sectionName);
 
 }

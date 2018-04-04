@@ -1,6 +1,7 @@
 package com.siwoo.projpa.service;
 
 import com.siwoo.projpa.domain.Project;
+import com.siwoo.projpa.domain.ProjectSummary;
 import com.siwoo.projpa.domain.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +11,8 @@ import java.util.Map;
 
 @Transactional(readOnly = true)
 public interface ProjectService {
+
+    ProjectSummary summary(long projectId);
 
     @Transactional(readOnly = false, rollbackFor = RuntimeException.class)
     void assign(Project project, User user);

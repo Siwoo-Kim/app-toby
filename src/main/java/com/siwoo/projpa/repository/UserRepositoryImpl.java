@@ -16,9 +16,13 @@ import java.util.Optional;
 @Repository
 public class UserRepositoryImpl implements CustomUserRepository {
 
+
     @PersistenceContext
     EntityManager entityManager;
     private static final Class<User> domainClass = User.class;
+
+    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_EMAIL = "email";
 
     @Override
     public User create(User user) {

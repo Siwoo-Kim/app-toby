@@ -1,6 +1,7 @@
 package com.siwoo.projpa.web;
 
 import com.siwoo.projpa.domain.Project;
+import com.siwoo.projpa.domain.ProjectSummary;
 import com.siwoo.projpa.repository.ProjectRepository;
 import com.siwoo.projpa.service.ProjectService;
 import lombok.extern.slf4j.Slf4j;
@@ -36,4 +37,8 @@ public class ProjectController {
     }
 
 
+    @GetMapping("/summary/{projectId}")
+    public ProjectSummary getSummary(@PathVariable("projectId") long projectId) {
+        return projectService.summary(projectId);
+    }
 }

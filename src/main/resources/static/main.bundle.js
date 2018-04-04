@@ -324,6 +324,24 @@ var DocumentModule = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/models/chapter.model.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Chapter; });
+var Chapter = /** @class */ (function () {
+    function Chapter(title, description, childs) {
+        this.title = title;
+        this.description = description;
+        this.childs = childs;
+    }
+    return Chapter;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/models/document.model.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -368,7 +386,7 @@ module.exports = "\r\n.main-wrapper {\r\n  margin-top: 20px;\r\n}\r\n\r\n.left-s
 /***/ "./src/app/project/project-main/project-main.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"main-wrapper\">\n  <div class=\"row\">\n    <div class=\"col-3 col-sm-3 left-side\">\n      <div class=\"ui vertical menu\">\n        <div class=\"item\" *ngFor=\"let section of sections\">\n          <div class=\"header\">{{ section.name }}</div>\n          <div class=\"menu\">\n            <a class=\"item\">Document1</a>\n            <a class=\"item\">Document2</a>\n          </div>\n        </div>\n        <div class=\"item\">\n          <div class=\"header\">Section</div>\n          <div class=\"menu\">\n            <a class=\"item\">Document1</a>\n            <a class=\"item\">Document2</a>\n          </div>\n        </div>\n        <div class=\"item\">\n          <div class=\"header\">Seciton</div>\n          <div class=\"menu\">\n            <a class=\"item\">Document1</a>\n            <a class=\"item\">Document2</a>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"col-9 col-sm-9 dividing ui main-content-wrapper\">\n      <div class=\"main-header\">\n        <h3 class=\"header dividing ui\">\n          {{ project.name }}\n        </h3>\n        <div class=\"props\">\n          {{ project.basicTime.updated || project.basicTime.created }} | 공개\n        </div>\n      </div>\n\n      <div class=\"ui message\">\n        Last updated of time for section is {{ project.lastUpdatedSection }}.\n      </div>\n\n      <div class=\"main-content\">\n        <p>\n          {{ project.description }}\n        </p>\n      </div>\n\n      <div class=\"ui list\">\n\n      </div>\n      <div class=\"ui relaxed divided list\">\n        <h5 class=\"\"> 예제 코드 </h5>\n        <div class=\"item\">\n          <i class=\"large github middle aligned icon\"></i>\n          <div class=\"content\">\n            <a class=\"header\">Document1</a>\n            <div class=\"description\">Document1 URL</div>\n          </div>\n        </div>\n        <div class=\"item\">\n          <i class=\"large github middle aligned icon\"></i>\n          <div class=\"content\">\n            <a class=\"header\">Document2</a>\n            <div class=\"description\">Document2 URL</div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "\n<div class=\"main-wrapper\">\n  <div class=\"row\">\n    <div class=\"col-3 col-sm-3 left-side\">\n      <div class=\"ui vertical menu\">\n        <div class=\"item\" *ngFor=\"let section of projectSummary.sectionNames\">\n          <div class=\"header\">{{ section }}</div>\n          <div class=\"menu\">\n            <a class=\"item\" *ngFor=\"let documentTitle of getDocumentTitleByName(section)\">\n              {{ documentTitle }}\n            </a>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"col-9 col-sm-9 dividing ui main-content-wrapper\">\n      <div class=\"main-header\">\n        <h3 class=\"header dividing ui\">\n          {{ project.name }}\n        </h3>\n        <div class=\"props\">\n          {{ project.basicTime.updated || project.basicTime.created }} | 공개\n        </div>\n      </div>\n\n      <div class=\"ui message\">\n        Project Type : <i class=\"ui icon html5\" [ngClass]=\"{'cloudversify' : projectSummary.type == 'BACKEND'}\"></i>{{ projectSummary.type }}\n        <br>\n        Last updated of time for section is {{ project.lastUpdatedSection || 'Not Recent' }}.\n      </div>\n\n      <div class=\"main-content\">\n        <p>\n          {{ project.description }}\n        </p>\n      </div>\n\n      <app-list-chapter [chapters]=\"chapters\" [title]=\"project.name\"></app-list-chapter>\n\n      <div class=\"ui relaxed divided list\">\n        <h5 class=\"\"> 예제 코드 </h5>\n        <div class=\"item\">\n          <i class=\"large github middle aligned icon\"></i>\n          <div class=\"content\">\n            <a class=\"header\">Document1</a>\n            <div class=\"description\">Document1 URL</div>\n          </div>\n        </div>\n        <div class=\"item\">\n          <i class=\"large github middle aligned icon\"></i>\n          <div class=\"content\">\n            <a class=\"header\">Document2</a>\n            <div class=\"description\">Document2 URL</div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -381,6 +399,7 @@ module.exports = "\n<div class=\"main-wrapper\">\n  <div class=\"row\">\n    <di
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_project_repository_service__ = __webpack_require__("./src/app/services/project-repository.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_section_repository_service__ = __webpack_require__("./src/app/services/section-repository.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_chapter_model__ = __webpack_require__("./src/app/models/chapter.model.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -394,21 +413,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ProjectMainComponent = /** @class */ (function () {
     function ProjectMainComponent(productRepository, sectionRepository, route) {
         this.productRepository = productRepository;
         this.sectionRepository = sectionRepository;
         this.route = route;
+        this.chapters = [];
     }
     ProjectMainComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params.subscribe(function (params) {
             var projectName = params['name'];
             _this.project = _this.productRepository.getProjectByName(projectName);
-            console.log(_this.project);
-            _this.sectionRepository.getSectionByProject(_this.project.name)
-                .subscribe(function (sections) { return _this.sections = sections; });
+            _this.productRepository.getProjectSummary(_this.project.id).subscribe(function (data) {
+                _this.projectSummary = data;
+                var sectionChapter = [];
+                for (var _i = 0, _a = _this.projectSummary.sectionNames; _i < _a.length; _i++) {
+                    var sectionName = _a[_i];
+                    sectionChapter.push(new __WEBPACK_IMPORTED_MODULE_4__models_chapter_model__["a" /* Chapter */](sectionName, ''));
+                }
+                _this.chapters.push(new __WEBPACK_IMPORTED_MODULE_4__models_chapter_model__["a" /* Chapter */](_this.project.name, _this.project.description, sectionChapter));
+            });
         });
+    };
+    ProjectMainComponent.prototype.getDocumentTitleByName = function (sectionName) {
+        var titles = [];
+        for (var _i = 0, _a = Object.keys(this.projectSummary.documentTitles); _i < _a.length; _i++) {
+            var _sectionName = _a[_i];
+            if (_sectionName == sectionName) {
+                titles = this.projectSummary.documentTitles[_sectionName];
+                console.log(titles);
+            }
+        }
+        return titles;
     };
     ProjectMainComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -566,6 +604,13 @@ var ProjectRepository = /** @class */ (function () {
         return this._projects
             .filter(function (pro) { return pro.name.toLowerCase() == name.toLowerCase(); })[0];
     };
+    ProjectRepository.prototype.getProjectSummary = function (projectId) {
+        return this.dataSource.get("project/summary/" + projectId);
+    };
+    ProjectRepository.prototype.getProjectSummaryByName = function (projectName) {
+        var id = this._projects.filter(function (_project) { return _project.name == projectName; }).map(function (_project) { return _project.id; })[0];
+        return this.getProjectSummary(id);
+    };
     ProjectRepository = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__rest_datasource_servics__["a" /* RestDatasourceService */]])
@@ -606,7 +651,12 @@ var RestDatasourceService = /** @class */ (function () {
     function RestDatasourceService(http, protocol) {
         this.http = http;
         this.protocol = protocol;
-        this.backendUrl = protocol + "://" + location.hostname + "/";
+        if (this.protocol == 'http') {
+            this.backendUrl = protocol + "://" + location.hostname + ":8080/";
+        }
+        else {
+            this.backendUrl = protocol + "://" + location.hostname + "/";
+        }
     }
     RestDatasourceService.prototype.get = function (url, params) {
         var queryParam = null;
@@ -767,6 +817,114 @@ var BottomComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/shared/components/list-chapter/list-chapter-item/list-chapter-item.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/shared/components/list-chapter/list-chapter-item/list-chapter-item.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "\n<div class=\"ui list mt-2\">\n  <div class=\"item\">\n    <i class=\"folder icon\"></i>\n    <div class=\"content\">\n      <div class=\"header\">{{ chapter.title }}</div>\n      <div class=\"description\">{{ chapter.description }}</div>\n      <ng-template *ngIf=\"chapter.childs\" ></ng-template>\n      <app-list-item\n        *ngFor=\"let chapter_child of chapter.childs\"\n        [chapter]=\"chapter_child\"\n      ></app-list-item>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/shared/components/list-chapter/list-chapter-item/list-chapter-item.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListChapterItemComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_chapter_model__ = __webpack_require__("./src/app/models/chapter.model.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ListChapterItemComponent = /** @class */ (function () {
+    function ListChapterItemComponent() {
+    }
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__models_chapter_model__["a" /* Chapter */])
+    ], ListChapterItemComponent.prototype, "chapter", void 0);
+    ListChapterItemComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-list-item',
+            template: __webpack_require__("./src/app/shared/components/list-chapter/list-chapter-item/list-chapter-item.component.html"),
+            styles: [__webpack_require__("./src/app/shared/components/list-chapter/list-chapter-item/list-chapter-item.component.css")]
+        })
+    ], ListChapterItemComponent);
+    return ListChapterItemComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/components/list-chapter/list-chapter.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/shared/components/list-chapter/list-chapter.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"col-12 ml-4 mt-4\">\n    <h2 class=\"ui dividing header\">\n      {{ title }}\n      <a class=\"anchor\" id=\"components\"></a>\n    </h2>\n    <app-list-item *ngFor=\"let chapter of chapters\"\n                   [chapter]=\"chapter\"></app-list-item>\n</div>\n<hr>\n"
+
+/***/ }),
+
+/***/ "./src/app/shared/components/list-chapter/list-chapter.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListChapterComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ListChapterComponent = /** @class */ (function () {
+    function ListChapterComponent() {
+    }
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+        __metadata("design:type", Array)
+    ], ListChapterComponent.prototype, "chapters", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+        __metadata("design:type", String)
+    ], ListChapterComponent.prototype, "title", void 0);
+    ListChapterComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-list-chapter',
+            template: __webpack_require__("./src/app/shared/components/list-chapter/list-chapter.component.html"),
+            styles: [__webpack_require__("./src/app/shared/components/list-chapter/list-chapter.component.css")]
+        })
+    ], ListChapterComponent);
+    return ListChapterComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/shared/footer/footer.component.css":
 /***/ (function(module, exports) {
 
@@ -820,14 +978,14 @@ var FooterComponent = /** @class */ (function () {
 /***/ "./src/app/shared/header/header.component.css":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n\r\n.box-shadow {\r\n  -webkit-box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);\r\n  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);\r\n}\r\n.menu {\r\n  height: 60px;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -ms-flex-wrap: wrap;\r\n  flex-wrap: wrap;\r\n  -webkit-box-align: center;\r\n  -ms-flex-align: center;\r\n  align-items: center;\r\n  padding: 8px 16px;\r\n  background: #3f51b5;\r\n  font-family: Roboto,Helvetica Neue,sans-serif;\r\n}\r\n.menu > * {\r\n  background-repeat: no-repeat;\r\n}\r\n.mat-button {\r\n  -webkit-user-select: none;\r\n     -moz-user-select: none;\r\n      -ms-user-select: none;\r\n          user-select: none;\r\n  cursor: pointer;\r\n  outline: 0;\r\n  border: none;\r\n  -webkit-tap-highlight-color: transparent;\r\n  display: inline-block;\r\n  white-space: nowrap;\r\n  text-decoration: none;\r\n  vertical-align: baseline;\r\n  text-align: center;\r\n  margin: 0;\r\n  min-width: 45px;\r\n  line-height: 36px;\r\n  padding: 0 10px;\r\n  font-weight: bold;\r\n  border-radius: 2px;\r\n}\r\n"
+module.exports = "\r\n.shadow {\r\n  -webkit-box-shadow: 2px 6px 65px -6px rgba(0,0,0,0.75);\r\n  box-shadow: 2px 6px 65px -6px rgba(0,0,0,0.75);\r\n}\r\n\r\ni.icon {\r\n  height: 26px !important;\r\n  margin: 0 4px 3px 0 !important;\r\n}\r\n\r\n:host {\r\n  font-family: 'Nanum Pen Script', cursiv !important;\r\n  font-size: 1.5em !important;\r\n  z-index: 2 !important;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  z-index: 2;\r\n}\r\n\r\nh1{\r\n  font-size: 1.8em !important;\r\n}\r\n\r\n.form-inline{\r\n  border-radius: 10px !important;\r\n}\r\n\r\n.header-wrapper{\r\n  background-color: #FFFFFF;\r\n  border: 1px solid #DDD;\r\n  -webkit-box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);\r\n          box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);\r\n}\r\n\r\n.form-inline input {\r\n  padding: 0.25rem 0.5rem !important;\r\n  font-size: 0.875rem !important;\r\n  line-height: 1.5 !important;\r\n  border-radius: 0.2rem !important;\r\n}\r\n\r\ni.search.icon {\r\n  top: 0.15em !important;\r\n  font-size: 0.875rem !important;\r\n  line-height: 1.5 !important;\r\n  border-radius: 0.2rem !important;\r\n}\r\n"
 
 /***/ }),
 
 /***/ "./src/app/shared/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"mb-5 header\">\n  <nav class=\"ui top fixed menu text-white box-shadow\">\n    <h5 class=\"my-0 m-1 mt-4 mr-3 font-weight-normal mb-1\">\n      <div class=\"ui icon header\">\n        <i class=\"github square icon\" style=\"color: white\"></i>\n      </div>\n    </h5>\n    <div class=\"nav-wrapper celled\">\n      <button mat-button  [matMenuTriggerFor]=\"menu\" >Menu</button>\n      <mat-menu #menu=\"matMenu\">\n        <button mat-menu-item>Item 1</button>\n        <button mat-menu-item>Item 2</button>\n      </mat-menu>\n      <button mat-button\n              [routerLink]=\"['project','test']\"\n              [routerLinkActive]=\"active\"\n      ><i class=\"large github middle aligned icon\"></i>Menu</button>\n      <a style=\"text-decoration: none;\" *ngFor=\"let project of projects\" [routerLink]=\"['project',project.name]\">\n        <button mat-button><i class=\"large github middle aligned icon\" [ngClass]=\"project.icon\" ></i> {{ project.name }}</button>\n      </a>\n    </div>\n  </nav>\n</div>\n"
+module.exports = "<div class=\"header-wrapper d-flex mb-1 flex-column flex-md-row align-items-center p-3 px-md-4 shadow\">\n  <h3 class=\"my-0 mr-md-auto font-weight-normal ui header\">\n    <a\n\n      [routerLink]=\"['/home']\"\n    ><i class=\"ui icon large github\"></i></a>\n  </h3>\n  <nav class=\"my-2 my-md-0 mr-md-3\">\n    <a\n      *ngFor=\"let project of projects\"\n      class=\"p-2\"\n      [routerLink]=\"['project',project.name]\"\n      routerLinkActive=\"active\"> {{ project.name }}</a>\n  </nav>\n  <a class=\"btn btn-outline-primary mr-2\"\n     mat-raised-button\n     (click)=\"onChangeModel('user')\">Contact</a>\n  <form class=\"form-inline ui icon input\">\n    <input\n      type=\"text\"\n      class=\"form-control-sm\"\n      placeholder=\"Search Document\">\n      <i class=\"inverted circular search link icon\"></i>\n  </form>\n</div>\n"
 
 /***/ }),
 
@@ -894,14 +1052,14 @@ var HeaderComponent = /** @class */ (function () {
 /***/ "./src/app/shared/location/location.component.css":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n\r\nh6 {\r\n  padding-top: 10px !important;\r\n}\r\n\r\ni {\r\n  margin-left: 1em;\r\n  margin-right: 1em;\r\n}\r\n"
+module.exports = "\r\n.label {\r\n  position: relative !important;\r\n}\r\n\r\nh6 {\r\n  padding-top: 10px !important;\r\n}\r\n\r\ni {\r\n  margin-left: 1em;\r\n  margin-right: 1em;\r\n}\r\n"
 
 /***/ }),
 
 /***/ "./src/app/shared/location/location.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"wrapper col-12\">\n  <div class=\"ui label attached mt-3\" >\n    <h6 class=\"ui header grey ml-5\"> 프로젝트<i class=\"fa fa-caret-right\"></i>언어 </h6>\n  </div>\n</div>\n"
+module.exports = "\n<div class=\"ui bottom attached label\"  >\n  <div class=\"ui tiny breadcrumb\">\n    <a class=\"section\">홈</a>\n    <i class=\"right chevron icon divider\"></i>\n    <a class=\"section\">프로젝트</a>\n    <i class=\"right chevron icon divider\"></i>\n    <a class=\"section\">JAVA</a>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -951,7 +1109,7 @@ module.exports = ""
 /***/ "./src/app/shared/main/main.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card-deck mb-3 text-center\">\n  <div class=\"card mb-4 box-shadow\">\n    <div class=\"box-list clearfix\">\n      <div class=\"row\">\n        <div class=\"box-list-item text-center col-4\" >\n          <div class=\"box-item\">\n            <figure>\n              <div class=\"figure-inner\">\n                <img width=\"400\" height=\"400\" src=\"/assets/img/web_icon_1.jpg\"\n                     alt=\"web_icon_4\">\n              </div>\n            </figure>\n            <div class=\"detail-area\">\n              <p >Hello</p>\n            </div>\n          </div>\n        </div>\n        <div class=\"box-list-item text-center col-4\" >\n          <div class=\"box-item\">\n            <figure>\n              <div class=\"figure-inner\">\n                <img  width=\"400\" height=\"400\" src=\"/assets/img/web_icon_2.jpg\"\n                      alt=\"web_icon_4\">\n              </div>\n            </figure>\n            <div class=\"detail-area\">\n              <p >Hello</p>\n            </div>\n          </div>\n        </div>\n        <div class=\"box-list-item text-center col-4\" >\n          <div class=\"box-item\">\n            <figure>\n              <div class=\"figure-inner\">\n                <img  width=\"400\" height=\"400\"src=\"/assets/img/web_icon_3.jpg\"\n                      alt=\"web_icon_4\">\n              </div>\n            </figure>\n            <div class=\"detail-area\">\n              <p >Hello</p>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "\n<div class=\"card-deck mb-3 text-center\">\n  <div class=\"card mb-4 box-shadow\">\n    <div class=\"box-list clearfix\">\n      <div class=\"row\">\n        <div class=\"box-list-item text-center col-4\" >\n          <div class=\"box-item\">\n            <figure>\n              <div class=\"figure-inner\">\n                <img width=\"400\" height=\"400\" src=\"/assets/img/web_icon_1.jpg\"\n                     alt=\"web_icon_4\">\n              </div>\n            </figure>\n            <div class=\"detail-area\">\n              <p >Hello</p>\n            </div>\n          </div>\n        </div>\n        <div class=\"box-list-item text-center col-4\" >\n          <div class=\"box-item\">\n            <figure>\n              <div class=\"figure-inner\">\n                <img  width=\"400\" height=\"400\" src=\"/assets/img/web_icon_2.jpg\"\n                      alt=\"web_icon_4\">\n              </div>\n            </figure>\n            <div class=\"detail-area\">\n              <p >Hello</p>\n            </div>\n          </div>\n        </div>\n        <div class=\"box-list-item text-center col-4\" >\n          <div class=\"box-item\">\n            <figure>\n              <div class=\"figure-inner\">\n                <img  width=\"400\" height=\"400\"src=\"/assets/img/web_icon_3.jpg\"\n                      alt=\"web_icon_4\">\n              </div>\n            </figure>\n            <div class=\"detail-area\">\n              <p >Hello</p>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -1006,12 +1164,16 @@ var MainComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__main_main_component__ = __webpack_require__("./src/app/shared/main/main.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_material__ = __webpack_require__("./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_list_chapter_list_chapter_component__ = __webpack_require__("./src/app/shared/components/list-chapter/list-chapter.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_list_chapter_list_chapter_item_list_chapter_item_component__ = __webpack_require__("./src/app/shared/components/list-chapter/list-chapter-item/list-chapter-item.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -1033,6 +1195,8 @@ var ShareModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_3__header_header_component__["a" /* HeaderComponent */],
                 __WEBPACK_IMPORTED_MODULE_6__location_location_component__["a" /* LocationComponent */],
                 __WEBPACK_IMPORTED_MODULE_7__main_main_component__["a" /* MainComponent */],
+                __WEBPACK_IMPORTED_MODULE_10__components_list_chapter_list_chapter_component__["a" /* ListChapterComponent */],
+                __WEBPACK_IMPORTED_MODULE_11__components_list_chapter_list_chapter_item_list_chapter_item_component__["a" /* ListChapterItemComponent */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["a" /* MatButtonModule */],
@@ -1049,6 +1213,8 @@ var ShareModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_2__bottom_bottom_component__["a" /* BottomComponent */],
                 __WEBPACK_IMPORTED_MODULE_3__header_header_component__["a" /* HeaderComponent */],
                 __WEBPACK_IMPORTED_MODULE_6__location_location_component__["a" /* LocationComponent */],
+                __WEBPACK_IMPORTED_MODULE_10__components_list_chapter_list_chapter_component__["a" /* ListChapterComponent */],
+                __WEBPACK_IMPORTED_MODULE_11__components_list_chapter_list_chapter_item_list_chapter_item_component__["a" /* ListChapterItemComponent */],
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["c" /* MatInputModule */],
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["b" /* MatFormFieldModule */],
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["e" /* MatSelectModule */],

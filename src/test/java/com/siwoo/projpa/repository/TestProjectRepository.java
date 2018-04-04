@@ -1,8 +1,7 @@
 package com.siwoo.projpa.repository;
 
 import com.siwoo.projpa.FixtureFactory;
-import com.siwoo.projpa.domain.Project;
-import com.siwoo.projpa.domain.User;
+import com.siwoo.projpa.domain.*;
 import com.siwoo.projpa.service.ProjectService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
@@ -13,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +30,8 @@ public class TestProjectRepository {
     @Autowired
     UserRepository userRepository;
     @Autowired ProjectRepository projectRepository;
+    @Autowired DocumentRepository documentRepository;
+    @Autowired SectionRepository sectionRepository;
     @Autowired
     ProjectService projectService;
     private List<User> users;
@@ -75,5 +77,24 @@ public class TestProjectRepository {
     }
 
 
+    @Test
+    public void getProjectSummaryByProjectName() {
+        List<Section> sections = sectionRepository.findByProjectName(projects.get(0).getName());
+
+        for(Section section: sections) {
+            List<Document> documents = FixtureFactory.documents();
+            for(Document document: documents) {
+                document.setSection(section);
+                documentRepository.save(document);
+            }
+        }
+
+        ProjectSummary summaries = projectRepository.getProjectSummary(projects.get(0).getId());
+        log.warn(summaries + "");
+
+        for(String key: summaries.getDocumentTitles().keySet()) {
+            log.warn(key + Arrays.toString(summaries.getDocumentTitles().get(key)));
+        }
+    }
 
 }

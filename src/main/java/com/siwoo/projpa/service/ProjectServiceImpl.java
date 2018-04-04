@@ -2,6 +2,7 @@ package com.siwoo.projpa.service;
 
 import com.siwoo.projpa.domain.BasicTime;
 import com.siwoo.projpa.domain.Project;
+import com.siwoo.projpa.domain.ProjectSummary;
 import com.siwoo.projpa.domain.User;
 import com.siwoo.projpa.repository.ProjectRepository;
 import com.siwoo.projpa.repository.SectionRepository;
@@ -26,6 +27,12 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired ProjectRepository projectRepository;
     @Autowired SectionRepository sectionRepository;
     @Autowired AuditService auditService;
+
+
+    @Override
+    public ProjectSummary summary(long projectId) {
+        return projectRepository.getProjectSummary(projectId);
+    }
 
     @Override
     public void assign(Project project, User user) {

@@ -41,48 +41,48 @@ import static com.siwoo.projpa.support.QueryTester.*;
 public class ProjpaApplication {
 
 	public static void main(String[] args) throws InterruptedException {
-		SpringApplication.run(ProjpaApplication.class, args);
+		ApplicationContext context = SpringApplication.run(ProjpaApplication.class, args);
 
-//		EntityManager entityManager = context.getBean(EntityManager.class);
-//		Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(System.in)));
-//
-//		while (true) {
-//
-//			System.out.printf("JPQL> ");
-//			String query = scanner.nextLine();
-//
-//			if(query.equals("Q")){
-//				System.exit(0);
-//			}
-//			if(!StringUtils.hasText(query)){
-//				continue;
-//			}
-//
-//			try {
-//				List result = entityManager.createQuery(query).getResultList();
-//
-//				if(noResult(result)) {
-//                    System.out.println("No Result : try again");
-//                }
-//
-//
-//				for(Object row: result) {
-//                    int count = 1;
-//                    System.out.println("=========================================================");
-//                    System.out.println("Data Retrieved: ");
-//                    System.out.printf(" Data : " + count + " [");
-//                    printResult(row);
-//                    System.out.printf(" ] ");
-//                    count++;
-//                }
-//				System.out.println("===============================================================");
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//
-//			}
-//
-//
-//		}
+		EntityManager entityManager = context.getBean(EntityManager.class);
+		Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(System.in)));
+
+		while (true) {
+
+			System.out.printf("JPQL> ");
+			String query = scanner.nextLine();
+
+			if(query.equals("Q")){
+				System.exit(0);
+			}
+			if(!StringUtils.hasText(query)){
+				continue;
+			}
+
+			try {
+				List result = entityManager.createQuery(query).getResultList();
+
+				if(noResult(result)) {
+                    System.out.println("No Result : try again");
+                }
+
+
+				for(Object row: result) {
+                    int count = 1;
+                    System.out.println("=========================================================");
+                    System.out.println("Data Retrieved: ");
+                    System.out.printf(" Data : " + count + " [");
+                    printResult(row);
+                    System.out.printf(" ] ");
+                    count++;
+                }
+				System.out.println("===============================================================");
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			}
+
+
+		}
 	}
 
 

@@ -5,16 +5,15 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Getter @Setter @ToString
 public class ProjectSummary implements Serializable{
 
     private String name;
     private Project.Type type;
-    private Set<String> sectionNames = new HashSet<>();
-    private Set<String> documentTitles = new HashSet<>();
+    private List<String> sectionNames = new ArrayList<>();
+    private Map<String, String[]> documentTitles = new HashMap<>();
 
     public ProjectSummary() {}
 
@@ -23,7 +22,7 @@ public class ProjectSummary implements Serializable{
         this.type = type;
     }
 
-    public ProjectSummary(String name, Project.Type type, Set<String> sectionNames, Set<String> documentTitles) {
+    public ProjectSummary(String name, Project.Type type, List<String> sectionNames, Map<String,String[]> documentTitles) {
         this.name = name;
         this.type = type;
         this.sectionNames = sectionNames;
