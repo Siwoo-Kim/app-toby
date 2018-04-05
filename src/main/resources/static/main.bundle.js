@@ -27,7 +27,7 @@ module.exports = ""
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n\n<app-header></app-header>\n<app-location></app-location>\n\n<div class=\"page-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center\">\n  <p class=\"sub-header\" >\n    About Page by Siwoo Kim\n  </p>\n  <h1 class=\"ui header dividing\" style=\"font-size: 3em\">\n    Project\n    <div class=\"sub header pt-3 pb-3\">\n        프로젝트란 우리말로 목표정도로 번역 할 수 있을 것 같습니다. 어떤 목표를 달성하기 위해서 많은 사람이 협력합니다. 이 과정에서 소위 막장이라고 부르는 상황들이 발생합니다. 그리고 이런 막장은 어느정도는 숙명과도 같은 것입니다. 하지만 막장은 줄일 수 있습니다. 행복한 프로젝트는 아니더라도 프로젝트를 덜 불행하게 만들수는 있습니다. 이를 위한 많은 도구들이 있고 생활코딩 프로젝트 관리편에서는 이 도구들을 소개해드립니다.\n    </div>\n  </h1>\n</div>\n\n<div class=\"container-fluid\">\n  <router-outlet></router-outlet>\n  <a routerLink=\"/document/create\">C</a>\n</div>\n<app-footer></app-footer>\n\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n\n<app-header></app-header>\n<app-location></app-location>\n\n<div class=\"page-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center\">\n  <p class=\"sub-header\" >\n    About Page by Siwoo Kim\n  </p>\n  <h1 class=\"ui header dividing\" style=\"font-size: 3em\">\n    Project\n    <div class=\"sub header p-5\" style=\"font-family: 'Ubuntu', sans-serif\">\n        프로젝트란 우리말로 목표정도로 번역 할 수 있을 것 같습니다. 어떤 목표를 달성하기 위해서 많은 사람이 협력합니다. 이 과정에서 소위 막장이라고 부르는 상황들이 발생합니다. 그리고 이런 막장은 어느정도는 숙명과도 같은 것입니다. 하지만 막장은 줄일 수 있습니다. 행복한 프로젝트는 아니더라도 프로젝트를 덜 불행하게 만들수는 있습니다. 이를 위한 많은 도구들이 있고 프로젝트 관리편에서는 이 도구들을 소개해드립니다.\n    </div>\n  </h1>\n  <div class=\"ui message\">\n    <i class=\"ui code icon\"></i>\n    <div class=\"content\">\n      <div class=\"header\">\n        Are you Coding everyday?\n      </div>\n      <p>If you want to be better, do it right now</p>\n    </div>\n  </div>\n</div>\n\n<div class=\"container-fluid\">\n  <router-outlet></router-outlet>\n  <a routerLink=\"/document/create\">C</a>\n</div>\n<app-footer></app-footer>\n\n"
 
 /***/ }),
 
@@ -128,7 +128,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             ],
             providers: [
-                { provide: __WEBPACK_IMPORTED_MODULE_9__app_tokens__["a" /* PROTOCOL_TOKEN */], useValue: 'https' }
+                { provide: __WEBPACK_IMPORTED_MODULE_9__app_tokens__["a" /* PROTOCOL_TOKEN */], useValue: 'https' },
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */]]
         })
@@ -409,7 +409,7 @@ module.exports = "\r\n.main-wrapper {\r\n  margin-top: 20px;\r\n}\r\n\r\n.left-s
 /***/ "./src/app/project/project-main/project-main.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n\n<div class=\"ui grid stackable container-fluid\">\n  <div class=\"row\">\n    <app-project-sidebar [project]=\"project\" ></app-project-sidebar>\n    <div class=\"ui thirteen wide column\">\n      <div class=\"main-header\">\n        <h3 class=\"header dividing ui\">\n          {{ project.name }}\n        </h3>\n        <div class=\"props\">\n          {{ ( project.basicTime.updated || project.basicTime.created ) | date }} | 공개\n        </div>\n      </div>\n\n      <app-data-loader *ngIf=\"!projectSummary\"></app-data-loader>\n      <div class=\"ui message\" *ngIf=\"projectSummary\">\n        Project Type : <i class=\"ui icon html5\" [ngClass]=\"{'cloudversify' : project.type == 'BACKEND'}\"></i>{{ projectSummary.type }}\n        <br>\n        Last updated of time for section is {{ project.lastUpdatedSection || 'Not Recent' }}.\n      </div>\n\n      <div class=\"main-content\">\n        <p>\n          {{ project.description }}\n        </p>\n      </div>\n\n      <app-data-loader *ngIf=\"!projectSummary\"></app-data-loader>\n      <app-list-chapter *ngIf=\"projectSummary\" [chapters]=\"chapters\" [title]=\"project.name\"></app-list-chapter>\n\n      <div class=\"ui relaxed divided list\">\n        <h5 class=\"\"> 예제 코드 </h5>\n        <div class=\"item\">\n          <i class=\"large github middle aligned icon\"></i>\n          <div class=\"content\">\n            <a class=\"header\">Document1</a>\n            <div class=\"description\">Document1 URL</div>\n          </div>\n        </div>\n        <div class=\"item\">\n          <i class=\"large github middle aligned icon\"></i>\n          <div class=\"content\">\n            <a class=\"header\">Document2</a>\n            <div class=\"description\">Document2 URL</div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "\n\n<div class=\"ui grid stackable container-fluid\">\n  <div class=\"row\">\n    <app-project-sidebar [project]=\"project\" ></app-project-sidebar>\n    <div class=\"ui thirteen wide column\">\n      <div class=\"main-header\">\n        <h3 class=\"header dividing ui\">\n          {{ project.name }}\n        </h3>\n        <div class=\"props\" *ngIf=\"project.basicTime\">\n          {{ ( project.basicTime.updated || project.basicTime.created || Date() ) }} | 공개\n        </div>\n      </div>\n\n      <app-data-loader *ngIf=\"!projectSummary\"></app-data-loader>\n      <div class=\"ui message\" *ngIf=\"projectSummary\">\n        Project Type : <i class=\"ui icon html5\" [ngClass]=\"{'cloudversify' : project.type == 'BACKEND'}\"></i>{{ projectSummary.type }}\n        <br>\n        Last updated of time for section is {{ project.lastUpdatedSection || 'Not Recent' }}.\n      </div>\n\n      <div class=\"main-content\">\n        <p>\n          {{ project.description }}\n        </p>\n      </div>\n\n      <app-data-loader *ngIf=\"!projectSummary\"></app-data-loader>\n      <app-list-chapter *ngIf=\"projectSummary\" [chapters]=\"chapters\" [title]=\"project.name\"></app-list-chapter>\n\n      <div class=\"ui relaxed divided list\">\n        <h5 class=\"\"> 예제 코드 </h5>\n        <div class=\"item\">\n          <i class=\"large github middle aligned icon\"></i>\n          <div class=\"content\">\n            <a class=\"header\">Document1</a>\n            <div class=\"description\">Document1 URL</div>\n          </div>\n        </div>\n        <div class=\"item\">\n          <i class=\"large github middle aligned icon\"></i>\n          <div class=\"content\">\n            <a class=\"header\">Document2</a>\n            <div class=\"description\">Document2 URL</div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -505,7 +505,7 @@ module.exports = ""
 /***/ "./src/app/project/project-main/project-sidebar/project-sidebar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<app-data-loader class=\"ui three wide column pl-3\" *ngIf=\"!currentProject\"></app-data-loader>\n<div class=\"ui three wide column pl-3\" *ngIf=\"currentProject\">\n  <div class=\"ui vertical menu\">\n    <div class=\"item\" *ngFor=\"let section of projectSummary.sectionNames\">\n      <div class=\"header\">{{ section }}</div>\n      <div class=\"menu\">\n        <a class=\"item\" *ngFor=\"let documentTitle of getDocumentTitleByName(section)\">\n          {{ documentTitle }}\n        </a>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "\n<app-data-loader class=\"ui three wide column pl-3\" *ngIf=\"!currentProject\"></app-data-loader>\n<div class=\"ui three wide column pl-3\" *ngIf=\"currentProject\">\n  <div class=\"ui vertical menu\">\n    <div class=\"item\"\n         *ngFor=\"let section of projectSummary.sectionNames\"\n         (mouseover)=\"selectedSection = section\"\n         [ngClass]=\"{'active teal': selectedSection == section}\">\n      <div class=\"ui left pointing label\"\n           [ngClass]=\"{'active teal': selectedSection == section}\">\n        {{ getDocumentTitleByName(section).length }}\n      </div>\n      <div class=\"header\">{{ section }}</div>\n      <div class=\"menu\">\n        <a class=\"ui item\"\n           id=\"side-anchor\"\n           [attr.data-tooltip]=\"section + ' Section! '\"\n           [attr.data-position]=\"'right center'\"\n           *ngFor=\"let documentTitle of getDocumentTitleByName(section)\">\n          {{ documentTitle }}\n        </a>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -554,7 +554,6 @@ var ProjectSidebarComponent = /** @class */ (function () {
             var _sectionName = _a[_i];
             if (_sectionName == sectionName) {
                 titles = this.projectSummary.documentTitles[_sectionName];
-                console.log(titles);
             }
         }
         return titles;
@@ -868,6 +867,7 @@ var SectionRepository = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__document_repository_service__ = __webpack_require__("./src/app/services/document-repository.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__project_repository_service__ = __webpack_require__("./src/app/services/project-repository.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__section_repository_service__ = __webpack_require__("./src/app/services/section-repository.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__static_datasource_service__ = __webpack_require__("./src/app/services/static-datasource.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -879,12 +879,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var ServiceModule = /** @class */ (function () {
     function ServiceModule() {
     }
     ServiceModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
             providers: [
+                __WEBPACK_IMPORTED_MODULE_5__static_datasource_service__["a" /* StaticDatasourceService */],
                 __WEBPACK_IMPORTED_MODULE_1__rest_datasource_servics__["a" /* RestDatasourceService */],
                 /*  App Repository  */
                 __WEBPACK_IMPORTED_MODULE_2__document_repository_service__["a" /* DocumentRepository */],
@@ -894,6 +896,240 @@ var ServiceModule = /** @class */ (function () {
         })
     ], ServiceModule);
     return ServiceModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/static-datasource.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StaticDatasourceService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__ = __webpack_require__("./node_modules/rxjs/_esm5/Observable.js");
+
+var CASE;
+(function (CASE) {
+    CASE[CASE["PROJECT"] = 0] = "PROJECT";
+    CASE[CASE["PROJECTSUMMARY"] = 1] = "PROJECTSUMMARY";
+    CASE[CASE["SECTION"] = 2] = "SECTION";
+    CASE[CASE["DOCUMENT"] = 3] = "DOCUMENT";
+})(CASE || (CASE = {}));
+var StaticDatasourceService = /** @class */ (function () {
+    function StaticDatasourceService() {
+        this.projects = [
+            {
+                "id": 1,
+                "name": "Java",
+                "type": "BACKEND",
+                "icon": "android",
+                "url": "http://www.localhost.com:8080/java",
+                "description": "Java SE(Java Platform, Standard Edition)는 자바의 표준안이다. 자바라는 언어가 어떠한 문법적인 구성을 가졌는지와 같은 것들을 정의하고 있다. 이것은 구체적인 소프트웨어가 아니고 그 소프트웨어의 설계도라고 할 수 있다. 소프트웨어에서는 설계도라는 표현 대신에 명세서(spec, specification)이라는 말을 사용한다. 이 명세서에 따라서 Java가 만들어지게 된다. Java SE 7은 버전 7에 대한 명세서이다. 자바는 계속 진화하고 있는 기술이다. 이 명세서는 JCP(Java Community Process, http://jcp.org)라는 조직을 통해서 만들어진다.",
+            },
+            {
+                "id": 2,
+                "name": "Javascript",
+                "type": "BACKEND",
+                "icon": "android",
+                "url": "http://www.localhost.com:8080/java",
+                "description": "Java SE(Java Platform, Standard Edition)는 자바의 표준안이다. 자바라는 언어가 어떠한 문법적인 구성을 가졌는지와 같은 것들을 정의하고 있다. 이것은 구체적인 소프트웨어가 아니고 그 소프트웨어의 설계도라고 할 수 있다. 소프트웨어에서는 설계도라는 표현 대신에 명세서(spec, specification)이라는 말을 사용한다. 이 명세서에 따라서 Java가 만들어지게 된다. Java SE 7은 버전 7에 대한 명세서이다. 자바는 계속 진화하고 있는 기술이다. 이 명세서는 JCP(Java Community Process, http://jcp.org)라는 조직을 통해서 만들어진다.",
+            },
+            {
+                "id": 3,
+                "name": "java3",
+                "type": "BACKEND",
+                "icon": "android",
+                "url": "http://www.localhost.com:8080/java",
+                "description": "Java SE(Java Platform, Standard Edition)는 자바의 표준안이다. 자바라는 언어가 어떠한 문법적인 구성을 가졌는지와 같은 것들을 정의하고 있다. 이것은 구체적인 소프트웨어가 아니고 그 소프트웨어의 설계도라고 할 수 있다. 소프트웨어에서는 설계도라는 표현 대신에 명세서(spec, specification)이라는 말을 사용한다. 이 명세서에 따라서 Java가 만들어지게 된다. Java SE 7은 버전 7에 대한 명세서이다. 자바는 계속 진화하고 있는 기술이다. 이 명세서는 JCP(Java Community Process, http://jcp.org)라는 조직을 통해서 만들어진다.",
+            },
+            {
+                "id": 4,
+                "name": "java4",
+                "type": "BACKEND",
+                "icon": "android",
+                "url": "http://www.localhost.com:8080/java",
+                "description": "Java SE(Java Platform, Standard Edition)는 자바의 표준안이다. 자바라는 언어가 어떠한 문법적인 구성을 가졌는지와 같은 것들을 정의하고 있다. 이것은 구체적인 소프트웨어가 아니고 그 소프트웨어의 설계도라고 할 수 있다. 소프트웨어에서는 설계도라는 표현 대신에 명세서(spec, specification)이라는 말을 사용한다. 이 명세서에 따라서 Java가 만들어지게 된다. Java SE 7은 버전 7에 대한 명세서이다. 자바는 계속 진화하고 있는 기술이다. 이 명세서는 JCP(Java Community Process, http://jcp.org)라는 조직을 통해서 만들어진다.",
+            },
+        ];
+        this.projectSummary = [
+            {
+                "name": "Java",
+                "type": "BACKEND",
+                "sectionNames": [
+                    "주석과 세미콜론",
+                    "JAVA 설치",
+                    "데이터 타입",
+                    "숫자와 문자",
+                    "변수"
+                ],
+                "documentTitles": {
+                    "주석과 세미콜론": [],
+                    "데이터 타입": [],
+                    "JAVA 설치": [
+                        "변수",
+                        "데이터 타입",
+                        "상수",
+                        "메소드",
+                        "언어소개",
+                        "함수지향",
+                        "클로저"
+                    ],
+                    "숫자와 문자": [
+                        "변수",
+                        "데이터 타입",
+                        "상수",
+                        "메소드",
+                        "언어소개",
+                        "함수지향",
+                        "클로저"
+                    ],
+                    "변수": [],
+                }
+            },
+            {
+                "name": "Java",
+                "type": "BACKEND",
+                "sectionNames": [
+                    "주석과 세미콜론",
+                    "JAVA 설치",
+                    "데이터 타입",
+                    "숫자와 문자",
+                    "변수"
+                ],
+                "documentTitles": {
+                    "주석과 세미콜론": [],
+                    "데이터 타입": [],
+                    "JAVA 설치": [
+                        "변수",
+                        "데이터 타입",
+                        "상수",
+                        "메소드",
+                        "언어소개",
+                        "함수지향",
+                        "클로저"
+                    ],
+                    "숫자와 문자": [
+                        "변수",
+                        "데이터 타입",
+                        "상수",
+                        "메소드",
+                        "언어소개",
+                        "함수지향",
+                        "클로저"
+                    ],
+                    "변수": [],
+                }
+            }
+        ];
+        this.sections = [{
+                "id": 1,
+                "name": "JAVA 설치",
+                "difficulty": 0,
+                "description": "자바로 프로그램을 만들기 위해서는 아래와 같은 과정이 필요하다. 코드 작성 컴퓨터가 실행할 수 있는 형태로 코드를 컴파일 컴파일된 프로그램을 실행",
+                "project": {
+                    "id": 1
+                },
+            },
+            {
+                "id": 2,
+                "name": "숫자와 문자",
+                "difficulty": 0,
+                "description": "프로그래밍 입문자에게 가장 익숙한 데이터 타입(data type)은 숫자와 문자일 것이다. 이번 시간에는 실제로 가장 많이 사용되는 데이터 형인 문자와 숫자를 프로그래밍에서는 어떻게 표현하고 연산하는지 알아보자.",
+                "project": {
+                    "id": 1,
+                }
+            },
+            {
+                "id": 3,
+                "name": "변수",
+                "difficulty": 0,
+                "description": "영어로는 Variable로 (문자나 숫자 같은) 데이터를 담는 컨테이너다. 여기에 담겨진 데이터는 다른 데이터로 바꿀 수 있다. 변수는 마치 (사람이 쓰는 언어인) 자연어에서 대명사와 비슷한 역할을 한다.",
+                "project": {
+                    "id": 1,
+                }
+            },
+            {
+                "id": 4,
+                "name": "주석과 세미콜론",
+                "difficulty": 0,
+                "description": "주석(comment)은 로직에 대한 설명이나 코드를 비활성화 할 때 사용한다. 주석은 프로그래밍적으로 해석되지 않는다.",
+                "project": {
+                    "id": 2,
+                }
+            },
+            {
+                "id": 5,
+                "name": "데이터 타입",
+                "difficulty": 0,
+                "description": "데이터 타입은 조금 어렵다. 후속 수업에서 필수적인 선행지식은 아니지만, 또 뒤에 배치하는 것도 애매하다. 이번 토픽의 학습이 어렵게 느껴지면 다음 토픽으로 넘어가고 나중에 다시 학습하면 된다. 데이터 타입에 대해서 자세히 알아보기 전에 데이터의 크기에 대해서 학습하자.",
+                "project": {
+                    "id": 2,
+                }
+            }];
+        this.documents = [
+            {
+                "id": 1,
+                "title": "변수",
+                "subtitle": null,
+                "description": "다음 예제는 변수에 값을 대입하는 방법을 보여주는 예제다.",
+                "content": "위의 구문은 변수 a를 지금부터 사용하겠다고 변수를 선언한 것이다. 변수 a 앞에는 int라는 키워드가 있다. 이 키워드는 integer의 약자로 한국어로는 정수라는 의미다. 정수는 0을 중심으로 -1, -2, -3과 같은 음수와 1, 2, 3과 같은 양수를 통틀어서 정수라고 한다. 위의 코드는 변수 a가 정수를 담는 그릇임을 명시한 것이다. 이 변수를 사용하는 입장에서는 이 변수 안에 들어있는 데이터가 틀림 없이 정수라는 것을 확신 할 수 있게 된다. a = 1; 좌항의 변수 a의 데이터가 1이라는 의미다. a에 숫자 1을 대입한 것이다. 이제부터 a 안에는 1이 들어있다. 이러한 것을 변수 a에 숫자 1을 할당했다고 한다. 위의 실습 결과는 각각 2와 3이 출력될 것이다. 변수 a에 담겨 있는 값이 1일 때는 a+1의 결과가 2가 된다. 두번째 결과가 3이 된 것은 a의 값이 2로 바뀌었고, 2+1의 결과인 3이 출력된 것이다. //은 주석(comment)으로 코드에 부가적인 설명을 쓰거나 사용하지 않는 코드를 비활성화시키기 위해서 사용한다. 뒤에 따라오는 내용은 해석되지 않는다. 세미콜론(;)은 하나의 구문이 끝났음을 명시적으로 나타내는 기호다. 다음처럼 한줄에 여러구문을 사용하고 싶을 때 세미콜론이 유용하다. int a; a = 1; System.out.println(a+1); //2 a = 2; System.out.println(a+1); //3 자바에서는 세미콜론을 생략할 수 없다.",
+                "owner": null,
+                "section": null,
+                "hit": 0,
+                "resources": [
+                    { "key": "추가정보3", "url": new URL("http://www.localhost.com:8080/notExits3") },
+                    { "key": "추가정보3", "url": new URL("http://www.localhost.com:8080/notExits3") },
+                    { "key": "추가정보3", "url": new URL("http://www.localhost.com:8080/notExits3") },
+                ]
+            },
+            {
+                "id": 2,
+                "title": "데이터 타입",
+                "subtitle": "데이터의 크기",
+                "description": "데이터 타입은 조금 어렵다. 후속 수업에서 필수적인 선행지식은 아니지만, 또 뒤에 배치하는 것도 애매하다. 이번 토픽의 학습이 어렵게 느껴지면 다음 토픽으로 넘어가고 나중에 다시 학습하면 된다.",
+                "content": "byte a; 이 변수에 담을 수 있는 숫자의 범위는 -128~127까지다. 이 범위 밖의 수인 -129나 128을 변수에 대입하려고 하면 오류가 발생할 것이다. 그럼 매우 큰 표현범위를 가지고 있는 long형을 사용하지 왜 byte 형을 사용할까? 만약 표현하고자 하는 수가 많아봐야 100을 넘지 않는 경우가 있다고 생각해보자. 행정구역을 숫자로 표시한다고 가정해보자.즉 어떤 숫자를 저장하느냐에 따라서 사용하는 메모리의 크기가 달라지는 것이 아니고, 어떤 데이터 타입으로 변수를 선언했느냐에 따라서 사용하는 메모리의 크기가 달라지는 것이다. 결국, 변수에 들어올 수 있는 숫자의 최대 크기를 잘 판단해서 데이터 타입을 지정해야 귀한 메모리의 용량을 아낄 수 있다. 하지만 오늘날은 메모리의 용량이 늘어났고, 또 어떤 데이터형을 사용할 것이냐는 문제를 판단하기 위해서는 여러 가지가 고려되어야 한다. 결과적으로 말해서 정수를 저장할 때는 int를 사용하면 된다. int 형을 처리 할 때 CPU의 처리속도가 빠르고, int는 충분히 큰 수를 표현할 수 있는 데이터 타입이기 때문이다.",
+                "owner": null,
+                "section": null,
+                "hit": 0,
+                "resources": [
+                    { "key": "추가정보3", "url": new URL("http://www.localhost.com:8080/notExits3") },
+                    { "key": "추가정보3", "url": new URL("http://www.localhost.com:8080/notExits3") },
+                    { "key": "추가정보3", "url": new URL("http://www.localhost.com:8080/notExits3") },
+                ]
+            }
+        ];
+    }
+    // 'project'
+    // `project/summary/${projectId}`
+    // 'document'
+    //  section/project/projectName`
+    StaticDatasourceService.prototype.analzyUrl = function (url) {
+        if (url.startsWith('project/summary')) {
+            return CASE.PROJECTSUMMARY;
+        }
+        if (url.startsWith('project')) {
+            return CASE.PROJECT;
+        }
+        if (url.startsWith('document')) {
+            return CASE.DOCUMENT;
+        }
+        if (url.startsWith('section')) {
+            return CASE.SECTION;
+        }
+        return null;
+    };
+    StaticDatasourceService.prototype.get = function (url, params) {
+        var _case = this.analzyUrl(url);
+        switch (_case) {
+            case CASE.PROJECTSUMMARY: return __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__["a" /* Observable */].from([this.projectSummary[0]]);
+            case CASE.PROJECT: return __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__["a" /* Observable */].from([this.projects]);
+            case CASE.DOCUMENT: return __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__["a" /* Observable */].from([this.documents]);
+            case CASE.SECTION: return __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__["a" /* Observable */].from([this.sections]);
+        }
+        return __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__["a" /* Observable */].from([]);
+    };
+    return StaticDatasourceService;
 }());
 
 
