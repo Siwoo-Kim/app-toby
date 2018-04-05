@@ -1196,7 +1196,7 @@ module.exports = ""
 /***/ "./src/app/shared/components/data-loader/data-loader.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui dividing active centered inline loader\"></div>\n\n"
+module.exports = "<div class=\"ui segment\">\n  <div class=\"ui active inverted dimmer\">\n    <div class=\"ui text loader\">Fetching Data...</div>\n  </div>\n  <p></p>\n</div>\n\n"
 
 /***/ }),
 
@@ -1532,7 +1532,7 @@ module.exports = ""
 /***/ "./src/app/shared/main/main.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"card-deck mb-3 text-center\">\n  <div class=\"card mb-4 box-shadow\">\n    <div class=\"box-list clearfix\">\n      <div class=\"row\">\n        <div class=\"box-list-item text-center col-4\" >\n          <div class=\"box-item\">\n            <figure>\n              <div class=\"figure-inner\">\n                <img width=\"400\" height=\"400\" src=\"/assets/img/web_icon_1.jpg\"\n                     alt=\"web_icon_4\">\n              </div>\n            </figure>\n            <div class=\"detail-area\">\n              <p >Hello</p>\n            </div>\n          </div>\n        </div>\n        <div class=\"box-list-item text-center col-4\" >\n          <div class=\"box-item\">\n            <figure>\n              <div class=\"figure-inner\">\n                <img  width=\"400\" height=\"400\" src=\"/assets/img/web_icon_2.jpg\"\n                      alt=\"web_icon_4\">\n              </div>\n            </figure>\n            <div class=\"detail-area\">\n              <p >Hello</p>\n            </div>\n          </div>\n        </div>\n        <div class=\"box-list-item text-center col-4\" >\n          <div class=\"box-item\">\n            <figure>\n              <div class=\"figure-inner\">\n                <img  width=\"400\" height=\"400\"src=\"/assets/img/web_icon_3.jpg\"\n                      alt=\"web_icon_4\">\n              </div>\n            </figure>\n            <div class=\"detail-area\">\n              <p >Hello</p>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n\n"
+module.exports = "\n<div class=\"ui vertical stripe segment mt-5\">\n  <div class=\"ui middle aligned stackable grid container\">\n    <div class=\"row\">\n      <div class=\"eight wide column\">\n        <h3 class=\"ui header\">How am I ? <i class=\"icon blind\"></i></h3>\n        <p>Seneca College Student, 2 Semester</p>\n        <h3 class=\"ui header\">What can you do? <i class=\"icon cube\"></i></h3>\n        <p class=\"ui text\">\n          Spring, Spring-boot, Java, Object oriented programming, Aspect oriented programming(AspectJ), Functional Programming with Java8 and Angular\n        </p>\n      </div>\n      <div class=\"four wide right floated column\">\n        <img src=\"assets/img/home/web_icon1.png\" class=\"ui large bordered rounded image\">\n      </div>\n    </div>\n  </div>\n</div>\n<div class=\"ui equal width stackable internally celled grid mt-5\">\n  <div class=\"center aligned row\">\n    <div class=\"column\">\n      <h3>\"Coding Everyday\"</h3>\n      <p>Practice Everyday to be better</p>\n    </div>\n    <div class=\"column\">\n      <h3>\"최근 공부하는것?\"</h3>\n      <p>\n        <img src=\"assets/img/home/web_icon_4.jpg\" class=\"ui avatar image\"> <b>JPA (Java Persistence Api) JPA 라 쓰고 하이버네이트라 읽는다.</b>\n      </p>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
