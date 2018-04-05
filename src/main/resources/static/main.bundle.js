@@ -37,7 +37,6 @@ module.exports = "<!--The content below is only a placeholder and can be replace
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_document_repository_service__ = __webpack_require__("./src/app/services/document-repository.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -48,21 +47,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-
 var AppComponent = /** @class */ (function () {
-    function AppComponent(documentRepository) {
-        this.documentRepository = documentRepository;
+    function AppComponent() {
     }
-    AppComponent.prototype.ngOnInit = function () {
-        console.log(this.documentRepository.documents);
-    };
+    AppComponent.prototype.ngOnInit = function () { };
     AppComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-root',
             template: __webpack_require__("./src/app/app.component.html"),
             styles: [__webpack_require__("./src/app/app.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_document_repository_service__["a" /* DocumentRepository */]])
+        __metadata("design:paramtypes", [])
     ], AppComponent);
     return AppComponent;
 }());
@@ -122,7 +117,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_4__services_service_module__["a" /* ServiceModule */],
                 __WEBPACK_IMPORTED_MODULE_8__document_document_module__["a" /* DocumentModule */],
                 __WEBPACK_IMPORTED_MODULE_10__project_project_module__["a" /* ProjectModule */],
-                __WEBPACK_IMPORTED_MODULE_6__angular_router__["b" /* RouterModule */].forRoot(routes),
+                __WEBPACK_IMPORTED_MODULE_6__angular_router__["c" /* RouterModule */].forRoot(routes),
                 /*  Angular module  */
                 __WEBPACK_IMPORTED_MODULE_5__angular_http__["b" /* HttpModule */],
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -308,13 +303,13 @@ var DocumentModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_6__angular_forms__["e" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_6__angular_forms__["j" /* ReactiveFormsModule */],
                 __WEBPACK_IMPORTED_MODULE_2__shared_share_module__["a" /* ShareModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_router__["b" /* RouterModule */].forChild(routes)
+                __WEBPACK_IMPORTED_MODULE_5__angular_router__["c" /* RouterModule */].forChild(routes)
             ],
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_3__components_document_list_document_list_component__["a" /* DocumentListComponent */],
                 __WEBPACK_IMPORTED_MODULE_4__components_document_create_document_create_component__["a" /* DocumentCreateComponent */]
             ],
-            exports: [__WEBPACK_IMPORTED_MODULE_5__angular_router__["b" /* RouterModule */]],
+            exports: [__WEBPACK_IMPORTED_MODULE_5__angular_router__["c" /* RouterModule */]],
         })
     ], DocumentModule);
     return DocumentModule;
@@ -455,7 +450,6 @@ var ProjectMainComponent = /** @class */ (function () {
     };
     ProjectMainComponent.prototype.init = function (project) {
         var _this = this;
-        this.project = project;
         this.productRepository.getProjectSummary(this.project.id).subscribe(function (data) {
             _this.projectSummary = data;
             _this.chapters = [];
@@ -505,7 +499,7 @@ module.exports = ""
 /***/ "./src/app/project/project-main/project-sidebar/project-sidebar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<app-data-loader class=\"ui three wide column pl-3\" *ngIf=\"!currentProject\"></app-data-loader>\n<div class=\"ui three wide column pl-3\" *ngIf=\"currentProject\">\n  <div class=\"ui vertical menu\">\n    <div class=\"item\"\n         *ngFor=\"let section of projectSummary.sectionNames\"\n         (mouseover)=\"selectedSection = section\"\n         [ngClass]=\"{'active teal': selectedSection == section}\">\n      <div class=\"ui left pointing label\"\n           [ngClass]=\"{'active teal': selectedSection == section}\">\n        {{ getDocumentTitleByName(section).length }}\n      </div>\n      <div class=\"header\">{{ section }}</div>\n      <div class=\"menu\">\n        <a class=\"ui item\"\n           id=\"side-anchor\"\n           [attr.data-tooltip]=\"section + ' Section! '\"\n           [attr.data-position]=\"'right center'\"\n           *ngFor=\"let documentTitle of getDocumentTitleByName(section)\">\n          {{ documentTitle }}\n        </a>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "\n<app-data-loader class=\"ui three wide column pl-3\" *ngIf=\"!currentProject\"></app-data-loader>\n<div class=\"ui three wide column pl-3\" *ngIf=\"!hasSection\" >\n  <div class=\"ui vertical menu\">\n    <div class=\"item\">\n      <div class=\"menu\">\n        <a class=\"ui item\">\n          <div class=\"ui negative message\">\n            <i class=\"close icon\" (click)=\"hasSection = true\"></i>\n            <div class=\"header\">\n              I'am sorry. I will bring content, soon!\n            </div>\n            <p>Empty section and titles</p>\n          </div>\n          <a class=\"ui item\"\n             [attr.data-tooltip]=\"'No Section! '\"\n             [attr.data-position]=\"'right center'\">\n          </a>\n        </a>\n      </div>\n    </div>\n  </div>\n</div>\n<div class=\"ui three wide column pl-3\" *ngIf=\"currentProject && hasSection\">\n  <div class=\"ui vertical menu\">\n    <div class=\"item\"\n         *ngFor=\"let section of projectSummary.sectionNames\"\n         (mouseover)=\"selectedSection = section\"\n         [ngClass]=\"{'active teal': selectedSection == section}\">\n      <div class=\"ui left pointing label\"\n           [ngClass]=\"{'active teal': selectedSection == section}\">\n        {{ getDocumentTitleByName(section).length }}\n      </div>\n      <div class=\"header\">{{ section }}</div>\n      <div class=\"menu\">\n        <a class=\"ui item\"\n           id=\"side-anchor\"\n           [attr.data-tooltip]=\"section + ' Section! '\"\n           [attr.data-position]=\"'right center'\"\n           *ngFor=\"let documentTitle of getDocumentTitleByName(section)\">\n          {{ documentTitle }}\n        </a>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -516,8 +510,7 @@ module.exports = "\n<app-data-loader class=\"ui three wide column pl-3\" *ngIf=\
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProjectSidebarComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_project_repository_service__ = __webpack_require__("./src/app/services/project-repository.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_project_model__ = __webpack_require__("./src/app/models/project.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_project_model__ = __webpack_require__("./src/app/models/project.model.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -530,11 +523,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var ProjectSidebarComponent = /** @class */ (function () {
-    function ProjectSidebarComponent(projectRepository, route) {
+    function ProjectSidebarComponent(projectRepository) {
         this.projectRepository = projectRepository;
-        this.route = route;
     }
     Object.defineProperty(ProjectSidebarComponent.prototype, "project", {
         set: function (project) {
@@ -542,12 +533,14 @@ var ProjectSidebarComponent = /** @class */ (function () {
             this.currentProject = project;
             this.projectRepository.getProjectSummary(this.currentProject.id).subscribe(function (data) {
                 _this.projectSummary = data;
+                _this.hasSection = _this.projectSummary.sectionNames.length > 0;
             });
         },
         enumerable: true,
         configurable: true
     });
-    ProjectSidebarComponent.prototype.ngOnInit = function () { };
+    ProjectSidebarComponent.prototype.ngOnInit = function () {
+    };
     ProjectSidebarComponent.prototype.getDocumentTitleByName = function (sectionName) {
         var titles = [];
         for (var _i = 0, _a = Object.keys(this.projectSummary.documentTitles); _i < _a.length; _i++) {
@@ -560,8 +553,8 @@ var ProjectSidebarComponent = /** @class */ (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__models_project_model__["a" /* Project */]),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__models_project_model__["a" /* Project */]])
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2__models_project_model__["a" /* Project */]),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__models_project_model__["a" /* Project */]])
     ], ProjectSidebarComponent.prototype, "project", null);
     ProjectSidebarComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -569,8 +562,7 @@ var ProjectSidebarComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/project/project-main/project-sidebar/project-sidebar.component.html"),
             styles: [__webpack_require__("./src/app/project/project-main/project-sidebar/project-sidebar.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_project_repository_service__["a" /* ProjectRepository */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_project_repository_service__["a" /* ProjectRepository */]])
     ], ProjectSidebarComponent);
     return ProjectSidebarComponent;
 }());
@@ -621,7 +613,7 @@ var ProjectModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_5__services_service_module__["a" /* ServiceModule */],
                 __WEBPACK_IMPORTED_MODULE_4__shared_share_module__["a" /* ShareModule */],
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* RouterModule */].forChild(routes),
+                __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* RouterModule */].forChild(routes),
             ],
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_2__project_main_project_main_component__["a" /* ProjectMainComponent */],
@@ -629,7 +621,7 @@ var ProjectModule = /** @class */ (function () {
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_2__project_main_project_main_component__["a" /* ProjectMainComponent */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_router__["b" /* RouterModule */]
+                __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* RouterModule */]
             ],
         })
     ], ProjectModule);
@@ -664,7 +656,6 @@ var DocumentRepository = /** @class */ (function () {
         this.dataSource = dataSource;
         this._documents = [];
         this.dataSource.get('document').subscribe(function (data) {
-            console.log(data);
             _this._documents = data;
         });
     }
@@ -712,7 +703,6 @@ var ProjectRepository = /** @class */ (function () {
         this.changeCurrentProjectEmitter = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
         this.dataSource.get('project').subscribe(function (data) {
             _this._projects = data;
-            console.log(_this._projects);
         });
     }
     Object.defineProperty(ProjectRepository.prototype, "currentProject", {
@@ -733,8 +723,7 @@ var ProjectRepository = /** @class */ (function () {
         return this.dataSource.get('project');
     };
     ProjectRepository.prototype.getProjectByName = function (name) {
-        return this._projects
-            .filter(function (pro) { return pro.name.toLowerCase() == name.toLowerCase(); })[0];
+        return this._projects.find(function (pro) { return pro.name.toLowerCase() == name.toLowerCase(); });
     };
     ProjectRepository.prototype.getProjectSummary = function (projectId) {
         return this.dataSource.get("project/summary/" + projectId);
@@ -1196,7 +1185,7 @@ module.exports = ""
 /***/ "./src/app/shared/components/data-loader/data-loader.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"ui segment\">\n  <div class=\"ui active inverted dimmer\">\n    <div class=\"ui text loader\">Fetching Data...</div>\n  </div>\n  <p></p>\n</div>\n\n"
+module.exports = "<div class=\"ui segment\" *ngIf=\"!maxentry\">\n  <div class=\"ui active inverted dimmer\">\n    <div class=\"ui text loader\">Fetching Data...</div>\n  </div>\n  <p></p>\n</div>\n\n"
 
 /***/ }),
 
@@ -1218,6 +1207,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var DataLoaderComponent = /** @class */ (function () {
     function DataLoaderComponent() {
+        var _this = this;
+        this.maxentry = false;
+        setTimeout(function () {
+            _this.maxentry = true;
+        }, 5000);
     }
     DataLoaderComponent.prototype.ngOnInit = function () {
     };
@@ -1482,7 +1476,7 @@ module.exports = "\r\n.label {\r\n  position: relative !important;\r\n}\r\n\r\nh
 /***/ "./src/app/shared/location/location.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"ui bottom attached label\"  >\n  <div class=\"ui tiny breadcrumb\">\n    <a class=\"section\">홈</a>\n    <i class=\"right chevron icon divider\"></i>\n    <a class=\"section\">프로젝트</a>\n    <i class=\"right chevron icon divider\"></i>\n    <a class=\"section\">JAVA</a>\n  </div>\n</div>\n"
+module.exports = "\n<div class=\"ui bottom attached label\"  >\n  <div class=\"ui tiny breadcrumb\">\n    <a *ngFor=\"let url of urlSegments;let i= index;let _last = last\"\n       [routerLink]=\"tourl(i)\"\n       class=\"ui section\">\n      {{ url.trim().toUpperCase() }}\n      <i class=\"right chevron icon divider\" *ngIf=\"!_last\"></i>\n    </a>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1492,6 +1486,7 @@ module.exports = "\n<div class=\"ui bottom attached label\"  >\n  <div class=\"u
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LocationComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1502,9 +1497,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var LocationComponent = /** @class */ (function () {
-    function LocationComponent() {
+    function LocationComponent(route, router) {
+        var _this = this;
+        this.route = route;
+        this.router = router;
+        this.toSegments(this.router.url);
+        this.router.events.subscribe(function (event) {
+            if (event['url'] != null) {
+                _this.url = event['url'];
+                _this.toSegments(_this.url);
+            }
+        });
     }
+    LocationComponent.prototype.toSegments = function (url) {
+        this.urlSegments = [];
+        var _urls = url.split('/');
+        this.urlSegments = _urls.filter(function (url) {
+            return url != null && url.length != 0 && url.trim() != "";
+        });
+    };
+    LocationComponent.prototype.tourl = function (index) {
+        var _urls = "";
+        for (var i = 0; i < index + 1; i++) {
+            _urls += "/" + this.urlSegments[i];
+        }
+        return _urls;
+    };
     LocationComponent.prototype.ngOnInit = function () {
     };
     LocationComponent = __decorate([
@@ -1513,7 +1533,8 @@ var LocationComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/shared/location/location.component.html"),
             styles: [__webpack_require__("./src/app/shared/location/location.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */],
+            __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]])
     ], LocationComponent);
     return LocationComponent;
 }());
@@ -1632,7 +1653,7 @@ var ShareModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["d" /* MatMenuModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_common__["b" /* CommonModule */],
                 __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
-                __WEBPACK_IMPORTED_MODULE_9__angular_router__["b" /* RouterModule */],
+                __WEBPACK_IMPORTED_MODULE_9__angular_router__["c" /* RouterModule */],
             ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_1__footer_footer_component__["a" /* FooterComponent */],
