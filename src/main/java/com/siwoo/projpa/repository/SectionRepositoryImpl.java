@@ -3,22 +3,18 @@ package com.siwoo.projpa.repository;
 import com.siwoo.projpa.domain.*;
 import com.siwoo.projpa.domain.criteria.SectionCriteria;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.function.BiFunction;
 
 import static com.siwoo.projpa.domain.criteria.SectionCriteria.Search;
 import static com.siwoo.projpa.repository.SectionRepository.*;
 import static com.siwoo.projpa.repository.support.RepositorySupport.surround;
-import static com.siwoo.projpa.service.support.SimpleValidator.throwIfNotTrue;
-import static com.siwoo.projpa.service.support.SimpleValidator.throwIfNull;
+import static com.siwoo.projpa.service.support.ServiceSupporter.throwIfNotTrue;
+import static com.siwoo.projpa.service.support.ServiceSupporter.throwIfNull;
 
 @Slf4j
 @Repository
@@ -30,7 +26,7 @@ public class SectionRepositoryImpl implements CustomSectionRepository {
 
 
     @Override
-    public List<Section> findCriteriaMatchALL(SectionCriteria sectionCriteria) {
+    public List<Section> findByCriteriaMatchALL(SectionCriteria sectionCriteria) {
         throwIfNull(sectionCriteria);
         throwIfNotTrue((searchSet) -> searchSet.size() > 0, sectionCriteria.getSearches());
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -92,14 +88,14 @@ public class SectionRepositoryImpl implements CustomSectionRepository {
 //    }
 
     @Override
-    public List<Section> findCriteriaMatchAny(SectionCriteria sectionCriteria) {
+    public List<Section> findByCriteriaMatchAny(SectionCriteria sectionCriteria) {
         throwIfNull(sectionCriteria);
         throwIfNotTrue((searchSet) -> searchSet.size() > 0, sectionCriteria.getSearches());
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Section> query = cb.createQuery(domainClass);
         Root<Section> sectionRoot = query.from(domainClass);
 
-        Predicate criteria = cb.conjunction();
+        Predicate criteria = cb.disjunction();
 
         for (Search search : sectionCriteria.getSearches()) {
             switch (search) {

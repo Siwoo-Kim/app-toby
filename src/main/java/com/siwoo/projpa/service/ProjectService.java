@@ -23,6 +23,8 @@ public interface ProjectService {
     @Transactional(readOnly = false)
     void updateLastUpdatedSections();
 
+    
+
     void displayProjectUsers(String name);
 
     Project maxManagerProject();

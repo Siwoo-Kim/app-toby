@@ -11,6 +11,7 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long>, CustomUserRepository{
 
+
     @Query("select distinct u from User u left join fetch u.projects where u.id = :id ")
     User findFetchAllById(@Param("id") long id);
 

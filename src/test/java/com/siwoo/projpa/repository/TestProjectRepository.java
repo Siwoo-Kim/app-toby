@@ -80,7 +80,6 @@ public class TestProjectRepository {
     @Test
     public void getProjectSummaryByProjectName() {
         List<Section> sections = sectionRepository.findByProjectName(projects.get(0).getName());
-
         for(Section section: sections) {
             List<Document> documents = FixtureFactory.documents();
             for(Document document: documents) {
@@ -97,4 +96,17 @@ public class TestProjectRepository {
         }
     }
 
+    @Test
+    public void countSectionByName() {
+        Project project = FixtureFactory.projects().get(0);
+        projectRepository.save(project);
+        int count = 0;
+        for(Section section: FixtureFactory.sections()) {
+            section.setProject(project);
+            count++;
+            sectionRepository.save(section);
+        }
+        long found = projectRepository.countSection(project.getId());
+        assertTrue(count == found);
+    }
 }

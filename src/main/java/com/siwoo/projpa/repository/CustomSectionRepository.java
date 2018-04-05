@@ -9,11 +9,11 @@ import java.util.List;
 
 public interface CustomSectionRepository {
 
-    List<Section> findCriteriaMatchALL(SectionCriteria sectionCriteria);
+    List<Section> findByCriteriaMatchALL(SectionCriteria sectionCriteria);
 
     //List<Section> findSectionByProjects(Project... projects);
 
-    List<Section> findCriteriaMatchAny(SectionCriteria sectionCriteria);
+    List<Section> findByCriteriaMatchAny(SectionCriteria sectionCriteria);
 
     List<Section> findByProject(long projectId);
 

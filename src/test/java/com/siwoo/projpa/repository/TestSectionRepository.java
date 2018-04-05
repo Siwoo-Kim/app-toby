@@ -129,25 +129,25 @@ public class TestSectionRepository {
         int difficulty = sections.get(3).getDifficulty();
         Project project1 = sections.get(3).getProject();
 
-        List<Section> found = sectionRepository.findCriteriaMatchALL(new SectionCriteria(searchName, null, 0, null, SectionCriteria.Search.NAME));
+        List<Section> found = sectionRepository.findByCriteriaMatchALL(new SectionCriteria(searchName, null, 0, null, SectionCriteria.Search.NAME));
         assertTrue(found.contains(section));
         log.warn(found + " ");
 
-        found = sectionRepository.findCriteriaMatchALL(new SectionCriteria(searchName,"NOT EXISTS", null ,null , SectionCriteria.Search.NAME,SectionCriteria.Search.DESCRIPTION));
+        found = sectionRepository.findByCriteriaMatchALL(new SectionCriteria(searchName,"NOT EXISTS", null ,null , SectionCriteria.Search.NAME,SectionCriteria.Search.DESCRIPTION));
         assertTrue(found.contains(section));
         log.warn(found + " ");
 
         Section section2 = sections.get(4);
-        found = sectionRepository.findCriteriaMatchALL(new SectionCriteria(searchName,section2.getDescription(), null, null,   SectionCriteria.Search.NAME,SectionCriteria.Search.DESCRIPTION));
+        found = sectionRepository.findByCriteriaMatchALL(new SectionCriteria(searchName,section2.getDescription(), null, null,   SectionCriteria.Search.NAME,SectionCriteria.Search.DESCRIPTION));
         assertTrue(found.contains(section));
         assertTrue(found.contains(section2));
 
-        found = sectionRepository.findCriteriaMatchALL(
+        found = sectionRepository.findByCriteriaMatchALL(
                 new SectionCriteria(null,null,difficulty, null, SectionCriteria.Search.DIFFICULTY)
         );
         assertTrue(found.contains(section));
 
-        found = sectionRepository.findCriteriaMatchALL(
+        found = sectionRepository.findByCriteriaMatchALL(
                 new SectionCriteria(null,null,null, section.getProject(), SectionCriteria.Search.PROJECT)
         );
         assertTrue(found.contains(section));

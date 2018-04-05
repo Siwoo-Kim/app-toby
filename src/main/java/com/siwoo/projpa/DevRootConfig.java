@@ -1,5 +1,6 @@
 package com.siwoo.projpa;
 
+import com.siwoo.projpa.jaxb.Sqlmap;
 import com.siwoo.projpa.service.support.sql.*;
 import com.siwoo.projpa.util.MakeSuore;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -9,6 +10,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.oxm.Marshaller;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
 import javax.sql.DataSource;
 import java.nio.file.FileSystems;
@@ -27,6 +30,13 @@ public class DevRootConfig {
     @Bean
     SqlService sqlService() {
         return new DefaultSqlService();
+    }
+
+    @Bean
+    Marshaller marshaller() {
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setContextPath(Sqlmap.class.getPackage().getName());
+        return marshaller;
     }
 //    @Bean
 //    SqlReader sqlReader() {

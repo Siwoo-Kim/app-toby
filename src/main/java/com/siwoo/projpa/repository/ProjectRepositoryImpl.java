@@ -15,15 +15,18 @@ import javax.persistence.TypedQuery;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Repository @Slf4j
+@Repository
+@Slf4j
 public class ProjectRepositoryImpl implements CustomProjectRepository {
 
     @PersistenceContext
     EntityManager entityManager;
     private final static Class<Project> domainClass = Project.class;
 
-    @Autowired SectionRepository sectionRepository;
-    @Autowired DocumentRepository documentRepository;
+    @Autowired
+    SectionRepository sectionRepository;
+    @Autowired
+    DocumentRepository documentRepository;
 
 
     private final static String BY_NAME =
@@ -33,10 +36,10 @@ public class ProjectRepositoryImpl implements CustomProjectRepository {
 
     @Override
     public List<Project> getByNames(List<String> names) {
-        Assert.notEmpty(names,"names must not empty");
+        Assert.notEmpty(names, "names must not empty");
         return entityManager.createQuery(BY_NAME_IN, domainClass)
-            .setParameter("names", capitalize(names) )
-            .getResultList();
+                .setParameter("names", capitalize(names))
+                .getResultList();
     }
 
     @Override
@@ -53,14 +56,14 @@ public class ProjectRepositoryImpl implements CustomProjectRepository {
 
     @Override
     public ProjectSummary getProjectSummary(long projectId) {
-        Project project = entityManager.find(domainClass,projectId);
+        Project project = entityManager.find(domainClass, projectId);
         List<String> sectionNames = sectionRepository.findNameByProjectName(project.getName());
         Map<String, String[]> documentTitles = new HashMap<>();
-        for(String sectionName: sectionNames) {
+        for (String sectionName : sectionNames) {
             String[] titles = documentRepository.findTitleBySectionName(sectionName);
-            documentTitles.put(sectionName,titles);
+            documentTitles.put(sectionName, titles);
         }
-        return new ProjectSummary(project.getName(),project.getType(),sectionNames,documentTitles);
+        return new ProjectSummary(project.getName(), project.getType(), sectionNames, documentTitles);
     }
 
 }

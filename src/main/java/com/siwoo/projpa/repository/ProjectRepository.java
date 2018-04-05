@@ -26,4 +26,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long>, CustomP
     @Query("select p from Project p where p.type in (:types)")
     List<Project> findByTypes(Project.Type... types);
 
+    @Query("select count(s) from Section s where s.project.id = :id")
+    long countSection(@Param("id") long id);
+
 }

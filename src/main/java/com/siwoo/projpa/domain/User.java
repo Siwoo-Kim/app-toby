@@ -1,5 +1,6 @@
 package com.siwoo.projpa.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.siwoo.projpa.domain.support.NotExistingLevelException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -33,6 +34,7 @@ public class User {
     private Level level;
     private double point;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "USER_PROJECT",
     joinColumns = @JoinColumn(name="manager_id"),
