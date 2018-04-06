@@ -46,4 +46,6 @@ public interface WebPageRepository extends JpaRepository<WebPage, String>, Custo
     @Query("select count(w) from WebPage w where w.isPublic = :isPublic")
     long countByIsPublic(@Param("isPublic") boolean isPublic );
 
+    List<WebPage> findByAuthor(User user);
+
 }

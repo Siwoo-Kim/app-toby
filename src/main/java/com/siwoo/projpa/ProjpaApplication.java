@@ -9,14 +9,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.PropertiesPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Properties;
 
 @Slf4j
-
 @PropertySource("classpath:application.properties")
 @SpringBootApplication(scanBasePackages = "com.siwoo.projpa")
 public class ProjpaApplication {
@@ -35,6 +42,7 @@ public class ProjpaApplication {
     public static void main(String[] args) throws InterruptedException {
         /*	ApplicationContext context = */
         SpringApplication.run(ProjpaApplication.class, args);
+
 
 //		EntityManager entityManager = context.getBean(EntityManager.class);
 //		Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(System.in)));

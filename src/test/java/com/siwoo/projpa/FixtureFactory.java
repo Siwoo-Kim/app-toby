@@ -71,6 +71,7 @@ public class FixtureFactory {
 
         List<Document> documents = null;
         try{
+        documents = new ArrayList<>();
         Document document = new Document();
         document.setTitle("변수");
         document.setDescription("다음 예제는 변수에 값을 대입하는 방법을 보여주는 예제다.");

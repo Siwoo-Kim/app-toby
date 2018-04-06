@@ -1,10 +1,13 @@
 package com.siwoo.projpa.repository;
 
+import com.siwoo.projpa.domain.User;
 import com.siwoo.projpa.domain.WebPage;
 import com.siwoo.projpa.domain.criteria.WebPageCriteria;
 import com.siwoo.projpa.domain.support.CriteriaException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +30,23 @@ public class WebPageRepositoryImpl implements CustomWebPageRepository {
     @PersistenceContext
     EntityManager entityManager;
     private static final Class<WebPage> DOMAIN_CLASS = WebPage.class;
+
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void updateAuthorBulk(List<WebPage> webPages, User user) {
+        for(WebPage webPage: webPages){
+            entityManager.createNamedQuery(WebPage.NAMEDSQL_WEBPAGE_UPDATE_AUTHOR)
+                    .setParameter("author",user)
+                    .setParameter("name", webPage.getName())
+                    .executeUpdate();
+        }
+    }
+
+
+    public void insertBulk(List<WebPage> webPages) {
+
+    }
 
     @Override
     public List<WebPage> findByCriteriaMatchAny(WebPageCriteria webPageCriteria) {

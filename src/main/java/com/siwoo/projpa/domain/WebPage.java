@@ -18,7 +18,12 @@ import java.util.Set;
 @Getter @Setter @ToString
 @Entity
 @EqualsAndHashCode(of = {"name","url"})
+@NamedQueries(
+        @NamedQuery(name = "WEBPAGE.UPDATE_AUTHOR",
+        query = "update WebPage e set e.author = :author where e.name = :name"))
 public class WebPage {
+
+    public static final String NAMEDSQL_WEBPAGE_UPDATE_AUTHOR = "WEBPAGE.UPDATE_AUTHOR";
 
     @Id
     private String name;

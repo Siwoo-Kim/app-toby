@@ -134,4 +134,15 @@ public class TestWebPageRepository {
         found = webPageRepository.findByCriteriaMatchAny(criteria);
         assertTrue(found.contains(webPages.get(2)));
     }
+
+    @Test
+    public void updateAuthorBulk() {
+        List<WebPage> webPages = FixtureFactory.webPages();
+        User user = new User();
+        user.setEmail("dummay@email.com");
+        userRepository.save(user);
+        webPageRepository.updateAuthorBulk(webPages, user);
+        List<WebPage> found = webPageRepository.findByAuthor(user);
+        assertEquals(found.size(),webPages.size());
+    }
 }

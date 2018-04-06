@@ -556,8 +556,8 @@ var ProjectMainComponent = /** @class */ (function () {
         var _this = this;
         this.route.params.subscribe(function (params) {
             var projectName = params['name'];
+            _this.chapters = [];
             _this.project = _this.productRepository.getProjectByName(projectName);
-            console.log(_this.project);
             _this.productRepository.currentProject = _this.project;
             var sections = _this.sectionRepository.getByProject(_this.project);
             sections.forEach(function (section) {

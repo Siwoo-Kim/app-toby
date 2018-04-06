@@ -14,7 +14,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.*;
 import java.util.stream.Collectors;
-
+import static com.siwoo.projpa.repository.support.RepositorySupport.*;
 @Repository
 @Slf4j
 public class ProjectRepositoryImpl implements CustomProjectRepository {
@@ -37,7 +37,7 @@ public class ProjectRepositoryImpl implements CustomProjectRepository {
     @Override
     public List<Project> getByNames(List<String> names) {
         Assert.notEmpty(names, "names must not empty");
-        return entityManager.createQuery(BY_NAME_IN, domainClass)
+        return entityManager.createNamedQuery(Project.NAMED_PROJECT_BY_NAME_IN,domainClass)
                 .setParameter("names", capitalize(names))
                 .getResultList();
     }
@@ -45,12 +45,6 @@ public class ProjectRepositoryImpl implements CustomProjectRepository {
     @Override
     public List<Project> getByNames(String... names) {
         return getByNames(Arrays.asList(names));
-    }
-
-    private List<String> capitalize(List<String> names) {
-        return names.stream()
-                .map(String::toUpperCase)
-                .collect(Collectors.toList());
     }
 
 
