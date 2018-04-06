@@ -1361,7 +1361,7 @@ var AboutPageComponent = /** @class */ (function () {
     AboutPageComponent.prototype.toggleHost = function () {
         $('#about-page-wrapper').animate({
             opacity: 0,
-        }, 300);
+        }, 350);
         $('#about-page-wrapper').animate({
             opacity: 1,
         }, 1500);
@@ -1799,11 +1799,11 @@ var LocationComponent = /** @class */ (function () {
         return _urls;
     };
     LocationComponent.prototype.changePageState = function () {
-        if (this.prevUrlSegments != null && this.urlSegments[0] == this.prevUrlSegments[0]) {
-            return;
-        }
         if (this.urlSegments.length == 0 || this.urlSegments[0] == '') {
             this.pageStateObserver.next(new __WEBPACK_IMPORTED_MODULE_2__models_page_state_model__["c" /* PageState */](__WEBPACK_IMPORTED_MODULE_2__models_page_state_model__["b" /* Page */].HOME, this.url));
+            return;
+        }
+        if (this.prevUrlSegments != null && this.urlSegments[0] == this.prevUrlSegments[0]) {
             return;
         }
         switch (this.urlSegments[0]) {
