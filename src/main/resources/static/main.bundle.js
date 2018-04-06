@@ -1361,10 +1361,10 @@ var AboutPageComponent = /** @class */ (function () {
     AboutPageComponent.prototype.toggleHost = function () {
         $('#about-page-wrapper').animate({
             opacity: 0,
-        }, 1000);
+        }, 300);
         $('#about-page-wrapper').animate({
             opacity: 1,
-        }, 1000);
+        }, 1500);
     };
     ;
     AboutPageComponent.prototype.ngOnDestroy = function () {
