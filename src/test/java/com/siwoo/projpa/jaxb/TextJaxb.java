@@ -1,5 +1,6 @@
 package com.siwoo.projpa.jaxb;
 
+import com.siwoo.projpa.service.support.sql.OxmSqlService;
 import com.siwoo.projpa.service.support.sql.SqlService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -18,9 +19,9 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.*;
 
 @Slf4j
 @RunWith(SpringRunner.class)
@@ -34,6 +35,7 @@ public class TextJaxb {
 
     @Test
     public void parse() throws JAXBException, IOException {
+        assertThat(sqlService, is(instanceOf(OxmSqlService.class)));
         String sql = sqlService.sql("INSERT");
         assertTrue(StringUtils.hasText(sql));
         log.warn(sql + "");

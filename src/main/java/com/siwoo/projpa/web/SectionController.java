@@ -14,8 +14,13 @@ public class SectionController {
     @Autowired
     SectionRepository sectionRepository;
 
+    @GetMapping
+    public List<Section> sections() {
+        return sectionRepository.findAll();
+    }
+
     @GetMapping("/project/{projectName}")
-    public List<Section> sections(@PathVariable("projectName") String projectName) {
+    public List<Section> byProject(@PathVariable("projectName") String projectName) {
         return sectionRepository.findByProjectName(projectName);
     }
 }

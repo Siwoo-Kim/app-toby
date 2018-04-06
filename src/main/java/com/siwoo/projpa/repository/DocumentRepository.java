@@ -12,7 +12,7 @@ import java.util.Map;
 
 public interface DocumentRepository extends JpaRepository<Document, Long>, CustomDocumentRepository {
 
-    public static final String COLUMN_SECTION = "section";
+    public static final String COLUMN_SECTION = "sections";
     public static final String COLUMN_TITLE = "title";
     public static final String COLUMN_SUBTITLE = "subtitle";
     public static final String COLUMN_DESCRIPTION = "description";

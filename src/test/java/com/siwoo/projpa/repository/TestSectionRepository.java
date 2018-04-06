@@ -164,7 +164,7 @@ public class TestSectionRepository {
 //        List<Section> concated = sectionRepository.findSectionByProjects(project, project2);
 //        log.warn(concated + "");
 //
-//        for(Section s: sections) {
+//        for(Section s: byProject) {
 //            assertTrue(concated.contains(s));
 //        }
 //        for(Section s: sections2) {

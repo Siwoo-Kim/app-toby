@@ -21,6 +21,7 @@ public class Section {
     @Max(value = 5)
     private int difficulty;
 
+    @Column(length = 1500)
     private String description;
 
     @Embedded

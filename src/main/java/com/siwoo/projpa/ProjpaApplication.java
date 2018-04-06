@@ -99,6 +99,7 @@ public class ProjpaApplication {
             for(WebPage webPage: webPages) {
                 webPage.setAuthor(siwoo);
             }
+
             webPageRepository.saveAll(webPages);
             List<Project> projects = FixtureFactory.projects();
             projectRepository.saveAll(projects);
@@ -112,32 +113,45 @@ public class ProjpaApplication {
                 userRepository.save(user);
             }
 
+            //JAVA SECTIONS
             project = projectRepository.getByNames("JAVA").get(0);
-            List<Section> sections = FixtureFactory.sections();
+            List<Section> sections = FixtureFactory.javaSection();
             for (Section section : sections) {
                 section.setProject(project);
                 sectionRepository.save(section);
             }
 
+            //JAVASCRIPT SECTIONS
             project = projectRepository.getByNames("JAVASCRIPT").get(0);
-            sections = FixtureFactory.sections();
+            sections = FixtureFactory.javascriptSection();
             for (Section section : sections) {
                 section.setProject(project);
                 sectionRepository.save(section);
             }
-
             sectionRepository.saveAll(sections);
             sectionRepository.saveAll(FixtureFactory.sections()); //no matching project
             documentRepository.saveAll(FixtureFactory.documents());
-            Section section = sections.get(0);
-            for (Document document : FixtureFactory.documents()) {
+
+            //JAVA Document for First Section
+            Section section = sectionRepository.findByProjectName("JAVA").get(0);
+            for (Document document : FixtureFactory.javaDocuments()) {
                 document.setSection(section);
                 documentRepository.save(document);
             }
             section = sections.get(1);
-            for (Document document : FixtureFactory.documents()) {
+
+            //JAVASCRIPT Document for First Section
+            for (Document document : FixtureFactory.javascriptDocuments()) {
                 document.setSection(section);
                 documentRepository.save(document);
+            }
+
+            //ALL Document fo all SECTION
+            for(Section _section: sectionRepository.findAll()) {
+                for(Document document: FixtureFactory.documents()) {
+                    document.setSection(_section);
+                    documentRepository.save(document);
+                }
             }
         };
     }

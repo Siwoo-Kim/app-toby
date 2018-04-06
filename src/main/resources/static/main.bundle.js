@@ -37,6 +37,10 @@ module.exports = "<!--The content below is only a placeholder and can be replace
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_document_repository_service__ = __webpack_require__("./src/app/services/document-repository.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_section_repository_service__ = __webpack_require__("./src/app/services/section-repository.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_project_repository_service__ = __webpack_require__("./src/app/services/project-repository.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_webpage_repository_service__ = __webpack_require__("./src/app/services/webpage-repository.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -47,8 +51,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
+
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+    function AppComponent(webpageRepository, projectRepository, sectionRepository, documentRepsotiroy) {
+        this.webpageRepository = webpageRepository;
+        this.projectRepository = projectRepository;
+        this.sectionRepository = sectionRepository;
+        this.documentRepsotiroy = documentRepsotiroy;
     }
     AppComponent.prototype.ngOnInit = function () { };
     AppComponent = __decorate([
@@ -57,7 +69,10 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/app.component.html"),
             styles: [__webpack_require__("./src/app/app.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__services_webpage_repository_service__["a" /* WebPageRepository */],
+            __WEBPACK_IMPORTED_MODULE_3__services_project_repository_service__["a" /* ProjectRepository */],
+            __WEBPACK_IMPORTED_MODULE_2__services_section_repository_service__["a" /* SectionRepository */],
+            __WEBPACK_IMPORTED_MODULE_1__services_document_repository_service__["a" /* DocumentRepository */]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -82,6 +97,7 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__document_document_module__ = __webpack_require__("./src/app/document/document.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__app_tokens__ = __webpack_require__("./src/app/app.tokens.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__project_project_module__ = __webpack_require__("./src/app/project/project.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__guards_home_first_guard__ = __webpack_require__("./src/app/guards/home-first.guard.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -99,9 +115,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var routes = [
-    { path: '', component: __WEBPACK_IMPORTED_MODULE_7__shared_main_main_component__["a" /* MainComponent */] },
-    { path: 'home', component: __WEBPACK_IMPORTED_MODULE_7__shared_main_main_component__["a" /* MainComponent */] },
+    { path: '', component: __WEBPACK_IMPORTED_MODULE_7__shared_main_main_component__["a" /* MainComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_11__guards_home_first_guard__["a" /* MainFirstGuard */]] },
+    { path: 'home', component: __WEBPACK_IMPORTED_MODULE_7__shared_main_main_component__["a" /* MainComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_11__guards_home_first_guard__["a" /* MainFirstGuard */]] },
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -123,7 +140,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             ],
             providers: [
-                { provide: __WEBPACK_IMPORTED_MODULE_9__app_tokens__["a" /* PROTOCOL_TOKEN */], useValue: 'https' },
+                __WEBPACK_IMPORTED_MODULE_11__guards_home_first_guard__["a" /* MainFirstGuard */],
+                { provide: __WEBPACK_IMPORTED_MODULE_9__app_tokens__["b" /* REST_URL_TOKEN */], useValue: __WEBPACK_IMPORTED_MODULE_9__app_tokens__["a" /* HEROKU_SERVER_URL */] },
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */]]
         })
@@ -139,10 +157,18 @@ var AppModule = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PROTOCOL_TOKEN; });
+/* unused harmony export PROTOCOL_TOKEN */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return REST_URL_TOKEN; });
+/* unused harmony export JSON_SERVER_URL */
+/* unused harmony export SPRING_SERVER_URL */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HEROKU_SERVER_URL; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 
 var PROTOCOL_TOKEN = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* InjectionToken */]('protocol');
+var REST_URL_TOKEN = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* InjectionToken */]('backend-url');
+var JSON_SERVER_URL = 'http://localhost:3000/';
+var SPRING_SERVER_URL = "http://" + location.hostname + ":8080/";
+var HEROKU_SERVER_URL = "https://" + location.hostname + "/";
 
 
 /***/ }),
@@ -319,6 +345,69 @@ var DocumentModule = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/guards/home-first.guard.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MainFirstGuard; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_main_main_component__ = __webpack_require__("./src/app/shared/main/main.component.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var MainFirstGuard = /** @class */ (function () {
+    function MainFirstGuard(router) {
+        this.router = router;
+        this.firstHomeNavigation = true;
+    }
+    MainFirstGuard.prototype.canActivate = function (route, state) {
+        if (this.firstHomeNavigation) {
+            this.firstHomeNavigation = false;
+            if (route.component != __WEBPACK_IMPORTED_MODULE_2__shared_main_main_component__["a" /* MainComponent */]) {
+                this.router.navigateByUrl("/");
+                return false;
+            }
+        }
+        return true;
+    };
+    MainFirstGuard = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]])
+    ], MainFirstGuard);
+    return MainFirstGuard;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/models/BasicTime.model.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BasicTime; });
+var BasicTime = /** @class */ (function () {
+    function BasicTime(created, updated) {
+        this.created = created;
+        this.updated = updated;
+    }
+    return BasicTime;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/models/chapter.model.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -371,6 +460,24 @@ var Document = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/models/error-message.model.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ErrorMessage; });
+var ErrorMessage = /** @class */ (function () {
+    function ErrorMessage(code, message, locale) {
+        this.code = code;
+        this.message = message;
+        this.locale = locale;
+    }
+    return ErrorMessage;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/models/page-state.model.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -400,29 +507,6 @@ var PAGE_STATE = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Injectio
 
 /***/ }),
 
-/***/ "./src/app/models/project.model.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Project; });
-var Project = /** @class */ (function () {
-    function Project(id, name, type, icon, url, lastUpdatedSection, description, basicTime) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-        this.icon = icon;
-        this.url = url;
-        this.lastUpdatedSection = lastUpdatedSection;
-        this.description = description;
-        this.basicTime = basicTime;
-    }
-    return Project;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/project/project-main/project-main.component.css":
 /***/ (function(module, exports) {
 
@@ -433,7 +517,7 @@ module.exports = "\r\n.main-wrapper {\r\n  margin-top: 20px;\r\n}\r\n\r\n.left-s
 /***/ "./src/app/project/project-main/project-main.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n\n<div class=\"ui grid stackable container-fluid\">\n  <div class=\"row\" >\n    <app-project-sidebar [project]=\"project\" ></app-project-sidebar>\n    <div class=\"ui thirteen wide column\">\n      <div class=\"main-header\">\n        <h3 class=\"header dividing ui\">\n          {{ project.name }}\n        </h3>\n        <div class=\"props\" *ngIf=\"project.basicTime\">\n          {{ ( project.basicTime.updated || project.basicTime.created || Date() ) }} | 공개\n        </div>\n      </div>\n\n      <app-data-loader *ngIf=\"!projectSummary\"></app-data-loader>\n      <div class=\"ui message\" *ngIf=\"projectSummary\">\n        Project Type : <i class=\"ui icon html5\" [ngClass]=\"{'cloudversify' : project.type == 'BACKEND'}\"></i>{{ projectSummary.type }}\n        <br>\n        Last updated of time for section is {{ project.lastUpdatedSection || 'Not Recent' }}.\n      </div>\n\n      <div class=\"main-content\">\n        <p>\n          {{ project.description }}\n        </p>\n      </div>\n\n      <app-list-chapter *ngIf=\"projectSummary\" [chapters]=\"chapters\" [title]=\"project.name\"></app-list-chapter>\n\n      <div class=\"ui relaxed divided list\">\n        <h5 class=\"\"> 예제 코드 </h5>\n        <div class=\"item\">\n          <i class=\"large github middle aligned icon\"></i>\n          <div class=\"content\">\n            <a class=\"header\">Document1</a>\n            <div class=\"description\">Document1 URL</div>\n          </div>\n        </div>\n        <div class=\"item\">\n          <i class=\"large github middle aligned icon\"></i>\n          <div class=\"content\">\n            <a class=\"header\">Document2</a>\n            <div class=\"description\">Document2 URL</div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "\n\n<div class=\"ui grid stackable container-fluid\">\n  <div class=\"row\" >\n    <div class=\"ui three wide column\">\n      <app-project-sidebar></app-project-sidebar>\n    </div>\n    <div class=\"ui thirteen wide column\">\n      <div class=\"main-header\">\n        <h3 class=\"header dividing ui\">\n          {{ project.name }}\n        </h3>\n        <app-display-date *ngIf=\"project.basicTime\" [basicTime]=\"project.basicTime\"></app-display-date>\n      </div>\n\n      <div class=\"main-content\">\n        <p>\n          {{ project.description }}\n        </p>\n      </div>\n\n      <app-list-chapter [chapters]=\"chapters\"></app-list-chapter>\n\n      <div class=\"ui relaxed divided list\">\n        <h5 class=\"\"> 예제 코드 </h5>\n        <div class=\"item\">\n          <i class=\"large github middle aligned icon\"></i>\n          <div class=\"content\">\n            <a class=\"header\">Document1</a>\n            <div class=\"description\">Document1 URL</div>\n          </div>\n        </div>\n        <div class=\"item\">\n          <i class=\"large github middle aligned icon\"></i>\n          <div class=\"content\">\n            <a class=\"header\">Document2</a>\n            <div class=\"description\">Document2 URL</div>\n          </div>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -463,43 +547,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var ProjectMainComponent = /** @class */ (function () {
     function ProjectMainComponent(productRepository, sectionRepository, route) {
-        var _this = this;
         this.productRepository = productRepository;
         this.sectionRepository = sectionRepository;
         this.route = route;
         this.chapters = [];
+    }
+    ProjectMainComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.route.params.subscribe(function (params) {
             var projectName = params['name'];
             _this.project = _this.productRepository.getProjectByName(projectName);
+            console.log(_this.project);
             _this.productRepository.currentProject = _this.project;
+            var sections = _this.sectionRepository.getByProject(_this.project);
+            sections.forEach(function (section) {
+                _this.chapters.push(new __WEBPACK_IMPORTED_MODULE_4__models_chapter_model__["a" /* Chapter */](section.name, section.description));
+            });
         });
-        this.productRepository.changeCurrentProjectEmitter.subscribe(function (project) { return _this.init(project); });
-    }
-    ProjectMainComponent.prototype.ngOnInit = function () {
-    };
-    ProjectMainComponent.prototype.init = function (project) {
-        var _this = this;
-        this.productRepository.getProjectSummary(this.project.id).subscribe(function (data) {
-            _this.projectSummary = data;
-            _this.chapters = [];
-            var sectionChapter = [];
-            for (var _i = 0, _a = _this.projectSummary.sectionNames; _i < _a.length; _i++) {
-                var sectionName = _a[_i];
-                sectionChapter.push(new __WEBPACK_IMPORTED_MODULE_4__models_chapter_model__["a" /* Chapter */](sectionName, ''));
-            }
-            _this.chapters.push(new __WEBPACK_IMPORTED_MODULE_4__models_chapter_model__["a" /* Chapter */](_this.project.name, _this.project.description, sectionChapter));
-        });
-    };
-    ProjectMainComponent.prototype.getDocumentTitleByName = function (sectionName) {
-        var titles = [];
-        for (var _i = 0, _a = Object.keys(this.projectSummary.documentTitles); _i < _a.length; _i++) {
-            var _sectionName = _a[_i];
-            if (_sectionName == sectionName) {
-                titles = this.projectSummary.documentTitles[_sectionName];
-                console.log(titles);
-            }
-        }
-        return titles;
     };
     ProjectMainComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -528,7 +592,7 @@ module.exports = ""
 /***/ "./src/app/project/project-main/project-sidebar/project-sidebar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<app-data-loader class=\"ui three wide column pl-3\" *ngIf=\"!currentProject\"></app-data-loader>\n<div class=\"ui three wide column pl-3\" *ngIf=\"!hasSection\" >\n  <div class=\"ui vertical menu\">\n    <div class=\"item\">\n      <div class=\"menu\">\n        <a class=\"ui item\">\n          <div class=\"ui negative message\">\n            <i class=\"close icon\" (click)=\"hasSection = true\"></i>\n            <div class=\"header\">\n              I'am sorry. I will bring content, soon!\n            </div>\n            <p>Empty section and titles</p>\n          </div>\n          <a class=\"ui item\"\n             [attr.data-tooltip]=\"'No Section! '\"\n             [attr.data-position]=\"'right center'\">\n          </a>\n        </a>\n      </div>\n    </div>\n  </div>\n</div>\n<div class=\"ui three wide column pl-3\" *ngIf=\"currentProject && hasSection\">\n  <div class=\"ui vertical menu\">\n    <div class=\"item\"\n         *ngFor=\"let section of projectSummary.sectionNames\"\n         (mouseover)=\"selectedSection = section\"\n         [ngClass]=\"{'active teal': selectedSection == section}\">\n      <div class=\"ui left pointing label\"\n           [ngClass]=\"{'active teal': selectedSection == section}\">\n        {{ getDocumentTitleByName(section).length }}\n      </div>\n      <div class=\"header\">{{ section }}</div>\n      <div class=\"menu\">\n        <a class=\"ui item\"\n           id=\"side-anchor\"\n           [attr.data-tooltip]=\"section + ' Section! '\"\n           [attr.data-position]=\"'right center'\"\n           *ngFor=\"let documentTitle of getDocumentTitleByName(section)\">\n          {{ documentTitle }}\n        </a>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "\n<div class=\"ui stackable vertical menu\"\n     *ngIf=\"!sections || (sections.length == 0) || isClose\">\n  <div class=\"item\">\n    <div class=\"menu\">\n      <a class=\"ui item\">\n        <div class=\"ui negative message\">\n          <i class=\"close icon\" (click)=\"isClose = true\"></i>\n          <div class=\"header\">\n            I'am sorry. I will bring content, soon!\n          </div>\n          <p>Empty section and titles</p>\n        </div>\n        <a class=\"ui item\"\n           [attr.data-tooltip]=\"'No Section! '\"\n           [attr.data-position]=\"'right center'\">\n        </a>\n      </a>\n    </div>\n  </div>\n</div>\n<div class=\"ui stackable vertical pointing menu\" *ngIf=\"sections && sections.length > 0\">\n  <div class=\"item\" *ngFor=\"let section of sections\"\n       [ngClass]=\"{'active' : section == selectedSection }\"\n       (mouseover)=\"selectedSection = section\">\n    <a class=\"item\">\n      <div class=\"ui left pointing label\" [ngClass]=\"{'grey': section == selectedSection}\">{{ getCountDocuments(section.id)}} </div>\n      <div class=\"header\">{{ section.name }}</div>\n      <p >난이도 <i class=\"ui star blue rating\" [attr.data-rating]=\"section.difficulty + 1\"></i></p>\n    </a>\n    <div class=\"menu\">\n      <a class=\"ui item\"\n         id=\"side-anchor\"\n         *ngFor=\"let document of getDocumentBySection(section.id)\"\n         [attr.data-tooltip]=\"section.description.substr(0,30) + ' ... '\"\n         [attr.data-position]=\"'right center'\">\n        {{ document.title }}\n      </a>\n    </div>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -539,7 +603,8 @@ module.exports = "\n<app-data-loader class=\"ui three wide column pl-3\" *ngIf=\
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProjectSidebarComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_project_repository_service__ = __webpack_require__("./src/app/services/project-repository.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_project_model__ = __webpack_require__("./src/app/models/project.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_section_repository_service__ = __webpack_require__("./src/app/services/section-repository.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_document_repository_service__ = __webpack_require__("./src/app/services/document-repository.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -552,46 +617,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ProjectSidebarComponent = /** @class */ (function () {
-    function ProjectSidebarComponent(projectRepository) {
+    function ProjectSidebarComponent(projectRepository, sectionRepository, documentRepository) {
         this.projectRepository = projectRepository;
+        this.sectionRepository = sectionRepository;
+        this.documentRepository = documentRepository;
+        this.isClose = false;
     }
-    Object.defineProperty(ProjectSidebarComponent.prototype, "project", {
-        set: function (project) {
-            var _this = this;
-            this.currentProject = project;
-            this.projectRepository.getProjectSummary(this.currentProject.id).subscribe(function (data) {
-                _this.projectSummary = data;
-                _this.hasSection = _this.projectSummary.sectionNames.length > 0;
-            });
-        },
-        enumerable: true,
-        configurable: true
-    });
+    ProjectSidebarComponent.prototype.ngAfterViewInit = function () {
+        $('.ui.rating')
+            .rating({
+            initialRating: 0,
+            maxRating: 5
+        });
+    };
     ProjectSidebarComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.sections = this.sectionRepository.getByProject(this.projectRepository.currentProject);
+        this.projectRepository.changeCurrentProjectEmitter.subscribe(function (project) {
+            _this.sections = _this.sectionRepository.getByProject(project);
+        });
     };
-    ProjectSidebarComponent.prototype.getDocumentTitleByName = function (sectionName) {
-        var titles = [];
-        for (var _i = 0, _a = Object.keys(this.projectSummary.documentTitles); _i < _a.length; _i++) {
-            var _sectionName = _a[_i];
-            if (_sectionName == sectionName) {
-                titles = this.projectSummary.documentTitles[_sectionName];
-            }
-        }
-        return titles;
+    ProjectSidebarComponent.prototype.getCountDocuments = function (sectionId) {
+        return this.getDocumentBySection(sectionId).length;
     };
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2__models_project_model__["a" /* Project */]),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__models_project_model__["a" /* Project */]])
-    ], ProjectSidebarComponent.prototype, "project", null);
+    ProjectSidebarComponent.prototype.getDocumentBySection = function (sectionId) {
+        return this.documentRepository.getBySectionId(sectionId);
+    };
     ProjectSidebarComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-project-sidebar',
             template: __webpack_require__("./src/app/project/project-main/project-sidebar/project-sidebar.component.html"),
             styles: [__webpack_require__("./src/app/project/project-main/project-sidebar/project-sidebar.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_project_repository_service__["a" /* ProjectRepository */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_project_repository_service__["a" /* ProjectRepository */],
+            __WEBPACK_IMPORTED_MODULE_2__services_section_repository_service__["a" /* SectionRepository */],
+            __WEBPACK_IMPORTED_MODULE_3__services_document_repository_service__["a" /* DocumentRepository */]])
     ], ProjectSidebarComponent);
     return ProjectSidebarComponent;
 }());
@@ -612,6 +674,7 @@ var ProjectSidebarComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_share_module__ = __webpack_require__("./src/app/shared/share.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_service_module__ = __webpack_require__("./src/app/services/service.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__project_main_project_sidebar_project_sidebar_component__ = __webpack_require__("./src/app/project/project-main/project-sidebar/project-sidebar.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__guards_home_first_guard__ = __webpack_require__("./src/app/guards/home-first.guard.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -625,10 +688,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var routes = [
     { path: 'project', children: [
             { path: ':name', component: __WEBPACK_IMPORTED_MODULE_2__project_main_project_main_component__["a" /* ProjectMainComponent */] }
-        ]
+        ], canActivate: [__WEBPACK_IMPORTED_MODULE_7__guards_home_first_guard__["a" /* MainFirstGuard */]]
     }
 ];
 var ProjectModule = /** @class */ (function () {
@@ -681,23 +745,103 @@ var DocumentRepository = /** @class */ (function () {
     function DocumentRepository(dataSource) {
         var _this = this;
         this.dataSource = dataSource;
-        this._documents = [];
+        this.documents = [];
         this.dataSource.get('document').subscribe(function (data) {
-            _this._documents = data;
+            _this.documents = data;
         });
+        this.dataSource.get('document/-1').subscribe(function (data) { });
     }
-    Object.defineProperty(DocumentRepository.prototype, "documents", {
-        get: function () {
-            return this._documents.slice();
-        },
-        enumerable: true,
-        configurable: true
-    });
+    DocumentRepository.prototype.getBySection = function (section) {
+        return this.getBySectionId(section.id);
+    };
+    DocumentRepository.prototype.getBySectionId = function (sectionId) {
+        return this.documents
+            .filter(function (_document) { return _document.section && _document.section.id == sectionId; })
+            .slice();
+    };
     DocumentRepository = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__rest_datasource_servics__["a" /* RestDatasourceService */]])
     ], DocumentRepository);
     return DocumentRepository;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/error-message-handler.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ErrorMessageHandler; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__error_repository_service__ = __webpack_require__("./src/app/services/error-repository.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_error_message_model__ = __webpack_require__("./src/app/models/error-message.model.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var ErrorMessageHandler = /** @class */ (function () {
+    function ErrorMessageHandler(errorRepository) {
+        this.errorRepository = errorRepository;
+    }
+    ErrorMessageHandler.prototype.handleError = function (error) {
+        var _this = this;
+        console.log(error);
+        setTimeout(function () {
+            _this.errorRepository.report(new __WEBPACK_IMPORTED_MODULE_2__models_error_message_model__["a" /* ErrorMessage */](error.status, error.code, 'en'));
+        }, 0);
+    };
+    ErrorMessageHandler = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__error_repository_service__["a" /* ErrorRepository */]])
+    ], ErrorMessageHandler);
+    return ErrorMessageHandler;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/error-repository.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ErrorRepository; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__rest_datasource_servics__ = __webpack_require__("./src/app/services/rest-datasource.servics.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ErrorRepository = /** @class */ (function () {
+    function ErrorRepository(restDatasource) {
+        this.restDatasource = restDatasource;
+    }
+    ErrorRepository.prototype.report = function (errorMessage) {
+        console.log(errorMessage);
+    };
+    ErrorRepository = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["C" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__rest_datasource_servics__["a" /* RestDatasourceService */]])
+    ], ErrorRepository);
+    return ErrorRepository;
 }());
 
 
@@ -711,6 +855,7 @@ var DocumentRepository = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProjectRepository; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rest_datasource_servics__ = __webpack_require__("./src/app/services/rest-datasource.servics.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__ = __webpack_require__("./node_modules/rxjs/_esm5/Subject.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -722,16 +867,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var ProjectRepository = /** @class */ (function () {
     function ProjectRepository(dataSource) {
         var _this = this;
         this.dataSource = dataSource;
-        this._projects = [];
+        this.projects = [];
+        this._loaded = new __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__["b" /* Subject */]();
         this.changeCurrentProjectEmitter = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
         this.dataSource.get('project').subscribe(function (data) {
-            _this._projects = data;
+            _this.projects = data;
+            _this._loaded.next(true);
         });
     }
+    Object.defineProperty(ProjectRepository.prototype, "loaded", {
+        get: function () {
+            return this._loaded;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(ProjectRepository.prototype, "currentProject", {
         get: function () {
             return this._currentProject;
@@ -743,22 +898,20 @@ var ProjectRepository = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    ProjectRepository.prototype.getProject = function (id) {
-        return this._projects.find(function (_project) { return _project.id == id; });
-    };
     ProjectRepository.prototype.getProjects = function () {
-        return this.dataSource.get('project');
+        return this.projects.slice();
+    };
+    ProjectRepository.prototype.saveProject = function (project) {
+        if (project.id == 0 || project.id == null) {
+            //save
+        }
+        else {
+            //edit
+        }
     };
     ProjectRepository.prototype.getProjectByName = function (name) {
         return name != null ?
-            this._projects.find(function (pro) { return pro.name.toLowerCase() == name.toLowerCase(); }) : null;
-    };
-    ProjectRepository.prototype.getProjectSummary = function (projectId) {
-        return this.dataSource.get("project/summary/" + projectId);
-    };
-    ProjectRepository.prototype.getProjectSummaryByName = function (projectName) {
-        var id = this._projects.filter(function (_project) { return _project.name == projectName; }).map(function (_project) { return _project.id; })[0];
-        return this.getProjectSummary(id);
+            this.projects.find(function (pro) { return pro.name.toLowerCase() == name.toLowerCase(); }) : null;
     };
     ProjectRepository = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
@@ -778,8 +931,9 @@ var ProjectRepository = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RestDatasourceService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Rx__ = __webpack_require__("./node_modules/rxjs/_esm5/Rx.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_tokens__ = __webpack_require__("./src/app/app.tokens.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__("./node_modules/rxjs/_esm5/Observable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__ = __webpack_require__("./node_modules/rxjs/_esm5/Rx.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_tokens__ = __webpack_require__("./src/app/app.tokens.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -796,16 +950,13 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 
 
 
+
 var RestDatasourceService = /** @class */ (function () {
-    function RestDatasourceService(http, protocol) {
+    function RestDatasourceService(http, url) {
         this.http = http;
-        this.protocol = protocol;
-        if (this.protocol == 'http') {
-            this.backendUrl = protocol + "://" + location.hostname + ":8080/";
-        }
-        else {
-            this.backendUrl = protocol + "://" + location.hostname + "/";
-        }
+        this.url = url;
+        this.backendUrl = url;
+        console.log(this.backendUrl);
     }
     RestDatasourceService.prototype.get = function (url, params) {
         var queryParam = null;
@@ -817,6 +968,15 @@ var RestDatasourceService = /** @class */ (function () {
         }
         return this.request(__WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestMethod */].Get, url, queryParam);
     };
+    RestDatasourceService.prototype.post = function (url, body) {
+        return this.request(__WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestMethod */].Post, url, null, body);
+    };
+    RestDatasourceService.prototype.put = function (url, body) {
+        return this.request(__WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestMethod */].Put, url, null, body);
+    };
+    RestDatasourceService.prototype.delete = function (url) {
+        return this.request(__WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestMethod */].Delete, url);
+    };
     RestDatasourceService.prototype.request = function (method, url, params, body) {
         var req = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Request */]({
             method: method,
@@ -824,11 +984,14 @@ var RestDatasourceService = /** @class */ (function () {
             params: params,
             body: body
         });
-        return this.http.request(req).map(function (res) { return res.json(); });
+        return this.http.request(req).map(function (res) { return res.json(); }).catch(function (error) {
+            console.log(error);
+            return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["a" /* Observable */].throw({ status: error.status, code: error.statusText });
+        });
     };
     RestDatasourceService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
-        __param(1, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Inject */])(__WEBPACK_IMPORTED_MODULE_3__app_tokens__["a" /* PROTOCOL_TOKEN */])),
+        __param(1, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Inject */])(__WEBPACK_IMPORTED_MODULE_4__app_tokens__["b" /* REST_URL_TOKEN */])),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */], String])
     ], RestDatasourceService);
     return RestDatasourceService;
@@ -858,10 +1021,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var SectionRepository = /** @class */ (function () {
     function SectionRepository(dataSource) {
+        var _this = this;
         this.dataSource = dataSource;
+        this.dataSource.get('section').subscribe(function (data) {
+            _this.sections = data;
+            console.log(_this.sections);
+        });
     }
-    SectionRepository.prototype.getSectionByProject = function (projectName) {
-        return this.dataSource.get("section/project/" + projectName);
+    SectionRepository.prototype.getNames = function () {
+        return this.sections.map(function (_section) { return _section.name; });
+    };
+    SectionRepository.prototype.getNamesByProject = function (project) {
+        return this.sections
+            .filter(function (_section) {
+            return _section.project && _section.project.id == project.id;
+        })
+            .map(function (_section) { return _section.name; });
+    };
+    SectionRepository.prototype.getByProject = function (project) {
+        return this.sections.filter(function (_section) {
+            return _section.project && _section.project.id == project.id;
+        }).slice();
     };
     SectionRepository = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
@@ -888,12 +1068,16 @@ var SectionRepository = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_Subject__ = __webpack_require__("./node_modules/rxjs/_esm5/Subject.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__models_page_state_model__ = __webpack_require__("./src/app/models/page-state.model.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__webpage_repository_service__ = __webpack_require__("./src/app/services/webpage-repository.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__error_message_handler__ = __webpack_require__("./src/app/services/error-message-handler.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__error_repository_service__ = __webpack_require__("./src/app/services/error-repository.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -916,6 +1100,8 @@ var ServiceModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_3__project_repository_service__["a" /* ProjectRepository */],
                 __WEBPACK_IMPORTED_MODULE_8__webpage_repository_service__["a" /* WebPageRepository */],
                 __WEBPACK_IMPORTED_MODULE_4__section_repository_service__["a" /* SectionRepository */],
+                __WEBPACK_IMPORTED_MODULE_10__error_repository_service__["a" /* ErrorRepository */],
+                { provide: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_9__error_message_handler__["a" /* ErrorMessageHandler */] },
                 { provide: __WEBPACK_IMPORTED_MODULE_7__models_page_state_model__["a" /* PAGE_STATE */], useValue: new __WEBPACK_IMPORTED_MODULE_6_rxjs_Subject__["b" /* Subject */]() }
             ],
         })
@@ -1016,7 +1202,7 @@ var StaticDatasourceService = /** @class */ (function () {
                     "point": 0
                 },
                 "description": "프로그래밍을 처음 시작하는 분들의 눈높이에 맞게 만들어진 강의입니다. 이미 프로그래밍에 익숙한 분의 입장에서는 설명이 조금 장황할 수 있습니다.",
-                "url": "http://www.localhost.com:8080/section",
+                "url": "http://www.localhost.com:8080/sections",
             },
             {
                 "name": "Document",
@@ -1228,7 +1414,7 @@ var StaticDatasourceService = /** @class */ (function () {
     // 'project'
     // `project/summary/${projectId}`
     // 'document'
-    //  section/project/projectName`
+    //  sections/project/projectName`
     StaticDatasourceService.prototype.analzyUrl = function (url) {
         if (url.startsWith('webpage')) {
             console.log(url.substr('webpage'.length, url.length));
@@ -1287,11 +1473,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var WebPageRepository = /** @class */ (function () {
-    function WebPageRepository(restDatesource) {
-        this.restDatesource = restDatesource;
+    function WebPageRepository(restDatasource) {
+        var _this = this;
+        this.restDatasource = restDatasource;
+        this.webPages = [];
+        this.restDatasource.get('webpage').subscribe(function (data) {
+            _this.webPages = data;
+        });
     }
     WebPageRepository.prototype.getByName = function (name) {
-        return this.restDatesource.get("webpage/" + name);
+        return this.webPages.find(function (webPage) { return webPage.name.toUpperCase() == name.toUpperCase(); });
     };
     WebPageRepository = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* Injectable */])(),
@@ -1351,20 +1542,20 @@ var AboutPageComponent = /** @class */ (function () {
         this.pageStates = pageStates;
         this.route = route;
         this.webPageRepository = webPageRepository;
-        this.pageStateSubscription = this.pageStates.subscribe(function (pageState) {
-            _this.webPageRepository.getByName(__WEBPACK_IMPORTED_MODULE_1__models_page_state_model__["b" /* Page */][pageState.page]).subscribe(function (data) {
-                _this.webPage = data;
-                _this.toggleHost();
-            });
+        this.pageStateSubscription = this.pageStates
+            .delay(500)
+            .subscribe(function (pageState) {
+            _this.webPage = _this.webPageRepository.getByName(__WEBPACK_IMPORTED_MODULE_1__models_page_state_model__["b" /* Page */][pageState.page]);
+            _this.toggleHost();
         });
     }
     AboutPageComponent.prototype.toggleHost = function () {
         $('#about-page-wrapper').animate({
             opacity: 0,
-        }, 350);
+        }, 1);
         $('#about-page-wrapper').animate({
             opacity: 1,
-        }, 1500);
+        }, 1200);
     };
     ;
     AboutPageComponent.prototype.ngOnDestroy = function () {
@@ -1491,6 +1682,59 @@ var DataLoaderComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/shared/components/display-date/display-date.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/shared/components/display-date/display-date.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"ui six doubling message centered icon\" *ngIf=\"basicTime\">\n  <i class=\"calendar alternate outline small icon\"></i>\n  <div class=\"extra content\">\n    <span class=\"right floated\">\n      수정일: {{ basicTime?.updated || '없음' }}\n      <div class=\"divider ui\"></div>\n      생성일: {{ basicTime?.created || '없음' }}\n    </span>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/shared/components/display-date/display-date.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DisplayDateComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_BasicTime_model__ = __webpack_require__("./src/app/models/BasicTime.model.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var DisplayDateComponent = /** @class */ (function () {
+    function DisplayDateComponent() {
+    }
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__models_BasicTime_model__["a" /* BasicTime */])
+    ], DisplayDateComponent.prototype, "basicTime", void 0);
+    DisplayDateComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-display-date',
+            template: __webpack_require__("./src/app/shared/components/display-date/display-date.component.html"),
+            styles: [__webpack_require__("./src/app/shared/components/display-date/display-date.component.css")]
+        })
+    ], DisplayDateComponent);
+    return DisplayDateComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/shared/components/list-chapter/list-chapter-item/list-chapter-item.component.css":
 /***/ (function(module, exports) {
 
@@ -1501,7 +1745,7 @@ module.exports = ""
 /***/ "./src/app/shared/components/list-chapter/list-chapter-item/list-chapter-item.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"ui list mt-2\">\n  <div class=\"item\">\n    <i class=\"folder icon\"></i>\n    <div class=\"content\">\n      <div class=\"header\">{{ chapter.title }}</div>\n      <div class=\"description\">{{ chapter.description }}</div>\n      <ng-template *ngIf=\"chapter.childs\" ></ng-template>\n      <app-list-item\n        *ngFor=\"let chapter_child of chapter.childs\"\n        [chapter]=\"chapter_child\"\n      ></app-list-item>\n    </div>\n  </div>\n</div>\n"
+module.exports = "\n<div class=\"ui list mt-4\">\n  <div class=\"item\">\n    <i class=\"right triangle icon\"></i>\n    <div class=\"content\">\n      <h2 class=\"header\">{{ chapter.title }}</h2>\n      <div class=\"description\" style=\"line-height: 1.5em\">{{ chapter.description }}</div>\n      <ng-template *ngIf=\"chapter.childs\" ></ng-template>\n      <app-list-item\n        *ngFor=\"let chapter_child of chapter.childs\"\n        [chapter]=\"chapter_child\"\n      ></app-list-item>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1530,6 +1774,10 @@ var ListChapterItemComponent = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__models_chapter_model__["a" /* Chapter */])
     ], ListChapterItemComponent.prototype, "chapter", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* Input */])(),
+        __metadata("design:type", Number)
+    ], ListChapterItemComponent.prototype, "index", void 0);
     ListChapterItemComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-list-item',
@@ -1554,7 +1802,7 @@ module.exports = ""
 /***/ "./src/app/shared/components/list-chapter/list-chapter.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-12 ml-4 mt-4\">\n    <h2 class=\"ui dividing header\">\n      {{ title }}\n      <a class=\"anchor\" id=\"components\"></a>\n    </h2>\n    <app-list-item *ngFor=\"let chapter of chapters\"\n                   [chapter]=\"chapter\"></app-list-item>\n</div>\n<hr>\n"
+module.exports = "<div class=\"col-12 ml-4 mt-4\">\n    <h2 class=\"ui horizontal divider header\">\n      <i class=\"ui tag icon\"></i>\n      {{ title }}\n      <a class=\"anchor\" id=\"components\"></a>\n    </h2>\n    <app-list-item *ngFor=\"let chapter of chapters;let i = index\"\n                   [chapter]=\"chapter\" [index]=\"i\"></app-list-item>\n</div>\n<hr>\n"
 
 /***/ }),
 
@@ -1659,7 +1907,7 @@ module.exports = "\r\n.shadow {\r\n  -webkit-box-shadow: 2px 6px 65px -6px rgba(
 /***/ "./src/app/shared/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"header-wrapper d-flex mb-1 flex-column flex-md-row align-items-center p-3 px-md-4 shadow\">\n  <h3 class=\"my-0 mr-md-auto font-weight-normal ui header\">\n    <a\n      [routerLink]=\"['/home']\"\n    ><i class=\"ui icon large github\"></i></a>\n  </h3>\n  <nav class=\"my-2 my-md-0 mr-md-3\">\n    <a\n      *ngFor=\"let project of projects\"\n      class=\"p-2\"\n      [routerLink]=\"['project',project.name]\"\n      routerLinkActive=\"active\"> {{ project.name }}</a>\n  </nav>\n  <a class=\"btn btn-outline-primary mr-2\"\n     mat-raised-button\n     (click)=\"onChangeModel('user')\">Contact</a>\n  <form class=\"form-inline ui icon input\">\n    <input\n      type=\"text\"\n      class=\"form-control-sm\"\n      placeholder=\"Search Document\">\n      <i class=\"inverted circular search link icon\"></i>\n  </form>\n</div>\n"
+module.exports = "<div class=\"header-wrapper d-flex mb-1 flex-column flex-md-row align-items-center p-3 px-md-4 shadow\">\n  <h3 class=\"my-0 mr-md-auto font-weight-normal ui header\">\n    <a\n      [routerLink]=\"['/home']\"\n    ><i class=\"ui icon large github\"></i></a>\n  </h3>\n  <nav class=\"my-2 my-md-0 mr-md-3\">\n    <a\n      *ngFor=\"let project of projects\"\n      class=\"p-2\"\n      [routerLink]=\"['project',project.name]\"\n      routerLinkActive=\"active\"> {{ project.name }}</a>\n  </nav>\n  <div class=\"item\">\n    <iframe class=\"github\" src=\"//ghbtns.com/github-btn.html?user=Siwoo-Kim&amp;repo=app-toby&amp;type=watch&amp;count=true\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"100\" height=\"20\"></iframe>\n  </div>\n  <a class=\"btn btn-outline-primary mr-2\"\n     mat-raised-button\n     color=\"primary\"\n     (click)=\"onChangeModel('user')\">Contact</a>\n</div>\n"
 
 /***/ }),
 
@@ -1685,10 +1933,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var HeaderComponent = /** @class */ (function () {
     function HeaderComponent(projectRepository, route) {
-        var _this = this;
         this.projectRepository = projectRepository;
         this.route = route;
         this.projects = [];
+    }
+    HeaderComponent.prototype.getProject = function (name) {
+        return this.projectRepository.getProjectByName(name);
+    };
+    HeaderComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.projectRepository.loaded
+            .subscribe(function (load) { return _this.projects = _this.projectRepository.getProjects(); });
+    };
+    HeaderComponent.prototype.ngAfterViewInit = function () {
+        console.log(this.projects);
         $(document)
             .ready(function () {
             $('.ui.menu .ui.dropdown').dropdown({
@@ -1702,14 +1960,6 @@ var HeaderComponent = /** @class */ (function () {
                     .removeClass('active');
             });
         });
-        this.projectRepository.getProjects().subscribe(function (data) {
-            _this.projects = data;
-        });
-    }
-    HeaderComponent.prototype.ngOnInit = function () {
-    };
-    HeaderComponent.prototype.getProject = function (name) {
-        return this.projectRepository.getProjectByName(name);
     };
     HeaderComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -1911,12 +2161,16 @@ var MainComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_list_chapter_list_chapter_item_list_chapter_item_component__ = __webpack_require__("./src/app/shared/components/list-chapter/list-chapter-item/list-chapter-item.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_data_loader_data_loader_component__ = __webpack_require__("./src/app/shared/components/data-loader/data-loader.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__about_page_about_page_component__ = __webpack_require__("./src/app/shared/about-page/about-page.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_display_date_display_date_component__ = __webpack_require__("./src/app/shared/components/display-date/display-date.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__guards_home_first_guard__ = __webpack_require__("./src/app/guards/home-first.guard.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -1946,6 +2200,7 @@ var ShareModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_11__components_list_chapter_list_chapter_item_list_chapter_item_component__["a" /* ListChapterItemComponent */],
                 __WEBPACK_IMPORTED_MODULE_12__components_data_loader_data_loader_component__["a" /* DataLoaderComponent */],
                 __WEBPACK_IMPORTED_MODULE_13__about_page_about_page_component__["a" /* AboutPageComponent */],
+                __WEBPACK_IMPORTED_MODULE_14__components_display_date_display_date_component__["a" /* DisplayDateComponent */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["a" /* MatButtonModule */],
@@ -1957,6 +2212,9 @@ var ShareModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
                 __WEBPACK_IMPORTED_MODULE_9__angular_router__["c" /* RouterModule */],
             ],
+            providers: [
+                __WEBPACK_IMPORTED_MODULE_15__guards_home_first_guard__["a" /* MainFirstGuard */],
+            ],
             exports: [
                 __WEBPACK_IMPORTED_MODULE_1__footer_footer_component__["a" /* FooterComponent */],
                 __WEBPACK_IMPORTED_MODULE_2__bottom_bottom_component__["a" /* BottomComponent */],
@@ -1964,6 +2222,7 @@ var ShareModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_6__location_location_component__["a" /* LocationComponent */],
                 __WEBPACK_IMPORTED_MODULE_10__components_list_chapter_list_chapter_component__["a" /* ListChapterComponent */],
                 __WEBPACK_IMPORTED_MODULE_11__components_list_chapter_list_chapter_item_list_chapter_item_component__["a" /* ListChapterItemComponent */],
+                __WEBPACK_IMPORTED_MODULE_14__components_display_date_display_date_component__["a" /* DisplayDateComponent */],
                 __WEBPACK_IMPORTED_MODULE_12__components_data_loader_data_loader_component__["a" /* DataLoaderComponent */],
                 __WEBPACK_IMPORTED_MODULE_13__about_page_about_page_component__["a" /* AboutPageComponent */],
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["c" /* MatInputModule */],
