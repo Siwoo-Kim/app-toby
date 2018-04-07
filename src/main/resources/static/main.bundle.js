@@ -98,6 +98,8 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__app_tokens__ = __webpack_require__("./src/app/app.tokens.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__project_project_module__ = __webpack_require__("./src/app/project/project.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__guards_home_first_guard__ = __webpack_require__("./src/app/guards/home-first.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__contact_contact_module__ = __webpack_require__("./src/app/contact/contact.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__contact_contact_main_contact_main_component__ = __webpack_require__("./src/app/contact/contact-main/contact-main.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -116,8 +118,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
 var routes = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_7__shared_main_main_component__["a" /* MainComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_11__guards_home_first_guard__["a" /* MainFirstGuard */]] },
+    { path: 'contact', component: __WEBPACK_IMPORTED_MODULE_13__contact_contact_main_contact_main_component__["a" /* ContactMainComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_11__guards_home_first_guard__["a" /* MainFirstGuard */]] },
     { path: 'home', component: __WEBPACK_IMPORTED_MODULE_7__shared_main_main_component__["a" /* MainComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_11__guards_home_first_guard__["a" /* MainFirstGuard */]] },
 ];
 var AppModule = /** @class */ (function () {
@@ -131,6 +136,7 @@ var AppModule = /** @class */ (function () {
             imports: [
                 /*  App module  */
                 __WEBPACK_IMPORTED_MODULE_3__shared_share_module__["a" /* ShareModule */],
+                __WEBPACK_IMPORTED_MODULE_12__contact_contact_module__["a" /* ContactModule */],
                 __WEBPACK_IMPORTED_MODULE_4__services_service_module__["a" /* ServiceModule */],
                 __WEBPACK_IMPORTED_MODULE_8__document_document_module__["a" /* DocumentModule */],
                 __WEBPACK_IMPORTED_MODULE_10__project_project_module__["a" /* ProjectModule */],
@@ -170,6 +176,98 @@ var REST_URL_TOKEN = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Inje
 var JSON_SERVER_URL = 'http://localhost:3000/';
 var SPRING_SERVER_URL = "http://" + location.hostname + ":8080/";
 var HEROKU_SERVER_URL = "https://" + location.hostname + "/";
+
+
+/***/ }),
+
+/***/ "./src/app/contact/contact-main/contact-main.component.css":
+/***/ (function(module, exports) {
+
+module.exports = "\r\nmat-form-field {\r\n  width: 75%;\r\n  padding: 8px;\r\n}\r\n\r\nform > button {\r\n  width: 75%;\r\n  padding: 8px;\r\n}\r\n"
+
+/***/ }),
+
+/***/ "./src/app/contact/contact-main/contact-main.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "\n\n<div class=\"ui grid stackable doubling container p-2\">\n  <div class=\"three wide column\">\n    <h2 class=\"ui center aligned icon header\">\n      <i class=\"circular users icon\"></i>\n      Contact\n    </h2>\n  </div>\n  <div class=\"centered nine wide column\">\n    <form #f=\"ngForm\" novalidate class=\"pl-3\">\n      <mat-form-field>\n        <input\n          matInput\n          placeholder=\"Email\"\n          type=\"email\"\n          name=\"email\"\n          #email=\"ngModel\"\n          ngModel\n          email\n          required>\n        <i matSuffix class=\"icon mail\"></i>\n        <mat-hint>Enter Email to contact <span matSuffix>/ {{ email.value?.length || 0 }}</span></mat-hint>\n        <mat-error *ngIf=\"email.hasError('email')\">Email format is wrong</mat-error>\n        <mat-error *ngIf=\"email.hasError('required')\">Email is required</mat-error>\n      </mat-form-field>\n      <mat-form-field>\n        <input\n          matInput\n          placeholder=\"Name\"\n          type=\"text\"\n          name=\"name\"\n          #name=\"ngModel\"\n          ngModel\n          minlength=\"5\"\n          required>\n        <i matSuffix class=\"icon user circle\"></i>\n        <mat-hint>Enter Name to contact <span matSuffix>/ {{ name.value?.length || 0 }}</span></mat-hint>\n        <mat-error *ngIf=\"name.hasError('minlength')\">Character must contain more than 5</mat-error>\n        <mat-error *ngIf=\"name.hasError('required')\">Name is required</mat-error>\n      </mat-form-field>\n      <mat-form-field>\n        <input\n          matInput\n          name=\"Contact\"\n          ngModel\n          #contact=\"ngModel\"\n          [matDatepicker]=\"picker\"\n          placeholder=\"Time to availiable to contact\"\n          required\n          [min]=\"today\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n        <mat-datepicker #picker></mat-datepicker>\n        <mat-error *ngIf=\"contact.hasError('required')\">Contact Time is required</mat-error>\n      </mat-form-field>\n      <button mat-raised-button color=\"primary\" class=\"btn-block\">Currently Not Available</button>\n    </form>\n  </div>\n  <div class=\"four wide column\">\n    <img class=\"ui wireframe image\" src=\"/assets/img/dummy/dummy-paragraph.png\">\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/contact/contact-main/contact-main.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactMainComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ContactMainComponent = /** @class */ (function () {
+    function ContactMainComponent() {
+    }
+    ContactMainComponent.prototype.ngOnInit = function () {
+        this.today = new Date();
+    };
+    ContactMainComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-contact-main',
+            template: __webpack_require__("./src/app/contact/contact-main/contact-main.component.html"),
+            styles: [__webpack_require__("./src/app/contact/contact-main/contact-main.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ContactMainComponent);
+    return ContactMainComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/contact/contact.module.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("./node_modules/@angular/common/esm5/common.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_share_module__ = __webpack_require__("./src/app/shared/share.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("./node_modules/@angular/forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__contact_main_contact_main_component__ = __webpack_require__("./src/app/contact/contact-main/contact-main.component.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+var ContactModule = /** @class */ (function () {
+    function ContactModule() {
+    }
+    ContactModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
+                __WEBPACK_IMPORTED_MODULE_2__shared_share_module__["a" /* ShareModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_forms__["e" /* FormsModule */],
+            ],
+            declarations: [__WEBPACK_IMPORTED_MODULE_4__contact_main_contact_main_component__["a" /* ContactMainComponent */]]
+        })
+    ], ContactModule);
+    return ContactModule;
+}());
+
 
 
 /***/ }),
@@ -593,7 +691,7 @@ module.exports = ""
 /***/ "./src/app/project/project-main/project-sidebar/project-sidebar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"ui sidebar stackable vertical menu\"\n     *ngIf=\"!sections || (sections.length == 0) || isClose\">\n  <div class=\"item\">\n    <div class=\"menu\">\n      <a class=\"ui item\">\n        <div class=\"ui negative message\">\n          <i class=\"close icon\" (click)=\"isClose = true\"></i>\n          <div class=\"header\">\n            I'am sorry. I will bring content, soon!\n          </div>\n          <p>Empty section and titles</p>\n        </div>\n        <a class=\"ui item\"\n           [attr.data-tooltip]=\"'No Section! '\"\n           [attr.data-position]=\"'right center'\">\n        </a>\n      </a>\n    </div>\n  </div>\n</div>\n<div class=\"ui vertical stackable  sticky menu\"\n     #sidebar\n     *ngIf=\"sections && sections.length > 0\">\n  <div class=\"item\" *ngFor=\"let section of sections\"\n       [ngClass]=\"{'active' : section == selectedSection }\"\n       (mouseover)=\"selectedSection = section\">\n    <div class=\"header\">\n      <a class=\"ui attached grey top tag label\" style=\"position: relative\">\n        {{ section.name }} &nbsp;/&nbsp;\n        <i class=\"slack hash white small icon\"></i> {{getCountDocuments(section.id)}}\n      </a>\n    </div>\n    <div class=\"menu\">\n      <a class=\"ui item\"\n         id=\"side-anchor\"\n         *ngFor=\"let document of getDocumentBySection(section.id)\"\n         [attr.data-tooltip]=\"section.description.substr(0,30) + ' ... '\"\n         [attr.data-position]=\"'right center'\">\n        {{ document.title }}\n      </a>\n    </div>\n  </div>\n</div>\n\n"
+module.exports = "\n<div class=\"ui sidebar stackable vertical menu\"\n     *ngIf=\"!sections || (sections.length == 0) || isClose\">\n  <div class=\"item\">\n    <div class=\"menu\">\n      <a class=\"ui item\">\n        <div class=\"ui negative message\">\n          <i class=\"close icon\" (click)=\"isClose = true\"></i>\n          <div class=\"header\">\n            I'am sorry. I will bring content, soon!\n          </div>\n          <p>Empty section and titles</p>\n        </div>\n        <a class=\"ui item\"\n           [attr.data-tooltip]=\"'No Section! '\"\n           [attr.data-position]=\"'right center'\">\n        </a>\n      </a>\n    </div>\n  </div>\n</div>\n<div class=\"ui vertical stackable sticky menu\"\n     #sidebar\n     *ngIf=\"sections && sections.length > 0\">\n  <div class=\"item\" *ngFor=\"let section of sections\"\n       [ngClass]=\"{'active' : section == selectedSection }\"\n       (mouseover)=\"selectedSection = section\">\n    <div class=\"header\">\n      <a class=\"ui attached grey top tag label\" style=\"position: relative\">\n        {{ section.name }} &nbsp;/&nbsp;\n        <i class=\"slack hash white small icon\"></i> {{getCountDocuments(section.id)}}\n      </a>\n    </div>\n    <div class=\"menu\">\n      <a class=\"ui item\"\n         id=\"side-anchor\"\n         *ngFor=\"let document of getDocumentBySection(section.id)\"\n         [attr.data-tooltip]=\"section.description.substr(0,30) + ' ... '\"\n         [attr.data-position]=\"'right center'\">\n        {{ document.title }}\n      </a>\n    </div>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -957,7 +1055,6 @@ var RestDatasourceService = /** @class */ (function () {
         this.http = http;
         this.url = url;
         this.backendUrl = url;
-        console.log(this.backendUrl);
     }
     RestDatasourceService.prototype.get = function (url, params) {
         var queryParam = null;
@@ -1026,7 +1123,6 @@ var SectionRepository = /** @class */ (function () {
         this.dataSource = dataSource;
         this.dataSource.get('section').subscribe(function (data) {
             _this.sections = data;
-            console.log(_this.sections);
         });
     }
     SectionRepository.prototype.getNames = function () {
@@ -1547,21 +1643,23 @@ var AboutPageComponent = /** @class */ (function () {
         this.webPageRepository = webPageRepository;
         this.renewState = 'active';
         this.pageStateSubscription = this.pageStates
-            .delay(500)
             .subscribe(function (pageState) {
             _this.renewContent();
             setTimeout(function () {
                 _this.webPage = _this.webPageRepository.getByName(__WEBPACK_IMPORTED_MODULE_1__models_page_state_model__["b" /* Page */][pageState.page]);
-            }, 500);
+            }, 1000);
         });
     }
+    AboutPageComponent.prototype.ngAfterViewInit = function () {
+        $('.mini.modal').modal('show');
+    };
     AboutPageComponent.prototype.ngOnDestroy = function () {
         this.pageStateSubscription.unsubscribe();
     };
     AboutPageComponent.prototype.renewContent = function () {
         var _this = this;
         this.renewState = 'inactive';
-        setTimeout(function () { return _this.renewState = 'active'; }, 500);
+        setTimeout(function () { return _this.renewState = 'active'; }, 1000);
     };
     AboutPageComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -1576,8 +1674,8 @@ var AboutPageComponent = /** @class */ (function () {
                     Object(__WEBPACK_IMPORTED_MODULE_5__angular_animations__["j" /* state */])('active', Object(__WEBPACK_IMPORTED_MODULE_5__angular_animations__["k" /* style */])({
                         opacity: 1,
                     })),
-                    Object(__WEBPACK_IMPORTED_MODULE_5__angular_animations__["l" /* transition */])('inactive => active', Object(__WEBPACK_IMPORTED_MODULE_5__angular_animations__["e" /* animate */])(500)),
-                    Object(__WEBPACK_IMPORTED_MODULE_5__angular_animations__["l" /* transition */])('active => inactive', Object(__WEBPACK_IMPORTED_MODULE_5__angular_animations__["e" /* animate */])(500))
+                    Object(__WEBPACK_IMPORTED_MODULE_5__angular_animations__["l" /* transition */])('inactive => active', Object(__WEBPACK_IMPORTED_MODULE_5__angular_animations__["e" /* animate */])(1000)),
+                    Object(__WEBPACK_IMPORTED_MODULE_5__angular_animations__["l" /* transition */])('active => inactive', Object(__WEBPACK_IMPORTED_MODULE_5__angular_animations__["e" /* animate */])(1000))
                 ])
             ]
         }),
@@ -1759,7 +1857,7 @@ module.exports = ""
 /***/ "./src/app/shared/components/error-dialog/error-dialog.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"ui\">\n  <h2 mat-dialog-title>Error Message</h2>\n  <mat-dialog-content>Are you sure?</mat-dialog-content>\n  <mat-dialog-actions>\n    <button mat-button mat-dialog-close>{{ data.message }}</button>\n    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->\n    <button mat-button [mat-dialog-close]=\"true\">Yes</button>\n  </mat-dialog-actions>\n</div>\n"
+module.exports = ""
 
 /***/ }),
 
@@ -1769,7 +1867,6 @@ module.exports = "\n<div class=\"ui\">\n  <h2 mat-dialog-title>Error Message</h2
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ErrorDialogComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("./node_modules/@angular/material/esm5/material.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1779,15 +1876,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-
 
 var ErrorDialogComponent = /** @class */ (function () {
-    function ErrorDialogComponent(dialogRef, data) {
-        this.dialogRef = dialogRef;
-        this.data = data;
+    function ErrorDialogComponent() {
     }
     ErrorDialogComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -1795,8 +1886,7 @@ var ErrorDialogComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/shared/components/error-dialog/error-dialog.component.html"),
             styles: [__webpack_require__("./src/app/shared/components/error-dialog/error-dialog.component.css")]
         }),
-        __param(1, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Inject */])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["a" /* MAT_DIALOG_DATA */])),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MatDialogRef */], Object])
+        __metadata("design:paramtypes", [])
     ], ErrorDialogComponent);
     return ErrorDialogComponent;
 }());
@@ -1977,7 +2067,7 @@ module.exports = "\r\n.shadow {\r\n  -webkit-box-shadow: 2px 6px 65px -6px rgba(
 /***/ "./src/app/shared/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"header-wrapper d-flex mb-1 flex-column flex-md-row align-items-center p-3 px-md-4 shadow\">\n  <h3 class=\"my-0 mr-md-auto font-weight-normal ui header\">\n    <a\n      [routerLink]=\"['/home']\"\n    ><i class=\"ui icon large github\"></i></a>\n  </h3>\n  <nav class=\"my-2 my-md-0 mr-md-3\">\n    <a\n      *ngFor=\"let project of projects\"\n      class=\"p-2\"\n      [routerLink]=\"['project',project.name]\"\n      routerLinkActive=\"active\"> {{ project.name }}</a>\n  </nav>\n  <div class=\"item\">\n    <iframe class=\"github\" src=\"//ghbtns.com/github-btn.html?user=Siwoo-Kim&amp;repo=app-toby&amp;type=watch&amp;count=true\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"100\" height=\"20\"></iframe>\n  </div>\n  <a class=\"btn btn-outline-primary mr-2\"\n     mat-raised-button\n     color=\"primary\"\n     (click)=\"onChangeModel('user')\">Contact</a>\n</div>\n"
+module.exports = "<div class=\"header-wrapper d-flex mb-1 flex-column flex-md-row align-items-center p-3 px-md-4 shadow\">\n  <h3 class=\"my-0 mr-md-auto font-weight-normal ui header\">\n    <a\n      [routerLink]=\"['/home']\"\n    ><i class=\"ui icon large github\"></i></a>\n  </h3>\n  <nav class=\"my-2 my-md-0 mr-md-3\">\n    <a\n      *ngFor=\"let project of projects\"\n      class=\"p-2\"\n      [routerLink]=\"['project',project.name]\"\n      routerLinkActive=\"active\"> {{ project.name }}</a>\n  </nav>\n  <div class=\"item\">\n    <iframe class=\"github\" src=\"//ghbtns.com/github-btn.html?user=Siwoo-Kim&amp;repo=app-toby&amp;type=watch&amp;count=true\" allowtransparency=\"true\" frameborder=\"0\" scrolling=\"0\" width=\"100\" height=\"20\"></iframe>\n  </div>\n  <a class=\"btn btn-outline-primary mr-2\"\n     mat-raised-button\n     color=\"primary\"\n     routerLink=\"contact\">Contact</a>\n</div>\n"
 
 /***/ }),
 
@@ -2276,14 +2366,16 @@ var ShareModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_16__components_error_dialog_error_dialog_component__["a" /* ErrorDialogComponent */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["b" /* MatButtonModule */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["g" /* MatInputModule */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["e" /* MatFormFieldModule */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["f" /* MatIconModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["a" /* MatButtonModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["f" /* MatInputModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["d" /* MatFormFieldModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["e" /* MatIconModule */],
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["i" /* MatSelectModule */],
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["j" /* MatToolbarModule */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["h" /* MatMenuModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["g" /* MatMenuModule */],
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["c" /* MatDialogModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["b" /* MatDatepickerModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["h" /* MatNativeDateModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_common__["b" /* CommonModule */],
                 __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
                 __WEBPACK_IMPORTED_MODULE_9__angular_router__["c" /* RouterModule */],
@@ -2302,14 +2394,16 @@ var ShareModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_12__components_data_loader_data_loader_component__["a" /* DataLoaderComponent */],
                 __WEBPACK_IMPORTED_MODULE_13__about_page_about_page_component__["a" /* AboutPageComponent */],
                 __WEBPACK_IMPORTED_MODULE_16__components_error_dialog_error_dialog_component__["a" /* ErrorDialogComponent */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["g" /* MatInputModule */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["f" /* MatIconModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["b" /* MatDatepickerModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["h" /* MatNativeDateModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["f" /* MatInputModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["e" /* MatIconModule */],
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["j" /* MatToolbarModule */],
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["c" /* MatDialogModule */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["e" /* MatFormFieldModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["d" /* MatFormFieldModule */],
                 __WEBPACK_IMPORTED_MODULE_8__angular_material__["i" /* MatSelectModule */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["b" /* MatButtonModule */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["h" /* MatMenuModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["a" /* MatButtonModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["g" /* MatMenuModule */],
             ]
         })
     ], ShareModule);
