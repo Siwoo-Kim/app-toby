@@ -24,16 +24,33 @@ public class FixtureFactory {
             WebPage webPage = new WebPage();
             webPage.setName("Project");
             webPage.setPublic(true);
+            webPage.setPhrasemaker("찰스 앤터니 리처드 호어(C.A.R. Hoare)");
+            webPage.setPhrase("There are two ways of constructing a software design. One way is to make it so simple that there are obviously no deficiencies. And the other way is to make it so complicated that there are no obvious deficiencies.");
             webPage.addImageName("project_icon_1");
             webPage.addImageName("project_icon_2");
             webPage.addImageName("project_icon_3");
-            webPage.setDescription("프로젝트란 우리말로 목표정도로 번역 할 수 있을 것 같습니다. 어떤 목표를 달성하기 위해서 많은 사람이 협력합니다. 이 과정에서 소위 막장이라고 부르는 상황들이 발생합니다. 그리고 이런 막장은 어느정도는 숙명과도 같은 것입니다. 하지만 막장은 줄일 수 있습니다. 행복한 프로젝트는 아니더라도 프로젝트를 덜 불행하게 만들수는 있습니다. 이를 위한 많은 도구들이 있고 프로젝트 관리편에서는 이 도구들을 소개해드립니다.");
+             webPage.setDescription("프로젝트란 우리말로 목표정도로 번역 할 수 있을 것 같습니다. 어떤 목표를 달성하기 위해서 많은 사람이 협력합니다. 이 과정에서 소위 막장이라고 부르는 상황들이 발생합니다. 그리고 이런 막장은 어느정도는 숙명과도 같은 것입니다. 하지만 막장은 줄일 수 있습니다. 행복한 프로젝트는 아니더라도 프로젝트를 덜 불행하게 만들수는 있습니다. 이를 위한 많은 도구들이 있고 프로젝트 관리편에서는 이 도구들을 소개해드립니다.");
             webPage.setUrl(new URL("http", "www.localhost.com", 8080, "/project"));
             webPages.add(webPage);
 
             webPage = new WebPage();
+            webPage.setName("Contact");
+            webPage.setPublic(true);
+            webPage.setPhrasemaker("에릭 S 레이먼드(Eric S. Raymond)");
+            webPage.setPhrase("Computer science education cannot make anybody an expert programmer any more than studying brushes and pigment can make somebody an expert painter.");
+            webPage.addImageName("project_icon_1");
+            webPage.addImageName("project_icon_2");
+            webPage.addImageName("project_icon_3");
+            webPage.setDescription("제 프로젝트에 관심 있으시거나, 문의 사항이 있으면 연락주세요 :)  Email: sm123tt@gmail.com. If you have interest in my project or further questions, please contact me");
+            webPage.setUrl(new URL("http", "www.localhost.com", 8080, "/project"));
+            webPages.add(webPage);
+
+
+            webPage = new WebPage();
             webPage.setName("Home");
             webPage.setPublic(true);
+            webPage.setPhrase("Talk is cheap. Show me the code.");
+            webPage.setPhrasemaker("리누스 토르발스(Linus Torvalds)");
             webPage.addImageName("home_icon_1");
             webPage.addImageName("home_icon_2");
             webPage.setDescription("온라인용 포트폴리오입니다. 사회에 첫발을 내딛기 위한 정말로, 가장 처음으로 만든 포트폴리오라 할 수 있을 것 같습니다. 영원할 것 같던 대학시절이 끝나고 있습니다. 만감이 교차하는 마음으로 준비했던 포트폴리오입니다.");
@@ -43,6 +60,8 @@ public class FixtureFactory {
             webPage = new WebPage();
             webPage.setName("Section");
             webPage.setPublic(false);
+            webPage.setPhrasemaker("앨런 펄리스(Alan J. Perlis)");
+            webPage.setPhrase("In the one and only true way. The object-oriented version of ‘Spaghetti code’ is, of course, ‘Lasagna code’. (Too many layers).");
             webPage.addImageName("section_icon_1");
             webPage.addImageName("section_icon_2");
             webPage.setDescription("프로그래밍을 처음 시작하는 분들의 눈높이에 맞게 만들어진 강의입니다. 이미 프로그래밍에 익숙한 분의 입장에서는 설명이 조금 장황할 수 있습니다.");
@@ -52,6 +71,8 @@ public class FixtureFactory {
             webPage = new WebPage();
             webPage.setName("Document");
             webPage.setPublic(false);
+            webPage.setPhrasemaker("로버트 월트만(Roberto Waltman)");
+            webPage.setPhrase("In the one and only true way. The object-oriented version of ‘Spaghetti code’ is, of course, ‘Lasagna code’. (Too many layers)");
             webPage.addImageName("document_icon_1");
             webPage.addImageName("document_icon_2");
             webPage.setDescription("주력 웹 페이지 프로그래밍의 정보를 담고있는, 처음인 분들을 위해서 고안된 수업입니다. WEBn을 통해서 교양으로 코딩을 공부하려는 분들에게는 출구를, 직업으로 코딩을 공부하려는 분들에게는 입구를 제공해드리려고 노력하고 있습니다. 웹이라는 구체적인 사례를 통해서 코딩이 무엇인가 파악해보세요. 또 코딩을 통해서 웹을 만드는 방법을 공부해보세요. ");
@@ -433,7 +454,7 @@ public class FixtureFactory {
     public static List<User> users() {
         List<User> fixtures = new ArrayList<>();
         User user = new User();
-        user.setEmail("user1@email.com");
+        user.setEmail("sm123tt@gmail.com");
         user.setLevel(User.Level.BRONZE);
         user.setLogin(1);
         user.setRecommend(0);

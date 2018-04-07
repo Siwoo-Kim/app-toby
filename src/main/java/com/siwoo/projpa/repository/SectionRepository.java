@@ -31,5 +31,8 @@ public interface SectionRepository extends JpaRepository<Section, Long>, CustomS
     @Query("select distinct s.name from Section s where lower(s.project.name) = lower(:projectName)")
     List<String> findNameByProjectName(@Param("projectName") String projectName);
 
+    @Query("select s from Section s where s.name in :names")
+    List<Section> findByNames(@Param("names") List<String> names);
+
 
 }

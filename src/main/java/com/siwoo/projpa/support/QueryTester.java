@@ -16,7 +16,9 @@ public class QueryTester {
         if(result instanceof Object[]) {
             Object[] row = (Object[]) result;
             for(int i = 0; i < row.length; i++) {
-                printResult(row[i]);
+                if(row[i] != null) {
+                    printResult(row[i]);
+                }
             }
         } else if (result instanceof Long ||
                 result instanceof Double ||

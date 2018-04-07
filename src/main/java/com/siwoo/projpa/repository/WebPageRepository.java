@@ -46,6 +46,16 @@ public interface WebPageRepository extends JpaRepository<WebPage, String>, Custo
     @Query("select count(w) from WebPage w where w.isPublic = :isPublic")
     long countByIsPublic(@Param("isPublic") boolean isPublic );
 
+    @Query("select w.phrase, w.phrasemaker from WebPage w")
+    List<Object[]> findPhraseAndPhrasemaker();
+
+    @Query("select w.phrase, w.phrasemaker from WebPage w where upper(name) = upper(:name)")
+    Object[] findPhraseAndPhrasemakerByName(@Param("name") String name);
+
+
+
+    @Query("select w from WebPage w inner join w.author a where upper(a.name.last) like upper(:last) ")
+    List<WebPage> findByAuthorNameLast(@Param("last") String last);
     List<WebPage> findByAuthor(User user);
 
 }

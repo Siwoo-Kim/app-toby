@@ -16,12 +16,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.PropertiesPropertySource;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
+import javax.persistence.EntityManager;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Properties;
+import java.util.Scanner;
+
+import static com.siwoo.projpa.support.QueryTester.noResult;
+import static com.siwoo.projpa.support.QueryTester.printResult;
 
 @Slf4j
 @PropertySource("classpath:application.properties")
@@ -39,11 +47,11 @@ public class ProjpaApplication {
     @Autowired
     DocumentRepository documentRepository;
 
-    public static void main(String[] args) throws InterruptedException {
-        /*	ApplicationContext context = */
+    public static void main(String[] args) {
+
         SpringApplication.run(ProjpaApplication.class, args);
 
-
+//      ApplicationContext context = SpringApplication.run(ProjpaApplication.class, args);
 //		EntityManager entityManager = context.getBean(EntityManager.class);
 //		Scanner scanner = new Scanner(new BufferedReader(new InputStreamReader(System.in)));
 //
@@ -98,17 +106,6 @@ public class ProjpaApplication {
     @Bean
     CommandLineRunner fixture() {
         return args -> {
-            User siwoo = new User();
-            siwoo.setName(new Name("Siwoo", "Kim", null));
-            siwoo.setEmail("sm123tt@gmail.com");
-            siwoo.setLevel(User.Level.GOLD);
-            userRepository.save(siwoo);
-            List<WebPage> webPages = FixtureFactory.webPages();
-            for(WebPage webPage: webPages) {
-                webPage.setAuthor(siwoo);
-            }
-
-            webPageRepository.saveAll(webPages);
             List<Project> projects = FixtureFactory.projects();
             projectRepository.saveAll(projects);
             List<User> users = FixtureFactory.users();
@@ -121,6 +118,13 @@ public class ProjpaApplication {
                 userRepository.save(user);
             }
 
+            User siwoo = userRepository.findByEmail("sm123tt@gmail.com");
+            List<WebPage> webPages = FixtureFactory.webPages();
+            for(WebPage webPage: webPages) {
+                webPage.setAuthor(siwoo);
+            }
+
+            webPageRepository.saveAll(webPages);
             //JAVA SECTIONS
             project = projectRepository.getByNames("JAVA").get(0);
             List<Section> sections = FixtureFactory.javaSection();

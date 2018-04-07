@@ -37,6 +37,9 @@ public class WebPage {
     @OneToOne
     private User author;
 
+    private String phrase;
+    private String phrasemaker;
+
     private String description;
 
     @Convert(converter =  BooleanToYNConverter.class)

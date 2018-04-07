@@ -148,7 +148,7 @@ var AppModule = /** @class */ (function () {
             providers: [
                 __WEBPACK_IMPORTED_MODULE_11__guards_home_first_guard__["a" /* MainFirstGuard */],
                 /*  Test Server */
-                { provide: __WEBPACK_IMPORTED_MODULE_9__app_tokens__["b" /* REST_URL_TOKEN */], useValue: __WEBPACK_IMPORTED_MODULE_9__app_tokens__["a" /* HEROKU_SERVER_URL */] },
+                { provide: __WEBPACK_IMPORTED_MODULE_9__app_tokens__["b" /* REST_URL_TOKEN */], useValue: __WEBPACK_IMPORTED_MODULE_9__app_tokens__["a" /* JSON_SERVER_URL */] },
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */]]
         })
@@ -166,9 +166,9 @@ var AppModule = /** @class */ (function () {
 "use strict";
 /* unused harmony export PROTOCOL_TOKEN */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return REST_URL_TOKEN; });
-/* unused harmony export JSON_SERVER_URL */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JSON_SERVER_URL; });
 /* unused harmony export SPRING_SERVER_URL */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HEROKU_SERVER_URL; });
+/* unused harmony export HEROKU_SERVER_URL */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 
 var PROTOCOL_TOKEN = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* InjectionToken */]('protocol');
@@ -190,7 +190,7 @@ module.exports = "\r\nmat-form-field {\r\n  width: 75%;\r\n  padding: 8px;\r\n}\
 /***/ "./src/app/contact/contact-main/contact-main.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n\n<div class=\"ui grid stackable doubling container p-2\">\n  <div class=\"three wide column\">\n    <h2 class=\"ui center aligned icon header\">\n      <i class=\"circular users icon\"></i>\n      Contact\n    </h2>\n  </div>\n  <div class=\"centered nine wide column\">\n    <form #f=\"ngForm\" novalidate class=\"pl-3\">\n      <mat-form-field>\n        <input\n          matInput\n          placeholder=\"Email\"\n          type=\"email\"\n          name=\"email\"\n          #email=\"ngModel\"\n          ngModel\n          email\n          required>\n        <i matSuffix class=\"icon mail\"></i>\n        <mat-hint>Enter Email to contact <span matSuffix>/ {{ email.value?.length || 0 }}</span></mat-hint>\n        <mat-error *ngIf=\"email.hasError('email')\">Email format is wrong</mat-error>\n        <mat-error *ngIf=\"email.hasError('required')\">Email is required</mat-error>\n      </mat-form-field>\n      <mat-form-field>\n        <input\n          matInput\n          placeholder=\"Name\"\n          type=\"text\"\n          name=\"name\"\n          #name=\"ngModel\"\n          ngModel\n          minlength=\"5\"\n          required>\n        <i matSuffix class=\"icon user circle\"></i>\n        <mat-hint>Enter Name to contact <span matSuffix>/ {{ name.value?.length || 0 }}</span></mat-hint>\n        <mat-error *ngIf=\"name.hasError('minlength')\">Character must contain more than 5</mat-error>\n        <mat-error *ngIf=\"name.hasError('required')\">Name is required</mat-error>\n      </mat-form-field>\n      <mat-form-field>\n        <input\n          matInput\n          name=\"Contact\"\n          ngModel\n          #contact=\"ngModel\"\n          [matDatepicker]=\"picker\"\n          placeholder=\"Time to availiable to contact\"\n          required\n          [min]=\"today\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n        <mat-datepicker #picker></mat-datepicker>\n        <mat-error *ngIf=\"contact.hasError('required')\">Contact Time is required</mat-error>\n      </mat-form-field>\n      <button mat-raised-button color=\"primary\" class=\"btn-block\">Currently Not Available</button>\n    </form>\n  </div>\n  <div class=\"four wide column\">\n    <img class=\"ui wireframe image\" src=\"/assets/img/dummy/dummy-paragraph.png\">\n  </div>\n</div>\n"
+module.exports = "\n\n<div class=\"ui grid stackable doubling container p-2\">\n  <div class=\"three wide column\">\n    <h2 class=\"ui center aligned icon header\">\n      <i class=\"circular users icon\"></i>\n      Contact\n    </h2>\n  </div>\n  <div class=\"centered nine wide column\">\n    <form #f=\"ngForm\" novalidate class=\"pl-3\">\n      <mat-form-field>\n        <input\n          matInput\n          placeholder=\"Email\"\n          type=\"email\"\n          name=\"email\"\n          #email=\"ngModel\"\n          ngModel\n          email\n          required>\n        <i matSuffix class=\"icon mail\"></i>\n        <mat-hint >Enter Email to contact</mat-hint>\n        <span matSuffix>{{ email.value?.length || 0 }} / *</span>\n        <mat-error *ngIf=\"email.hasError('email')\">Email format is wrong</mat-error>\n        <mat-error *ngIf=\"email.hasError('required')\">Email is required</mat-error>\n      </mat-form-field>\n      <mat-form-field>\n        <input\n          matInput\n          placeholder=\"Name\"\n          type=\"text\"\n          name=\"name\"\n          #name=\"ngModel\"\n          ngModel\n          minlength=\"5\"\n          required>\n        <i matSuffix class=\"icon user circle\"></i>\n        <mat-hint >Enter Name to contact </mat-hint>\n        <span matSuffix>{{ name.value?.length || 0 }} / 5</span>\n        <mat-error *ngIf=\"name.hasError('minlength')\">Character must contain more than 5</mat-error>\n        <mat-error *ngIf=\"name.hasError('required')\">Name is required</mat-error>\n      </mat-form-field>\n      <mat-form-field>\n        <input\n          matInput\n          name=\"Contact\"\n          ngModel\n          #contact=\"ngModel\"\n          [matDatepicker]=\"picker\"\n          placeholder=\"Time to availiable to contact\"\n          required\n          [min]=\"today\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n        <mat-datepicker #picker></mat-datepicker>\n        <mat-error *ngIf=\"contact.hasError('required')\">Contact Time is required</mat-error>\n      </mat-form-field>\n      <button mat-raised-button color=\"primary\" class=\"btn-block\">Currently Not Available</button>\n    </form>\n  </div>\n  <div class=\"four wide column\">\n    <img class=\"ui wireframe image\" src=\"/assets/img/dummy/dummy-paragraph.png\">\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -588,10 +588,11 @@ var ErrorMessage = /** @class */ (function () {
 
 var Page;
 (function (Page) {
-    Page[Page["HOME"] = 0] = "HOME";
-    Page[Page["PROJECT"] = 1] = "PROJECT";
-    Page[Page["DOCUMENT"] = 2] = "DOCUMENT";
-    Page[Page["SECTION"] = 3] = "SECTION";
+    Page[Page["CONTACT"] = 0] = "CONTACT";
+    Page[Page["HOME"] = 1] = "HOME";
+    Page[Page["PROJECT"] = 2] = "PROJECT";
+    Page[Page["DOCUMENT"] = 3] = "DOCUMENT";
+    Page[Page["SECTION"] = 4] = "SECTION";
 })(Page || (Page = {}));
 var PageState = /** @class */ (function () {
     function PageState(page, url) {
@@ -1602,7 +1603,7 @@ module.exports = ""
 /***/ "./src/app/shared/about-page/about-page.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div id=\"about-page-wrapper\" class=\"page-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center\" *ngIf=\"webPage\"\n    [@renew]=\"renewState\">\n  <p class=\"sub-header\" >\n    About Page by {{ webPage.author.name.first }}\n  </p>\n  <h1 class=\"ui header dividing\" style=\"font-size: 3em\">\n    {{ webPage.name }}\n    <img class=\"ui large image\" src=\"/assets/img/home/webpage_icon1.png\">\n    <div class=\"sub header p-5\" style=\"font-family: 'Ubuntu', sans-serif\">\n      {{ webPage.description }}\n    </div>\n  </h1>\n  <div class=\"ui message m-5\">\n    <i class=\"ui code icon\"></i>\n    <div class=\"content\">\n      <div class=\"header\">\n        Are you Coding everyday?\n      </div>\n      <p>If you want to be better, do it right now</p>\n    </div>\n  </div>\n</div>\n"
+module.exports = "\n<div id=\"about-page-wrapper\" class=\"page-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center\" *ngIf=\"webPage\"\n    [@renew]=\"renewState\">\n  <p class=\"sub-header\" >\n    About Page by {{ webPage.author.name.first }}\n  </p>\n  <h1 class=\"ui header dividing\" style=\"font-size: 3em\">\n    {{ webPage.name }}\n    <img class=\"ui large image\" src=\"/assets/img/home/webpage_icon1.png\">\n    <div class=\"sub header p-5\" style=\"font-family: 'Ubuntu', sans-serif\">\n      {{ webPage.description }}\n    </div>\n  </h1>\n  <div class=\"ui message m-5\">\n    <i class=\"ui code icon\"></i>\n    <div class=\"center aligned header pt-2\">\n      {{ webPage.phrasemaker }}\n    </div>\n    <div class=\"center aligned description p-2\">\n      <p>{{ webPage.phrase }}</p>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -2216,13 +2217,17 @@ var LocationComponent = /** @class */ (function () {
         if (this.prevUrlSegments != null && this.urlSegments[0] == this.prevUrlSegments[0]) {
             return;
         }
-        switch (this.urlSegments[0]) {
+        switch (this.urlSegments[0].toLowerCase()) {
             case 'home':
                 this.pageStateObserver.next(new __WEBPACK_IMPORTED_MODULE_2__models_page_state_model__["c" /* PageState */](__WEBPACK_IMPORTED_MODULE_2__models_page_state_model__["b" /* Page */].HOME, this.url));
                 break;
             case 'project':
                 console.log('project');
                 this.pageStateObserver.next(new __WEBPACK_IMPORTED_MODULE_2__models_page_state_model__["c" /* PageState */](__WEBPACK_IMPORTED_MODULE_2__models_page_state_model__["b" /* Page */].PROJECT, this.url));
+                break;
+            case 'contact':
+                console.log('contact');
+                this.pageStateObserver.next(new __WEBPACK_IMPORTED_MODULE_2__models_page_state_model__["c" /* PageState */](__WEBPACK_IMPORTED_MODULE_2__models_page_state_model__["b" /* Page */].CONTACT, this.url));
                 break;
             case 'section':
                 console.log('section');
