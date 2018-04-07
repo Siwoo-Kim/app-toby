@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/section")
+@RequestMapping({"/section","/SECTION"})
 public class SectionController {
 
     @Autowired

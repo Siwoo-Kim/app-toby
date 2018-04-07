@@ -17,7 +17,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/webpage")
+@RequestMapping({"/webpage","/WEBPAGE"})
 public class WebPageController {
 
     @Autowired

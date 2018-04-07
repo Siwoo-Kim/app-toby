@@ -1,12 +1,15 @@
 package com.siwoo.projpa.web;
 
+import com.siwoo.projpa.service.MailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpRequest;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -30,11 +33,15 @@ public class HomeController {
 //    private String adminName;
     @Autowired Environment environment;
     private static final Map<String,String> maps = new HashMap<>();
+    @Autowired
+    MailService mailService;
+    @Value("${spring.mail.username}")
+    private String fromEmail;
 
     @GetMapping
-    public String home(Locale locale) {
-      log.info(locale + " access the app");
-      return "index";
+    public String home(@RequestHeader("Host") String host, Locale locale) {
+        mailService.send(mailService.createMailMessage(fromEmail, "Someone visit your homepage!", "Host: " + host + ", locale " + locale ));
+        return "index";
     }
 
     @ResponseBody

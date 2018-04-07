@@ -141,6 +141,7 @@ var AppModule = /** @class */ (function () {
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_11__guards_home_first_guard__["a" /* MainFirstGuard */],
+                /*  Test Server */
                 { provide: __WEBPACK_IMPORTED_MODULE_9__app_tokens__["b" /* REST_URL_TOKEN */], useValue: __WEBPACK_IMPORTED_MODULE_9__app_tokens__["a" /* HEROKU_SERVER_URL */] },
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */]]
@@ -592,7 +593,7 @@ module.exports = ""
 /***/ "./src/app/project/project-main/project-sidebar/project-sidebar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"ui stackable vertical menu\"\n     *ngIf=\"!sections || (sections.length == 0) || isClose\">\n  <div class=\"item\">\n    <div class=\"menu\">\n      <a class=\"ui item\">\n        <div class=\"ui negative message\">\n          <i class=\"close icon\" (click)=\"isClose = true\"></i>\n          <div class=\"header\">\n            I'am sorry. I will bring content, soon!\n          </div>\n          <p>Empty section and titles</p>\n        </div>\n        <a class=\"ui item\"\n           [attr.data-tooltip]=\"'No Section! '\"\n           [attr.data-position]=\"'right center'\">\n        </a>\n      </a>\n    </div>\n  </div>\n</div>\n<div class=\"ui stackable vertical pointing menu\" *ngIf=\"sections && sections.length > 0\">\n  <div class=\"item\" *ngFor=\"let section of sections\"\n       [ngClass]=\"{'active' : section == selectedSection }\"\n       (mouseover)=\"selectedSection = section\">\n    <a class=\"item\">\n      <div class=\"ui left pointing label\" [ngClass]=\"{'grey': section == selectedSection}\">{{ getCountDocuments(section.id)}} </div>\n      <div class=\"header\">{{ section.name }}</div>\n      <p >난이도 <i class=\"ui star blue rating\" [attr.data-rating]=\"section.difficulty + 1\"></i></p>\n    </a>\n    <div class=\"menu\">\n      <a class=\"ui item\"\n         id=\"side-anchor\"\n         *ngFor=\"let document of getDocumentBySection(section.id)\"\n         [attr.data-tooltip]=\"section.description.substr(0,30) + ' ... '\"\n         [attr.data-position]=\"'right center'\">\n        {{ document.title }}\n      </a>\n    </div>\n  </div>\n</div>\n\n"
+module.exports = "\n<div class=\"ui sidebar stackable vertical menu\"\n     *ngIf=\"!sections || (sections.length == 0) || isClose\">\n  <div class=\"item\">\n    <div class=\"menu\">\n      <a class=\"ui item\">\n        <div class=\"ui negative message\">\n          <i class=\"close icon\" (click)=\"isClose = true\"></i>\n          <div class=\"header\">\n            I'am sorry. I will bring content, soon!\n          </div>\n          <p>Empty section and titles</p>\n        </div>\n        <a class=\"ui item\"\n           [attr.data-tooltip]=\"'No Section! '\"\n           [attr.data-position]=\"'right center'\">\n        </a>\n      </a>\n    </div>\n  </div>\n</div>\n<div class=\"ui vertical stackable  sticky menu\"\n     #sidebar\n     *ngIf=\"sections && sections.length > 0\">\n  <div class=\"item\" *ngFor=\"let section of sections\"\n       [ngClass]=\"{'active' : section == selectedSection }\"\n       (mouseover)=\"selectedSection = section\">\n    <div class=\"header\">\n      <a class=\"ui attached grey top tag label\" style=\"position: relative\">\n        {{ section.name }} &nbsp;/&nbsp;\n        <i class=\"slack hash white small icon\"></i> {{getCountDocuments(section.id)}}\n      </a>\n    </div>\n    <div class=\"menu\">\n      <a class=\"ui item\"\n         id=\"side-anchor\"\n         *ngFor=\"let document of getDocumentBySection(section.id)\"\n         [attr.data-tooltip]=\"section.description.substr(0,30) + ' ... '\"\n         [attr.data-position]=\"'right center'\">\n        {{ document.title }}\n      </a>\n    </div>\n  </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -1505,7 +1506,7 @@ module.exports = ""
 /***/ "./src/app/shared/about-page/about-page.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div id=\"about-page-wrapper\" class=\"page-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center\" *ngIf=\"webPage\" >\n  <p class=\"sub-header\" >\n    About Page by {{ webPage.author.name.first }}\n  </p>\n  <h1 class=\"ui header dividing\" style=\"font-size: 3em\">\n    {{ webPage.name }}\n    <img class=\"ui large image\" src=\"/assets/img/home/webpage_icon1.png\">\n    <div class=\"sub header p-5\" style=\"font-family: 'Ubuntu', sans-serif\">\n      {{ webPage.description }}\n    </div>\n  </h1>\n  <div class=\"ui message m-5\">\n    <i class=\"ui code icon\"></i>\n    <div class=\"content\">\n      <div class=\"header\">\n        Are you Coding everyday?\n      </div>\n      <p>If you want to be better, do it right now</p>\n    </div>\n  </div>\n</div>\n"
+module.exports = "\n<div id=\"about-page-wrapper\" class=\"page-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center\" *ngIf=\"webPage\"\n    [@renew]=\"renewState\">\n  <p class=\"sub-header\" >\n    About Page by {{ webPage.author.name.first }}\n  </p>\n  <h1 class=\"ui header dividing\" style=\"font-size: 3em\">\n    {{ webPage.name }}\n    <img class=\"ui large image\" src=\"/assets/img/home/webpage_icon1.png\">\n    <div class=\"sub header p-5\" style=\"font-family: 'Ubuntu', sans-serif\">\n      {{ webPage.description }}\n    </div>\n  </h1>\n  <div class=\"ui message m-5\">\n    <i class=\"ui code icon\"></i>\n    <div class=\"content\">\n      <div class=\"header\">\n        Are you Coding everyday?\n      </div>\n      <p>If you want to be better, do it right now</p>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1519,6 +1520,7 @@ module.exports = "\n<div id=\"about-page-wrapper\" class=\"page-header px-3 py-3
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__("./node_modules/rxjs/_esm5/Observable.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_webpage_repository_service__ = __webpack_require__("./src/app/services/webpage-repository.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_animations__ = __webpack_require__("./node_modules/@angular/animations/esm5/animations.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1536,36 +1538,48 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 
 
 
+
 var AboutPageComponent = /** @class */ (function () {
     function AboutPageComponent(pageStates, route, webPageRepository) {
         var _this = this;
         this.pageStates = pageStates;
         this.route = route;
         this.webPageRepository = webPageRepository;
+        this.renewState = 'active';
         this.pageStateSubscription = this.pageStates
             .delay(500)
             .subscribe(function (pageState) {
-            _this.webPage = _this.webPageRepository.getByName(__WEBPACK_IMPORTED_MODULE_1__models_page_state_model__["b" /* Page */][pageState.page]);
-            _this.toggleHost();
+            _this.renewContent();
+            setTimeout(function () {
+                _this.webPage = _this.webPageRepository.getByName(__WEBPACK_IMPORTED_MODULE_1__models_page_state_model__["b" /* Page */][pageState.page]);
+            }, 500);
         });
     }
-    AboutPageComponent.prototype.toggleHost = function () {
-        $('#about-page-wrapper').animate({
-            opacity: 0,
-        }, 1);
-        $('#about-page-wrapper').animate({
-            opacity: 1,
-        }, 1200);
-    };
-    ;
     AboutPageComponent.prototype.ngOnDestroy = function () {
         this.pageStateSubscription.unsubscribe();
+    };
+    AboutPageComponent.prototype.renewContent = function () {
+        var _this = this;
+        this.renewState = 'inactive';
+        setTimeout(function () { return _this.renewState = 'active'; }, 500);
     };
     AboutPageComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-about-page',
             template: __webpack_require__("./src/app/shared/about-page/about-page.component.html"),
-            styles: [__webpack_require__("./src/app/shared/about-page/about-page.component.css")]
+            styles: [__webpack_require__("./src/app/shared/about-page/about-page.component.css")],
+            animations: [
+                Object(__WEBPACK_IMPORTED_MODULE_5__angular_animations__["m" /* trigger */])('renew', [
+                    Object(__WEBPACK_IMPORTED_MODULE_5__angular_animations__["j" /* state */])('inactive', Object(__WEBPACK_IMPORTED_MODULE_5__angular_animations__["k" /* style */])({
+                        opacity: 0,
+                    })),
+                    Object(__WEBPACK_IMPORTED_MODULE_5__angular_animations__["j" /* state */])('active', Object(__WEBPACK_IMPORTED_MODULE_5__angular_animations__["k" /* style */])({
+                        opacity: 1,
+                    })),
+                    Object(__WEBPACK_IMPORTED_MODULE_5__angular_animations__["l" /* transition */])('inactive => active', Object(__WEBPACK_IMPORTED_MODULE_5__angular_animations__["e" /* animate */])(500)),
+                    Object(__WEBPACK_IMPORTED_MODULE_5__angular_animations__["l" /* transition */])('active => inactive', Object(__WEBPACK_IMPORTED_MODULE_5__angular_animations__["e" /* animate */])(500))
+                ])
+            ]
         }),
         __param(0, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Inject */])(__WEBPACK_IMPORTED_MODULE_1__models_page_state_model__["a" /* PAGE_STATE */])),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["a" /* Observable */],
@@ -1729,6 +1743,62 @@ var DisplayDateComponent = /** @class */ (function () {
         })
     ], DisplayDateComponent);
     return DisplayDateComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/components/error-dialog/error-dialog.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/shared/components/error-dialog/error-dialog.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "\n<div class=\"ui\">\n  <h2 mat-dialog-title>Error Message</h2>\n  <mat-dialog-content>Are you sure?</mat-dialog-content>\n  <mat-dialog-actions>\n    <button mat-button mat-dialog-close>{{ data.message }}</button>\n    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->\n    <button mat-button [mat-dialog-close]=\"true\">Yes</button>\n  </mat-dialog-actions>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/shared/components/error-dialog/error-dialog.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ErrorDialogComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_material__ = __webpack_require__("./node_modules/@angular/material/esm5/material.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+
+
+var ErrorDialogComponent = /** @class */ (function () {
+    function ErrorDialogComponent(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+    }
+    ErrorDialogComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-error-dialog',
+            template: __webpack_require__("./src/app/shared/components/error-dialog/error-dialog.component.html"),
+            styles: [__webpack_require__("./src/app/shared/components/error-dialog/error-dialog.component.css")]
+        }),
+        __param(1, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Inject */])(__WEBPACK_IMPORTED_MODULE_1__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_material__["d" /* MatDialogRef */], Object])
+    ], ErrorDialogComponent);
+    return ErrorDialogComponent;
 }());
 
 
@@ -2163,12 +2233,14 @@ var MainComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__about_page_about_page_component__ = __webpack_require__("./src/app/shared/about-page/about-page.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_display_date_display_date_component__ = __webpack_require__("./src/app/shared/components/display-date/display-date.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__guards_home_first_guard__ = __webpack_require__("./src/app/guards/home-first.guard.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_error_dialog_error_dialog_component__ = __webpack_require__("./src/app/shared/components/error-dialog/error-dialog.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -2201,13 +2273,17 @@ var ShareModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_12__components_data_loader_data_loader_component__["a" /* DataLoaderComponent */],
                 __WEBPACK_IMPORTED_MODULE_13__about_page_about_page_component__["a" /* AboutPageComponent */],
                 __WEBPACK_IMPORTED_MODULE_14__components_display_date_display_date_component__["a" /* DisplayDateComponent */],
+                __WEBPACK_IMPORTED_MODULE_16__components_error_dialog_error_dialog_component__["a" /* ErrorDialogComponent */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["a" /* MatButtonModule */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["c" /* MatInputModule */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["b" /* MatFormFieldModule */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["e" /* MatSelectModule */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["d" /* MatMenuModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["b" /* MatButtonModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["g" /* MatInputModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["e" /* MatFormFieldModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["f" /* MatIconModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["i" /* MatSelectModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["j" /* MatToolbarModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["h" /* MatMenuModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["c" /* MatDialogModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_common__["b" /* CommonModule */],
                 __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
                 __WEBPACK_IMPORTED_MODULE_9__angular_router__["c" /* RouterModule */],
@@ -2225,11 +2301,15 @@ var ShareModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_14__components_display_date_display_date_component__["a" /* DisplayDateComponent */],
                 __WEBPACK_IMPORTED_MODULE_12__components_data_loader_data_loader_component__["a" /* DataLoaderComponent */],
                 __WEBPACK_IMPORTED_MODULE_13__about_page_about_page_component__["a" /* AboutPageComponent */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["c" /* MatInputModule */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["b" /* MatFormFieldModule */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["e" /* MatSelectModule */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["a" /* MatButtonModule */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_material__["d" /* MatMenuModule */],
+                __WEBPACK_IMPORTED_MODULE_16__components_error_dialog_error_dialog_component__["a" /* ErrorDialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["g" /* MatInputModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["f" /* MatIconModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["j" /* MatToolbarModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["c" /* MatDialogModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["e" /* MatFormFieldModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["i" /* MatSelectModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["b" /* MatButtonModule */],
+                __WEBPACK_IMPORTED_MODULE_8__angular_material__["h" /* MatMenuModule */],
             ]
         })
     ], ShareModule);

@@ -26,6 +26,7 @@ public class MailServiceImpl implements MailService{
     public String getFromEmail() {
         return fromEmail;
     }
+
     @Override
     public void send(MailMessage mailMessage) {
         javaMailSender.send((SimpleMailMessage) mailMessage);
