@@ -8,6 +8,7 @@ import com.siwoo.projpa.repository.ProjectRepository;
 import com.siwoo.projpa.repository.SectionRepository;
 import com.siwoo.projpa.repository.UserRepository;
 import com.siwoo.projpa.service.support.ServiceArgumentException;
+import com.siwoo.projpa.service.support.ServiceSupporter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -104,6 +105,12 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<Project> getAll() {
         return projectRepository.findAll();
+    }
+
+    @Override
+    public Project get(Long projectId) {
+        ServiceSupporter.throwIfNull(projectId);
+        return projectRepository.getOne(projectId);
     }
 
     private Map mappingToMap(List<Object[]> rows, Function<Object, Object> doWork) {

@@ -46,6 +46,8 @@ public class ProjpaApplication {
     SectionRepository sectionRepository;
     @Autowired
     DocumentRepository documentRepository;
+    @Autowired
+    JournalRepository journalRepository;
 
     public static void main(String[] args) {
 
@@ -106,6 +108,9 @@ public class ProjpaApplication {
     @Bean
     CommandLineRunner fixture() {
         return args -> {
+            List<Journal> journals = FixtureFactory.journals();
+            journalRepository.saveAll(journals);
+
             List<Project> projects = FixtureFactory.projects();
             projectRepository.saveAll(projects);
             List<User> users = FixtureFactory.users();

@@ -32,4 +32,6 @@ public interface ProjectService {
     Map<Project,Long> countManagers();
 
     List<Project> getAll();
+
+    Project get(Long projectId);
 }

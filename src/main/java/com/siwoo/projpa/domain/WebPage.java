@@ -38,6 +38,7 @@ public class WebPage {
     private User author;
 
     private String phrase;
+
     private String phrasemaker;
 
     private String description;

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +16,24 @@ import java.util.List;
 public class FixtureFactory {
     public static String getName(Object object) {
         return object.getClass().getSimpleName();
+    }
+
+    public static List<Journal> journals() {
+        List<Journal> journals = new ArrayList<>();
+        try{
+            Journal journal = new Journal(
+                    "Angular Animation 을 사용해보았다.",
+                    "2018-04-07",
+                    "하.. 이게 뭐란 말인가... 애초부터 CSS에 자신이 없던 나인데, 역시나 " +
+                            "앵귤러의 애니메이션도 다르지 않았다. 고등학교때 수학 도형을 좀 잘해놓을껄.. " +
+                            "그래도 좀 감이 잡히는 것 같다. 항상 시작이다 생각하고 노력하자!");
+            journals.add(journal);
+
+        }catch (ParseException e) {
+            log.error("Check the created date format");
+            e.printStackTrace();
+        }
+        return journals;
     }
 
     public static List<WebPage> webPages() {

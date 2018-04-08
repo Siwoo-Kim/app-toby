@@ -9,6 +9,7 @@ import javax.persistence.*;
 
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -26,6 +27,7 @@ public class Project {
 
     public static final String NAMED_PROJECT_BY_NAME = "PROJECT.BY_NAME";
     public static final String NAMED_PROJECT_BY_NAME_IN = "PROJECT.BY_NAME_IN";
+
 
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
@@ -50,5 +52,6 @@ public class Project {
     private String icon;
 
     private URL url;
+
 
 }

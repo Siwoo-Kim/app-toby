@@ -96,24 +96,27 @@ public class SectionRepositoryImpl implements CustomSectionRepository {
         Root<Section> sectionRoot = query.from(domainClass);
 
         Predicate criteria = cb.disjunction();
-
         for (Search search : sectionCriteria.getSearches()) {
             switch (search) {
                 case NAME: {
-                    criteria = cb.and(criteria, cb.like(sectionRoot.get(COLUMN_NAME), surround(sectionCriteria.getName(), "%")));
+                    criteria = cb.or(criteria,
+                                    cb.like(cb.upper(sectionRoot.get(COLUMN_NAME)),
+                                    surround(sectionCriteria.getName().toUpperCase(), "%")));
                     break;
                 }
                 case DESCRIPTION: {
-                    criteria = cb.and(criteria, cb.like(sectionRoot.get(COLUMN_DESCRIPTION), surround(sectionCriteria.getDescription(), "%")));
+                    criteria = cb.or(criteria,
+                                    cb.like(cb.upper(sectionRoot.get(COLUMN_DESCRIPTION)),
+                                    surround(sectionCriteria.getDescription().toUpperCase(), "%")));
                     break;
                 }
                 case DIFFICULTY: {
-                    criteria = cb.and(criteria, cb.equal(sectionRoot.get(COLUMN_DIFFICULTY), sectionCriteria.getDifficulty()));
+                    criteria = cb.or(criteria, cb.equal(sectionRoot.get(COLUMN_DIFFICULTY), sectionCriteria.getDifficulty()));
                     break;
                 }
                 case PROJECT: {
                     Join<Section, Project> projectJoin = sectionRoot.join(COLUMN_PROJECT, JoinType.INNER);
-                    criteria = cb.and(criteria, cb.equal(projectJoin.get(ProjectRepository.COLUMN_ID), sectionCriteria.getProject().getId()));
+                    criteria = cb.or(criteria, cb.equal(projectJoin.get(ProjectRepository.COLUMN_ID), sectionCriteria.getProject().getId()));
                     break;
                 }
                 default:

@@ -1,9 +1,11 @@
 package com.siwoo.projpa.service;
 
 import com.siwoo.projpa.domain.Section;
+import com.siwoo.projpa.domain.criteria.SectionCriteria;
 import com.siwoo.projpa.repository.SectionRepository;
 import com.siwoo.projpa.service.support.ServiceArgumentException;
 import com.siwoo.projpa.service.support.ServiceNotFoundException;
+import com.siwoo.projpa.service.support.ServiceSupporter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -22,4 +24,9 @@ public class SectionServiceImpl implements SectionService {
         return sectionRepository.findByProjectName(projectName);
     }
 
+    @Override
+    public List<Section> search(SectionCriteria sectionCriteria) {
+        ServiceSupporter.throwIfNull(sectionCriteria);
+        return sectionRepository.findByCriteriaMatchAny(sectionCriteria);
+    }
 }

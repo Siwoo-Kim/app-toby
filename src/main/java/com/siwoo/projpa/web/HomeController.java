@@ -8,10 +8,9 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.HttpRequest;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.util.WebUtils;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +39,14 @@ public class HomeController {
 
     @GetMapping
     public String home(@RequestHeader("Host") String host, Locale locale) {
-        mailService.send(mailService.createMailMessage(fromEmail, "Someone visit your homepage!", "Host: " + host + ", locale " + locale ));
+        //mailService.send(mailService.createMailMessage(fromEmail, "Someone visit your homepage!", "Host: " + host + ", locale " + locale ));
+        return "index";
+    }
+
+    @GetMapping(params = "error=true")
+    public String error(@RequestParam("message") String error, Locale locale) {
+        System.out.println("Error " + error);
+        //mailService.send(mailService.createMailMessage(fromEmail, "You got error ", "Error: " + error + ", locale " + locale ));
         return "index";
     }
 
